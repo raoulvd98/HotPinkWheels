@@ -173,9 +173,9 @@
         </div>
         <div class="row-auto-titel">
             <h2>
-                <button type="button" class="koop-knopje">
-                    <a asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@item.carid">In winkelwagen <i class="fa fa-cart-plus" style="font-size:20px;color:white;"></i></a>
-                </button>
+               
+                    <a asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@item.carid" class="koop-knopje">In winkelwagen <i class="fa fa-cart-plus" style="font-size:20px;color:white;"></i></a>
+              
                 <button type="button" class="row-auto-knopje">
                     <a asp-controller="WishList" asp-action="AddToCart" asp-route-id="@item.carid"><i class="fa fa-heart" style="font-size:20px;color:red;"></i></a>
                 </button>
