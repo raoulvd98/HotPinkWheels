@@ -1,0 +1,132 @@
+@model WebsiteHotPinkWheels.Models.Car
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Car</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Brand)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Brand)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Model)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Model)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ManufactureYear)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ManufactureYear)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Color)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Color)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Horsepower)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Horsepower)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Weight)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Weight)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Topspeed)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Topspeed)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Enginetype)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Enginetype)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Fueltype)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Fueltype)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Fuelusage)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Fuelusage)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Transmission)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Transmission)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Mileage)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Mileage)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.APK)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.APK)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Warranty)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Warranty)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AmountofDoors)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AmountofDoors)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AmountofSeats)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AmountofSeats)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AmountofPreviousOwners)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AmountofPreviousOwners)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Image)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.CarID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

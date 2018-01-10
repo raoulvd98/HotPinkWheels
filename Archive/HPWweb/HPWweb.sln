@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "HPWweb", "..\..\Project56-Webshop\WebSites\HPWweb\", "{63A651BB-F56B-41D1-8123-6146D5FBD926}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5.2"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_60171"
+		Debug.AspNetCompiler.PhysicalPath = "..\..\WebSites\HPWweb\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_60171\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_60171"
+		Release.AspNetCompiler.PhysicalPath = "..\..\WebSites\HPWweb\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_60171\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "60171"
+		SlnRelativePath = "..\..\WebSites\HPWweb\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F793683E-31BB-4D40-9867-2795C5264954}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{1FE85D10-952E-4F02-89DB-6194AB22A93A}"
+	ProjectSection(SolutionItems) = preProject
+		CarsDB.cs = CarsDB.cs
+		Context.cs = Context.cs
+		UsersDB.cs = UsersDB.cs
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{63A651BB-F56B-41D1-8123-6146D5FBD926}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63A651BB-F56B-41D1-8123-6146D5FBD926}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1FE85D10-952E-4F02-89DB-6194AB22A93A} = {F793683E-31BB-4D40-9867-2795C5264954}
+	EndGlobalSection
+EndGlobal

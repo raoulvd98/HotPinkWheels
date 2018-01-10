@@ -1,0 +1,116 @@
+﻿@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@model WebshopHPWcore.Models.HistoryViewModels.HistoryViewModel
+
+@using System.Linq;
+
+@{
+    ViewBag.Title = "History";
+}
+@functions
+{
+    public string GetAntiXsrfRequestToken()
+    {
+        return Xsrf.GetAndStoreTokens(Context).RequestToken;
+    }
+}
+<br />
+<h2>Bestelgeschiedenis</h2>
+<br />
+
+<div id="update-message">
+</div>
+
+@foreach (var item in Model.HistoryItems.OrderBy(x => x.DateCreated).Select(x => x.OrderId).Reverse().Distinct())
+{
+    decimal total = 0;
+    @foreach (var datum in Model.HistoryItems.Where(x => x.OrderId == item).Select(x => x.DateCreated).Distinct())
+    {
+        <h3>
+            @datum.Date.ToLongDateString()
+        </h3>
+    }
+    <table id="cart-summary" class="table table-bordered table-responsive table-hover table-striped">
+        <tr style="font-size: 20px; font-style: initial;">
+            <td width="200px;">
+                Bestelnummer
+            </td>
+            <td>
+                Producten
+            </td>
+            <td>
+                Totaalprijs
+            </td>
+            <td>
+                Status
+            </td>
+        </tr>
+
+        <tr id="row-@item" style="font-size: 16px;">
+            <td>
+                <p>
+                    @item
+                </p>
+            </td>
+            <td width="500px;">
+                @foreach (var product in Model.HistoryItems.Where(x => x.OrderId == item))
+                {
+                    <p>
+                        - @product.Car.brand&nbsp;@product.Car.model&nbsp;
+                    </p>
+                }
+            </td>
+            <td>
+                @foreach (var ordertotal in Model.HistoryItems.Where(x => x.OrderId == item).Select(x => x.Price))
+                {
+                    total += ordertotal;
+                }
+                <p>Totaal: €@total,-</p>
+
+                <button type="button" class="row-auto-knopje" data-toggle="collapse" data-target="#@item">Details</button>
+            </td>
+            <td>
+                @foreach (var datum in Model.HistoryItems.Where(x => x.OrderId == item).Select(x => x.DateCreated).Distinct())
+                {
+                    @if ((DateTime)datum.Date == DateTime.Now.AddDays(0).Date)
+                        { <p>Ontvangen</p> }
+                    @if ((DateTime)datum.Date == DateTime.Now.AddDays(-1).Date)
+                        { <p> In behandeling</p> }
+                    @if ((DateTime)datum.Date == DateTime.Now.AddDays(-2).Date)
+                        { <p>Verzonden</p> }
+                    @if ((DateTime)datum.Date <= DateTime.Now.AddDays(-3).Date)
+                        { <p>Afgerond</p> }
+                }
+            </td>
+        </tr>
+        <tr id="@item" class="collapse">
+            <td visbility: hidden;></td>
+            <td>
+                @foreach (var detail in Model.orderdetail.Where(x => x.Orderid == item).Select(x => x))
+                {
+                    <p>
+                        Bezorgadres <br /><br />
+                        @detail.Firstname&nbsp;@detail.Middlename&nbsp;@detail.Lastname<br />
+                        @detail.Address&nbsp;@detail.Housenumber<br />
+                        @detail.Zipcode&nbsp;@detail.City
+                    </p>
+                }
+            </td>
+            <td>
+                @foreach (var product in Model.HistoryItems.Where(x => x.OrderId == item))
+                {
+                    <p>
+                        @product.Car.brand&nbsp;@product.Car.model&nbsp; €@product.Car.price,-
+                    </p>
+                }
+            </td>
+            <td>
+
+            </td>
+        </tr>
+    </table>
+    <br />
+}
+
+
+<br />
+<br />

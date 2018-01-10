@@ -1,0 +1,121 @@
+﻿@model PaginatedList<WebshopHPWcore.Models.Accessoires>
+<br />
+<br />
+<br />
+<script>
+    // When the user clicks on div, open the popup
+    function Check() {
+        var popup = document.getElementById("myPopup");
+        popup.classList.toggle("show");
+    }
+</script>
+<div class="filterstuk">
+    <h2>Filter</h2>
+    <p>
+        <div class="collapse navbar-collapse">
+            <form asp-action="Index">
+                <div class="form-group">
+                    <input type="text" name="SearchString" value="@ViewBag.search" class="form-control" placeholder="Zoeken" />
+                </div>
+                <button type="submit" value="Zoeken" class="btn btn-success"><i class="fa fa-search" style="font-size:20px;color:white;"></i> </button>
+            </form>
+        </div>
+        <br />
+        <br />
+        <form asp-action="Index" method="get">
+            <input type="submit" value="Zoeken" class="btn btn-default" />
+            <input type="submit" value="Verwijder Filter(s)" class="btn btn-default" asp-action="Index" />
+            <br /><br />
+            Huidig Filter(s):
+            @ViewData["CurrentFilter"]<br /><br />
+        </form>
+    </p>
+</div>
+
+<center>
+    @await Html.PartialAsync("PaginationView")
+</center>
+<br />
+<br />
+@foreach (var item in Model)
+{
+    <div class="row-auto">
+        <div class="row-auto-plaatje">
+            <div class="item">
+                <img src="~/images/auto3.jpg" alt="Visual Studio" class="img-responsive" />
+            </div>
+        </div>
+        <div class="row-auto-titel">
+            <h2>
+                <button type="button" class="koop-knopje">
+                    <a asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@item.AccessoireId">In winkelwagen <i class="fa fa-cart-plus" style="font-size:20px;color:white;"></i></a>
+                </button>
+                <button type="button" class="row-auto-knopje">
+                    <a asp-controller="WishList" asp-action="AddToCart" asp-route-id="@item.AccessoireId"><i class="fa fa-heart" style="font-size:20px;color:red;"></i></a>
+                </button>
+
+                @Html.DisplayFor(modelItem => item.brand) @Html.DisplayFor(modelItem => item.model)
+            </h2>
+        </div>
+        <div class="row-auto-subtitle">
+            <h2 style="margin-top: 5px">
+                €@Html.DisplayFor(modelItem => item.price)
+                <button type="button" class="row-auto-knopje" data-toggle="collapse" data-target="#@item.AccessoireId">Details</button>
+            </h2>
+        </div>
+        <div class="row-auto-content">
+            <div class="row-auto-content-col">
+                <ul style="padding-left: 10px">
+                    <li><b>Bouwjaar: </b>@Html.DisplayFor(modelItem => item.brand)</li>
+                    <li><b>Kilometerstand: </b>@Html.DisplayFor(modelItem => item.model) km</li>
+                </ul>
+                <div id="@item.AccessoireId" class="collapse">
+                    <div class="ul-links">
+                        <hr class="hr-autopage" width="257%">
+                        <ul style="padding-left: 10px">
+                            <li><b>Kleur: </b>@Html.DisplayFor(modelItem => item.brand)</li>
+                            <li><b>Gewicht: </b>@Html.DisplayFor(modelItem => item.model) kg</li>
+                        </ul>
+                    </div>
+                    <div class="ul-rechts">
+                        <hr class="hr-autopage1">
+                        <ul>
+                            <li><b>count: </b>@Html.DisplayFor(modelItem => item.Count)</li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="dividing_line" width="755px">
+    </div>
+    <br />
+}
+
+<br />
+<center>
+    @await Html.PartialAsync("PaginationView")
+</center>
+
+<script>
+    /* When the user clicks on the button,
+    toggle between hiding and showing the dropdown content */
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    function filterFunction() {
+        var input, filter, ul, li, a, i;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        div = document.getElementById("myDropdown");
+        a = div.getElementsByTagName("a");
+        for (i = 0; i < a.length; i++) {
+            if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+                a[i].style.display = "";
+            } else {
+                a[i].style.display = "none";
+            }
+        }
+    }
+</script>

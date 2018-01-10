@@ -1,0 +1,47 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>HotPinkWheels</title>
+    <link rel="stylesheet" href="StyleSheet.css" type="text/css" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <div id="wrapper">
+                <div id="TopSide">
+                    <div id="Logo">
+                        <asp:Image ID="logoimage" runat="server" ImageUrl="~/Images/logohotpink.jpeg" width="100%" />          
+                    </div>
+                    <div id="Banner">
+                        <asp:Image ID="bannerimage" runat="server" ImageUrl="~/Images/bannerhotpink.jpeg" width="100%"  />
+                    </div>
+                    <div id="UserElement">
+                         <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/logohotpink.jpeg"  width="100%"  />
+                    </div>
+                </div>
+
+
+                <div id="Navigation">
+                    <ul id="nav">
+                        <li>
+                            
+                            <asp:HyperLink ID="Homepage" NavigateUrl="~/Pages/Shoppage.aspx" runat="server">Shop</asp:HyperLink></li>
+                        <li>
+                            <asp:HyperLink ID="About" NavigateUrl="~/Pages/over.aspx" runat="server">About<br /></asp:HyperLink></li>
+                    </ul>
+                </div>
+                <div id="Content">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</body>
+</html>

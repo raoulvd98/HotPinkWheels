@@ -1,0 +1,283 @@
+@model PaginatedList<WebshopHPW.Models.Car>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Huidig Filter(s):
+            @ViewData["CurrentFilter"]
+            @ViewData["ColorFilter"]
+            @ViewData["FuelTypeFilter"]
+            @ViewData["MotorTypeFilter"]
+            @ViewData["TransmissionFilter"]
+            <br>
+            <br>
+
+            Find by name: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
+
+            <select name="carColor" value="@ViewData["ColorFilter"]">
+                <option value="">Kleuren</option>
+                @foreach (var item in Model.Select(s => s.color).Distinct())
+                {
+                    <option value=@item>@item</option>
+                }
+            </select>
+            <select name="FuelType" value="@ViewData["FuelTypeFilter"]">
+                <option value="">Brandstof</option>
+                @foreach (var item in Model.Select(s => s.fueltype).Distinct())
+                {
+                    <option value=@item>@item</option>
+                }
+            </select>
+            <select name="motortype" value="@ViewData["MotorTypeFilter"]">
+                <option value="">Type motor</option>
+                @foreach (var item in Model.Select(s => s.enginetype).Distinct())
+                {
+                    <option value=@item>@item</option>
+                }
+            </select>
+
+            <select name="transmission" value="@ViewData["TransmissionFilter"]">
+                <option value="">Transmissie</option>
+                @foreach (var item in Model.Select(s => s.transmission).Distinct())
+                {
+                    <option value=@item>@item</option>
+                }
+            </select>
+
+            @*<b>Kilometerstand: (vanaf)</b>
+                <input type="number" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="SearchString" value="@ViewData["PrijsFilter"]" >*@
+
+            <input type="submit" value="Search" class="btn btn-default" /> |
+
+
+            <a asp-action="Index">Reset Filter</a>
+        </p>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Merk
+            </th>
+            <th>
+                Model
+            </th>
+            <th>
+                Bouwjaar
+            </th>
+            <th>
+                Kleur
+            </th>
+            <th>
+                Prijs
+            </th>
+            <th>
+                PK
+            </th>
+            <th>
+                Gewicht
+            </th>
+            <th>
+                Topsnelheid
+            </th>
+            <th>
+                Motortype
+            </th>
+            <th>
+                Brandstoftype
+            </th>
+            <th>
+                Brandstofverbruik
+            </th>
+            <th>
+                Transmissie
+            </th>
+            <th>
+                Kilometerstand
+            </th>
+            <th>
+                APK
+            </th>
+            <th>
+                Garantie
+            </th>
+            <th>
+                Deuren
+            </th>
+            <th>
+                Stoelen
+            </th>
+            <th>
+                Vorige eigenaren
+            </th>
+            <th>
+                Plaatje
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.brand)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.model)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.manufactureyear)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.color)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.horsepower)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.weight)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.topspeed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.enginetype)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fueltype)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fuelusage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.transmission)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mileage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.apk)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.warranty)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.amountofdoors)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.amountofseats)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.amountofpreviousowners)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.image)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.carid">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.carid">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.carid">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+<div class="Page-Buttons-Knopje">
+    <a asp-action="Index"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-page="@(1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       asp-route-currentColorFilter="@ViewData["ColorFilter"]"
+       asp-route-fueltypeFilter="@ViewData["FuelTypeFilter"]"
+       asp-route-motortypeFilter="@ViewData["MotorTypeFilter"]"
+       asp-route-transmissionFilter="@ViewData["TransmissionFilter"]"
+       class="btn btn-default @prevDisabled">
+        First
+    </a>
+    <a asp-action="Index"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-page="@(Model.PageIndex - 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       asp-route-currentColorFilter="@ViewData["ColorFilter"]"
+       asp-route-fueltypeFilter="@ViewData["FuelTypeFilter"]"
+       asp-route-motortypeFilter="@ViewData["MotorTypeFilter"]"
+       asp-route-transmissionFilter="@ViewData["TransmissionFilter"]"
+       class="btn btn-default @prevDisabled">
+        Previous
+    </a>
+    @for (int i = -3; i < 0; i++)
+    {
+        @if (@Model.PageIndex + i > 0)
+        {
+            <a asp-action="Index"
+               asp-route-sortOrder="@ViewData["CurrentSort"]"
+               asp-route-page="@(Model.PageIndex + i)"
+               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               asp-route-currentColorFilter="@ViewData["ColorFilter"]"
+               asp-route-fueltypeFilter="@ViewData["FuelTypeFilter"]"
+               asp-route-motortypeFilter="@ViewData["MotorTypeFilter"]"
+               asp-route-transmissionFilter="@ViewData["TransmissionFilter"]"
+               class="btn btn-default">
+                @(Model.PageIndex + i)
+            </a>}
+    }
+    @for (int i = 0; i <= 3; i++)
+    {
+        @if (@Model.PageIndex + i < @Model.TotalPages)
+        {
+            <a asp-action="Index"
+               asp-route-sortOrder="@ViewData["CurrentSort"]"
+               asp-route-page="@(Model.PageIndex + i)"
+               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               asp-route-currentColorFilter="@ViewData["ColorFilter"]"
+               asp-route-fueltypeFilter="@ViewData["FuelTypeFilter"]"
+               asp-route-motortypeFilter="@ViewData["MotorTypeFilter"]"
+               asp-route-transmissionFilter="@ViewData["TransmissionFilter"]"
+               class="btn btn-default">
+                @(Model.PageIndex + i)
+            </a>}
+    }
+    <a asp-action="Index"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-page="@(Model.PageIndex + 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       asp-route-currentColorFilter="@ViewData["ColorFilter"]"
+       asp-route-fueltypeFilter="@ViewData["FuelTypeFilter"]"
+       asp-route-motortypeFilter="@ViewData["MotorTypeFilter"]"
+       asp-route-transmissionFilter="@ViewData["TransmissionFilter"]"
+       class="btn btn-default @nextDisabled">
+        Next
+    </a>
+    <a asp-action="Index"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-page="@(Model.TotalPages)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       asp-route-currentColorFilter="@ViewData["ColorFilter"]"
+       asp-route-fueltypeFilter="@ViewData["FuelTypeFilter"]"
+       asp-route-motortypeFilter="@ViewData["MotorTypeFilter"]"
+       asp-route-transmissionFilter="@ViewData["TransmissionFilter"]"
+       class="btn btn-default @nextDisabled">
+        Last
+    </a>
+     </div>

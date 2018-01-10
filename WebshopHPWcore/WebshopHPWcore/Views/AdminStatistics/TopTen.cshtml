@@ -1,0 +1,118 @@
+﻿@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@model WebshopHPWcore.Models.HistoryViewModels.HistoryViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <title>Index</title>
+</head>
+<body>
+
+    <h2>Top verkochte auto's </h2>
+    <br />
+    <div><a asp-area="" asp-controller="AdminStatistics" asp-action="Index"><< Terug naar overzichten</a></div>
+    <table>
+        <tr>
+            <td width="100px">
+                <input type="radio" name="Data" id="DataIsModel" class="btn btn-default">Per Model<br />
+                <input type="radio" name="Data" id="DataIsBrand" class="btn btn-default" checked>Per Merk<br />
+            </td>
+            <td>
+                <input type="radio" name="Chart" id="ChangeToPieChart" class="btn btn-default">CirkelDiagram<br />
+                <input type="radio" name="Chart" id="ChangeToColumnChart" class="btn btn-default" checked>KolomDiagram<br />
+                <input type="radio" name="Chart" id="ChangeToBarChart" class="btn btn-default">StaafDiagram<br />
+            </td>
+        </tr>
+    </table>
+
+    @*<input id="SetAmountOfItemsInChart" type="number" value="10"  class="btn btn-default"/>
+        <button id="SetAmountOfItemsInChartSubmit" class="btn btn-default">Verander aantal weergegeven auto's</button><br />*@
+    <div id="chartContainer"></div>
+
+    <script type="text/javascript">
+
+        window.onload = function () {
+            function compareDataPointYAscend(dataPoint1, dataPoint2) {
+                return dataPoint1.y - dataPoint2.y;
+            }
+
+            function compareDataPointYDescend(dataPoint1, dataPoint2) {
+                return dataPoint2.y - dataPoint1.y;
+            }
+            CanvasJS.addColorSet("pink",
+                [//colorSet Array
+                    "#ff3399",
+                    "#f53d99",
+                    "#eb4799",
+                    "#e05299",
+                    "#d65c99",
+                    "#cc6699",
+                    "#c27099",
+                    "#b87a99",
+                    "#ad8599",
+                    "#a38f99",
+                ]);
+            var chart = new CanvasJS.Chart("chartContainer", {
+                colorSet: "pink",
+                animationEnabled: true,
+                title: {
+                    text: "Aantal verkochte auto's per merk"
+                },
+                subtitles: [
+                    { text: "" }
+                ],
+
+                axisX: {
+                    maximum:9.5
+
+                },
+
+                data: [
+                    {
+                        startAngle: 270,
+                        type: "column", //change type to column, bar, line, area, pie, etc
+                        dataPoints: @Html.Raw(ViewBag.dataPoints),
+                    }
+            ]
+            });
+            chart.options.data[0].dataPoints.sort(compareDataPointYDescend);
+            chart.render();
+            $("#DataIsModel").click(function () {
+                chart.options.title.text = "Aantal verkochte auto's per model"
+                chart.options.data[0].dataPoints = @Html.Raw(ViewBag.DataPoints2);
+                chart.options.data[0].dataPoints.sort(compareDataPointYDescend);
+                chart.render();
+            });
+            $("#DataIsBrand").click(function () {
+                chart.options.title.text = "Aantal verkochte auto's per merk"
+                chart.options.data[0].dataPoints = @Html.Raw(ViewBag.DataPoints);
+                chart.options.data[0].dataPoints.sort(compareDataPointYDescend);
+                chart.render();
+            });
+            $("#ChangeToPieChart").click(function () {
+                chart.options.data[0].type = "pie"
+                chart.render();
+            });
+            $("#ChangeToColumnChart").click(function () {
+                chart.options.data[0].type = "column"
+                chart.render();
+            });
+            $("#ChangeToBarChart").click(function () {
+                chart.options.data[0].type = "bar"
+                chart.render();
+            });
+            $("#SetAmountOfItemsInChartSubmit").click(function () {
+                chart.options.axisX.maximum = document.getElementById("SetAmountOfItemsInChart").value - 0.5;
+                chart.render();
+            });
+        };
+
+
+    </script>
+</body>
+</html>	

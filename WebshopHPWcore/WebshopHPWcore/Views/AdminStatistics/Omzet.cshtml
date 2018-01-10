@@ -1,0 +1,61 @@
+﻿@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@model WebshopHPWcore.Models.HistoryViewModels.HistoryViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <title>Index</title>
+</head>
+<body>
+
+    <h2>Index</h2>
+    <br />
+    <div><a asp-area="" asp-controller="AdminStatistics" asp-action="Index"><< Terug naar overzichten</a></div>
+    <div id="chartContainer"></div>
+
+    <script type="text/javascript">
+
+        window.onload = function () {
+            CanvasJS.addColorSet("pink",
+                [//colorSet Array
+                    "#ff3399",
+                    "#f53d99",
+                    "#eb4799",
+                    "#e05299",
+                    "#d65c99",
+                    "#cc6699",
+                    "#c27099",
+                    "#b87a99",
+                    "#ad8599",
+                    "#a38f99",
+                ]);
+            var chart = new CanvasJS.Chart("chartContainer", {
+                colorSet: "pink",
+                animationEnabled: true,
+                title: {
+                    text: "Omzet"
+                },
+                subtitles: [
+                    { text: "" }
+                ],
+
+                data: [
+                    {
+                        type: "spline", //change type to column, bar, line, area, pie, etc
+                        dataPoints: @Html.Raw(ViewBag.dataPoints3),
+                    }
+            ]
+            });
+            chart.render();
+
+        };
+
+
+    </script>
+</body>
+</html>	

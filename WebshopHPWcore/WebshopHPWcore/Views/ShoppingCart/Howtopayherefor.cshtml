@@ -1,0 +1,110 @@
+﻿@model WebshopHPWcore.Models.ReceiptViewModel
+@using Microsoft.AspNetCore.Identity
+@using WebshopHPWcore.Models
+@using WebshopHPWcore.Controllers
+@using Microsoft;
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<body>
+    <h2>Kies uw betaalmethode</h2>
+    <br />
+
+    <div id="paypal-button-container"></div>
+    <br />
+    <br />
+
+    <h4>Overzicht persoonsgegevens</h4>
+
+    <form asp-action="Finish" method="post" id="form" name="form">
+        <table id="table" class="table table-bordered table-responsive table-hover table-striped">
+            <tr>
+                <td>Naam:</td>
+                <td>
+                    <input readonly required name="Firstname" id="Firstname" value="@Model.user.FirstName" placeholder="Voornaam" title="Voornaam" class="form-control" />
+                    <input readonly required name="Middlename" id="Middlename" value="@Model.user.MiddleName" placeholder="Tussenvoegsel" title="Tussenvoegsel" class="form-control" />
+                    <input readonly required name="Lastname" id="Lastname" value="@Model.user.lastName" placeholder="Achternaam" title="Achternaam" class="form-control" />
+                </td>
+            </tr>
+            <tr>
+                <td>Adresgegevens:</td>
+                <td>
+                    <input readonly required name="Addres" id="Addres" value="@Model.user.Address" placeholder="Straatnaam" title="Adres" class="form-control" />
+                    <input readonly required name="Housenr" id="Housenr" value="@Model.user.HouseNumber" type="number" placeholder="Huisnummer" title="Huisnummer" class="form-control" />
+                    <input readonly name="Toevoeging" id="Toevoeging" type="text" placeholder="Toevoeging" title="Toevoeging" class="form-control" />
+                    <input readonly required name="Zipcode" id="Zipcode" placeholder="Postcode" pattern="[1-9][0-9]{3}\s?[a-zA-Z]{2}" value="@Model.user.ZipCode" title="Postcode (4 cijfers + 2 letters)" class="form-control" />
+                    <input readonly required name="City" id="City" placeholder="Woonplaats" value="@Model.user.City" title="Woonplaats" class="form-control" />
+                </td>
+            </tr>
+            <tr>
+                <td>Contactgegevens:</td>
+                <td>
+                    <input readonly required name="Email" id="Email" value="@Model.user.Email" class="form-control" type="email" />
+                    <input readonly id="Phonenr" type="tel" placeholder="Telefoonnummer" pattern="[0-9]{10}" title="Telefoonnummer" required name="Phonenr" value="@Model.user.PhoneNumber" class="form-control" />
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+    <script>
+        paypal.Button.render({
+
+            env: 'sandbox', // sandbox | production
+
+            // PayPal Client IDs - replace with your own
+            // Create a PayPal app: https://developer.paypal.com/developer/applications/create
+            client: {
+                sandbox: 'AXNxP0L3xHNZE_0aBLslnGCEhBtCWeSMvybHQVQgY1j_VtAba_D8ceugIUhJu2KNugtzB5FkgS7Z2g5h',
+                production: '<insert production client id>'
+            },
+
+            style: {
+                label: 'paypal',
+                size: 'medium',    // small | medium | large | responsive
+                shape: 'pill',     // pill | rect
+                color: 'blue',     // gold | blue | silver | black
+                tagline: false
+            },
+
+            // Show the buyer a 'Pay Now' button in the checkout flow
+            commit: true,
+
+            // payment() is called when the button is clicked
+            payment: function (data, actions) {
+
+                // Make a call to the REST api to create the payment
+                return actions.payment.create({
+                    payment: {
+                        transactions: [
+                            {
+                                amount: { total: @Model.shoppingcart.CartTotal, currency: 'EUR' }
+                            }
+                        ]
+                    }
+                });
+            },
+
+            // onAuthorize() is called when the buyer approves the payment
+            onAuthorize: function (data, actions) {
+
+                // Make a call to the REST api to execute the payment
+                return actions.payment.execute().then(function () {
+                    //window.alert('payment complete!');
+                    //window.location.href = "../ShoppingCart/Finish"
+                    document.getElementById("form").submit();
+                });
+            },
+
+            // onCancel() is called when the payment is cancelled
+            onCancel: function (data, actions) {
+                window.location.href = "../ShoppingCart/Cancellation"
+                }
+
+        }, '#paypal-button-container');
+
+    </script>
+</body>

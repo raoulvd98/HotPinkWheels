@@ -1,0 +1,57 @@
+@using Microsoft.AspNetCore.Identity
+@using WebshopHPWcore.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a asp-area="" asp-controller="WishList" asp-action="Index" title="Wensenlijst"><i class="fa fa-heart" style="font-size:20px;color:red;"></i></a>
+            </li>
+            <li>
+                <a asp-area="" asp-controller="History" asp-action="Index" title="Bestelgeschiedenis"><i class="fa fa-history" style="font-size:20px;color:white;"></i></a>
+            </li>
+
+            @if (User.IsInRole("Admin"))
+            {
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" title="Management"><i class="fa fa-cog" style="font-size:20px;"></i></a>
+                    <ul class="dropdown-menu">
+                        <br />
+                        <li><a asp-area="" asp-controller="AdminUsers" asp-action="Index">Beheer gebruikers</a></li>
+                        <br />
+                        <li><a asp-area="" asp-controller="Administrator" asp-action="Index">Beheer auto's</a></li>
+                        <br />
+                        @*<li><a asp-area="" asp-controller="Administrator" asp-action="ShowUsers">Beheer accessoires</a></li>
+                        <br />*@
+                        <li><a asp-area="" asp-controller="AdminStatistics" asp-action="Index">Overzicht statistieken</a></li>
+                    </ul>
+                </li>
+            }
+
+            <li>
+                <a asp-area="" asp-controller="Manage" asp-action="Index" title="Accountbeheer"><i class="fa fa-user" style="font-size:20px;color:white;"></i> @UserManager.GetUserName(User)</a>
+            </li>
+
+            <li>
+                <button type="submit" class="btn btn-link navbar-btn">Uitloggen <i class="fa fa-sign-out" style="font-size:20px;"></i></button>
+            </li>
+        </ul>
+    </form>
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        @*<li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Inloggen<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                @await Html.PartialAsync("/Views/Account/Login.cshtml")
+            </ul>
+        </li>*@
+
+        <li><a asp-area="" asp-controller="Account" asp-action="Login">Inloggen</a></li>
+    </ul>
+}

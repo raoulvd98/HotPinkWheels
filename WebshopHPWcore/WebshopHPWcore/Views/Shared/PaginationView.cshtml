@@ -1,0 +1,152 @@
+﻿@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+<div class="row-auto" ;>
+    <a asp-route-returnurl="@ViewData["ReturnUrl"]"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-page="@(1)"
+       asp-route-searchString="@ViewData["CurrentFilter"]"
+       asp-route-carColor="@ViewData["ColorFilter"]"
+       asp-route-fueltype="@ViewData["FuelTypeFilter"]"
+       asp-route-motortype="@ViewData["MotorTypeFilter"]"
+       asp-route-transmission="@ViewData["TransmissionFilter"]"
+       asp-route-maxPrice="@ViewData["MaxPriceFilter"]"
+       asp-route-amountSeats="@ViewData["AmountSeatsFilter"]"
+       asp-route-usage="@ViewData["UsageFilter"]"
+       asp-route-pk="@ViewData["PkFilter"]"
+       asp-route-milage="@ViewData["MilageFilter"]"
+       asp-route-topSpeed="@ViewData["TopSpeedFilter"]"
+       asp-route-minWeight="@ViewData["MinWeightFilter"]"
+       asp-route-maxWeight="@ViewData["MaxWeightFilter"]"
+       class="btn btn-default @prevDisabled">
+        <i class="fa fa-chevron-left" style="font-size:12px;color:white;"></i><i class="fa fa-chevron-left" style="font-size:12px;color:white;"></i>
+    </a>
+    <a asp-route-returnurl="@ViewData["ReturnUrl"]"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-page="@(Model.PageIndex - 1)"
+       asp-route-searchString="@ViewData["CurrentFilter"]"
+       asp-route-carColor="@ViewData["ColorFilter"]"
+       asp-route-fueltype="@ViewData["FuelTypeFilter"]"
+       asp-route-motortype="@ViewData["MotorTypeFilter"]"
+       asp-route-transmission="@ViewData["TransmissionFilter"]"
+       asp-route-maxPrice="@ViewData["MaxPriceFilter"]"
+       asp-route-amountSeats="@ViewData["AmountSeatsFilter"]"
+       asp-route-usage="@ViewData["UsageFilter"]"
+       asp-route-pk="@ViewData["PkFilter"]"
+       asp-route-milage="@ViewData["MilageFilter"]"
+       asp-route-topSpeed="@ViewData["TopSpeedFilter"]"
+       asp-route-minWeight="@ViewData["MinWeightFilter"]"
+       asp-route-maxWeight="@ViewData["MaxWeightFilter"]"
+       class="btn btn-default @prevDisabled">
+        <i class="fa fa-chevron-left" style="font-size:12px;color:white;"></i>
+    </a>
+
+    @for (int i = -3; i < 0; i++)
+    {
+        @if (@Model.PageIndex + i > 0)
+        {
+            <a asp-route-returnurl="@ViewData["ReturnUrl"]"
+               asp-route-sortOrder="@ViewData["CurrentSort"]"
+               asp-route-page="@(Model.PageIndex + i)"
+               asp-route-searchString="@ViewData["CurrentFilter"]"
+               asp-route-carColor="@ViewData["ColorFilter"]"
+               asp-route-fueltype="@ViewData["FuelTypeFilter"]"
+               asp-route-motortype="@ViewData["MotorTypeFilter"]"
+               asp-route-transmission="@ViewData["TransmissionFilter"]"
+               asp-route-maxPrice="@ViewData["MaxPriceFilter"]"
+               asp-route-amountSeats="@ViewData["AmountSeatsFilter"]"
+               asp-route-usage="@ViewData["UsageFilter"]"
+               asp-route-pk="@ViewData["PkFilter"]"
+               asp-route-milage="@ViewData["MilageFilter"]"
+               asp-route-topSpeed="@ViewData["TopSpeedFilter"]"
+               asp-route-minWeight="@ViewData["MinWeightFilter"]"
+               asp-route-maxWeight="@ViewData["MaxWeightFilter"]"
+               class="btn btn-default ">
+                @(Model.PageIndex + i)
+            </a>}
+    }
+
+    <a asp-route-returnurl="@ViewData["ReturnUrl"]"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-page="@(Model.PageIndex)"
+       asp-route-searchString="@ViewData["CurrentFilter"]"
+       asp-route-carColor="@ViewData["ColorFilter"]"
+       asp-route-fueltype="@ViewData["FuelTypeFilter"]"
+       asp-route-motortype="@ViewData["MotorTypeFilter"]"
+       asp-route-transmission="@ViewData["TransmissionFilter"]"
+       asp-route-maxPrice="@ViewData["MaxPriceFilter"]"
+       asp-route-amountSeats="@ViewData["AmountSeatsFilter"]"
+       asp-route-usage="@ViewData["UsageFilter"]"
+       asp-route-pk="@ViewData["PkFilter"]"
+       asp-route-milage="@ViewData["MilageFilter"]"
+       asp-route-topSpeed="@ViewData["TopSpeedFilter"]"
+       asp-route-minWeight="@ViewData["MinWeightFilter"]"
+       asp-route-maxWeight="@ViewData["MaxWeightFilter"]"
+       class="btn btn-active ">
+        @(Model.PageIndex)
+    </a>
+
+    @for (int i = 1; i <= 3; i++)
+    {
+        @if (@Model.PageIndex + i <= @Model.TotalPages)
+        {
+            <a asp-route-returnurl="@ViewData["ReturnUrl"]"
+               asp-route-sortOrder="@ViewData["CurrentSort"]"
+               asp-route-page="@(Model.PageIndex + i)"
+               asp-route-searchString="@ViewData["CurrentFilter"]"
+               asp-route-carColor="@ViewData["ColorFilter"]"
+               asp-route-fueltype="@ViewData["FuelTypeFilter"]"
+               asp-route-motortype="@ViewData["MotorTypeFilter"]"
+               asp-route-transmission="@ViewData["TransmissionFilter"]"
+               asp-route-maxPrice="@ViewData["MaxPriceFilter"]"
+               asp-route-amountSeats="@ViewData["AmountSeatsFilter"]"
+               asp-route-usage="@ViewData["UsageFilter"]"
+               asp-route-pk="@ViewData["PkFilter"]"
+               asp-route-milage="@ViewData["MilageFilter"]"
+               asp-route-topSpeed="@ViewData["TopSpeedFilter"]"
+               asp-route-minWeight="@ViewData["MinWeightFilter"]"
+               asp-route-maxWeight="@ViewData["MaxWeightFilter"]"
+               class="btn btn-default">
+                @(Model.PageIndex + i)
+            </a>}
+    }
+    <a asp-route-returnurl="@ViewData["ReturnUrl"]"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-page="@(Model.PageIndex + 1)"
+       asp-route-searchString="@ViewData["CurrentFilter"]"
+       asp-route-carColor="@ViewData["ColorFilter"]"
+       asp-route-fueltype="@ViewData["FuelTypeFilter"]"
+       asp-route-motortype="@ViewData["MotorTypeFilter"]"
+       asp-route-transmission="@ViewData["TransmissionFilter"]"
+       asp-route-maxPrice="@ViewData["MaxPriceFilter"]"
+       asp-route-amountSeats="@ViewData["AmountSeatsFilter"]"
+       asp-route-usage="@ViewData["UsageFilter"]"
+       asp-route-pk="@ViewData["PkFilter"]"
+       asp-route-milage="@ViewData["MilageFilter"]"
+       asp-route-topSpeed="@ViewData["TopSpeedFilter"]"
+       asp-route-minWeight="@ViewData["MinWeightFilter"]"
+       asp-route-maxWeight="@ViewData["MaxWeightFilter"]"
+       class="btn btn-default @nextDisabled">
+        <i class="fa fa-chevron-right" style="font-size:12px;color:white;"></i>
+    </a>
+    <a asp-route-returnurl="@ViewData["ReturnUrl"]"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-page="@(Model.TotalPages)"
+       asp-route-searchString="@ViewData["CurrentFilter"]"
+       asp-route-carColor="@ViewData["ColorFilter"]"
+       asp-route-fueltype="@ViewData["FuelTypeFilter"]"
+       asp-route-motortype="@ViewData["MotorTypeFilter"]"
+       asp-route-transmission="@ViewData["TransmissionFilter"]"
+       asp-route-maxPrice="@ViewData["MaxPriceFilter"]"
+       asp-route-amountSeats="@ViewData["AmountSeatsFilter"]"
+       asp-route-usage="@ViewData["UsageFilter"]"
+       asp-route-pk="@ViewData["PkFilter"]"
+       asp-route-milage="@ViewData["MilageFilter"]"
+       asp-route-topSpeed="@ViewData["TopSpeedFilter"]"
+       asp-route-minWeight="@ViewData["MinWeightFilter"]"
+       asp-route-maxWeight="@ViewData["MaxWeightFilter"]"
+       class="btn btn-default @nextDisabled">
+        <i class="fa fa-chevron-right" style="font-size:12px;color:white;"></i><i class="fa fa-chevron-right" style="font-size:12px;color:white;"></i>
+    </a>
+</div>

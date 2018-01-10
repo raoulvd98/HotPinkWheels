@@ -1,0 +1,348 @@
+@model PaginatedList<WebshopHPW.Models.Car>
+<br />
+<br />
+<br />
+<div class="filterstuk">
+    <h2>Filter</h2>
+    <p>
+        <div class="collapse navbar-collapse">
+            @using (Html.BeginForm("index", "home", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
+            {
+                <div class="form-group">
+                    <input type="text" name="search" value="@ViewBag.search" class="form-control" placeholder="search" />
+                </div>
+                <button type="submit" value="Search" class="btn btn-success">Search</button>
+            }
+        </div>
+        <br />
+        <br />
+        <form asp-action="Carpage" method="get">
+            <input type="submit" value="Search" class="btn btn-default" />
+            <input type="submit" value="Reset Filter" class="btn btn-default" asp-action="Carpage" />
+            <br /><br />
+            Huidig Filter(s):
+            @ViewData["CurrentFilter"]
+            @ViewData["ColorFilter"]
+            @ViewData["FuelTypeFilter"]
+            @ViewData["MotorTypeFilter"]
+            @ViewData["TransmissionFilter"]  <br /><br />
+
+            <b>Merken:</b><br />
+
+            <select name="SearchString" value="@ViewData["currentFilter"]">
+                <option value="">Alle</option>
+                @foreach (var item in Model.Select(s => s.brand).Distinct())
+                {
+                    <option value=@item>@item</option>
+                }
+            </select>
+
+            <br />
+            <br />
+
+            <b>Type brandstof:</b><br />
+            <select name="FuelType" value="@ViewData["FuelTypeFilter"]">
+                <option value="">Alle</option>
+                @foreach (var item in Model.Select(s => s.fueltype).Distinct())
+                {
+                    <option value=@item>@item</option>
+                }
+            </select>
+            <br />
+            <br />
+
+            <b>Kleur:</b><br />
+            <select name="carColor" value="@ViewData["ColorFilter"]">
+                <option value="">Alle</option>
+                @foreach (var item in Model.Select(s => s.color).Distinct())
+                {
+                    <option value=@item>@item</option>
+                }
+            </select>
+            <br />
+            <br />
+
+            <b>Prijs:</b><br />
+            <select class="sc-input">
+                <option value="0"></option>
+                <option value="500">€ 500</option>
+                <option value="1000">€ 1.000</option>
+                <option value="1500">€ 1.500</option>
+                <option value="2000">€ 2.000</option>
+                <option value="2500">€ 2.500</option>
+                <option value="3000">€ 3.000</option>
+                <option value="4000">€ 4.000</option>
+                <option value="5000">€ 5.000</option>
+                <option value="6000">€ 6.000</option>
+                <option value="7000">€ 7.000</option>
+                <option value="8000">€ 8.000</option>
+                <option value="9000">€ 9.000</option>
+                <option value="10000">€ 10.000</option>
+                <option value="12500">€ 12.500</option>
+                <option value="15000">€ 15.000</option>
+                <option value="17500">€ 17.500</option>
+                <option value="20000">€ 20.000</option>
+                <option value="25000">€ 25.000</option>
+                <option value="30000">€ 30.000</option>
+                <option value="40000">€ 40.000</option>
+                <option value="50000">€ 50.000</option>
+                <option value="75000">€ 75.000</option>
+                <option value="100000">€ 100.000</option>
+            </select><br /><br />
+
+            <b>Type motor:</b><br />
+            <select name="motortype" value="@ViewData["MotorTypeFilter"]">
+                <option value="">Alle</option>
+                @foreach (var item in Model.Select(s => s.enginetype).Distinct())
+                {
+                    <option value=@item>@item</option>
+                }
+            </select>
+            <br />
+            <br />
+
+            <b>Aantal stoelen:</b><br />
+            <select class="sc-input">
+                <option value="">Alle</option>
+                @foreach (var item in Model.Select(s => s.amountofseats).Distinct())
+                {
+                    <option value=@item>@item</option>
+                }
+            </select>
+            <br />
+            <br />
+
+            <b>Transmissie:</b><br />
+            <select name="transmission" value="@ViewData["TransmissionFilter"]">
+                <option value="">Alle</option>
+                @foreach (var item in Model.Select(s => s.transmission).Distinct())
+                {
+                    <option value=@item>@item</option>
+                }
+            </select>
+            <br />
+            <br />
+
+            <b>Verbruik</b><br />
+            <select class="sc-input">
+                <option value="0"></option>
+                <option value="red"> < 5 </option>
+                <option value="1000"> < 10 </option>
+                <option value="1000"> < 15 </option>
+                <option value="1000"> < 20 </option>
+            </select>
+            <br />
+            <br />
+
+            <b>Kilometers per liter brandstof</b><br />
+            <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+            <br />
+            <br />
+
+            <b>Kilometerstand: (vanaf)</b><br />
+            <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+            <br />
+            <br />
+
+            <b>PK: (vanaf)</b><br />
+            <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+            <br />
+            <br />
+
+            <b>Topsnelheid: (vanaf)</b><br />
+            <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+            <br />
+            <br />
+
+            <b>Gewicht (vanaf)</b><br />
+            <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+            <br />
+            <b>Gewicht: (Tot)</b><br />
+            <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+            <br />
+            <br />
+
+            <b>Bouwjaar: (vanaf)</b><br />
+            <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+            <br />
+            <b>Bouwjaar: (Tot)</b><br />
+            <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+            <br />
+            <br />
+
+        </form>
+    </p>
+</div>
+
+
+@foreach (var item in Model)
+{
+    <div class="row-auto">
+        <div class="row-auto-plaatje">
+            <div class="item">
+                <img src="~/images/auto2.jpg" alt="Visual Studio" class="img-responsive" />
+            </div>
+        </div>
+
+        <div class="row-auto-titel">
+            <h2>
+                @Html.DisplayFor(modelItem => item.brand) @Html.DisplayFor(modelItem => item.model)
+                <button type="button" class="row-auto-knopje" data-toggle="collapse" data-target="#@item.carid">View more</button>
+            </h2>
+        </div>
+        <div class="row-auto-subtitle">
+            <h2 style="margin-top: 5px">€@Html.DisplayFor(modelItem => item.price)</h2>
+        </div>
+        <div class="row-auto-content">
+
+            <div class="row-auto-content-col">
+                <ul style="padding-left: 10px">
+                    <li><b>Bouwjaar: </b>@Html.DisplayFor(modelItem => item.manufactureyear)</li>
+                    <li><b>Kilometerstand: </b>@Html.DisplayFor(modelItem => item.mileage) km</li>
+                </ul>
+
+                <div id="@item.carid" class="collapse">
+                    <div class="ul-links">
+                        <hr class="hr-autopage" width="257%">
+                        <ul style="padding-left: 10px">
+                            <li><b>Kleur: </b>@Html.DisplayFor(modelItem => item.color)</li>
+                            <li><b>Gewicht: </b>@Html.DisplayFor(modelItem => item.weight) kg</li>
+
+                            <li><b>Motor: </b>@Html.DisplayFor(modelItem => item.enginetype)</li>
+                            <li><b>Vermogen: </b>@Html.DisplayFor(modelItem => item.horsepower) pk</li>
+                            <li><b>Top snelheid: </b>@Html.DisplayFor(modelItem => item.topspeed) km/h</li>
+                            <li><b>Transmissie: </b>@Html.DisplayFor(modelItem => item.transmission)</li>
+                        </ul>
+                    </div>
+                    <div class="ul-rechts">
+                        <hr class="hr-autopage1">
+                        <ul>
+                            <li><b>Brandstof: </b>@Html.DisplayFor(modelItem => item.fueltype)</li>
+                            <li><b>Gebruik: </b>1/@Html.DisplayFor(modelItem => item.fuelusage)</li>
+                            <li><b>Aantal deuren: </b>@Html.DisplayFor(modelItem => item.amountofdoors)</li>
+                            <li><b>Aantal stoelen: </b>@Html.DisplayFor(modelItem => item.amountofseats)</li>
+                            <li><b>Vorige eigenaren: </b>@Html.DisplayFor(modelItem => item.amountofpreviousowners)</li>
+
+                            <li><b>APK: </b>@Html.DisplayFor(modelItem => item.apk)</li>
+                            <li><b>Garantie: </b>@Html.DisplayFor(modelItem => item.warranty)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="dividing_line" width="755px">
+    </div>
+    <br />
+}
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<br />
+
+<center>
+    <div class="Page-Buttons-Knopje">
+        <a asp-action="Carpage"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-page="@(1)"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           asp-route-currentColorFilter="@ViewData["ColorFilter"]"
+           asp-route-fueltypeFilter="@ViewData["FuelTypeFilter"]"
+           asp-route-motortypeFilter="@ViewData["MotorTypeFilter"]"
+           asp-route-transmissionFilter="@ViewData["TransmissionFilter"]"
+           class="btn btn-default @prevDisabled">
+            First
+        </a>
+        <a asp-action="Carpage"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-page="@(Model.PageIndex - 1)"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           asp-route-currentColorFilter="@ViewData["ColorFilter"]"
+           asp-route-fueltypeFilter="@ViewData["FuelTypeFilter"]"
+           asp-route-motortypeFilter="@ViewData["MotorTypeFilter"]"
+           asp-route-transmissionFilter="@ViewData["TransmissionFilter"]"
+           class="btn btn-default @prevDisabled">
+            Previous
+        </a>
+        @for (int i = -3; i < 0; i++)
+        {
+            @if (@Model.PageIndex + i > 0)
+            {
+                <a asp-action="Carpage"
+                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                   asp-route-page="@(Model.PageIndex + i)"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   asp-route-currentColorFilter="@ViewData["ColorFilter"]"
+                   asp-route-fueltypeFilter="@ViewData["FuelTypeFilter"]"
+                   asp-route-motortypeFilter="@ViewData["MotorTypeFilter"]"
+                   asp-route-transmissionFilter="@ViewData["TransmissionFilter"]"
+                   class="btn btn-default">
+                    @(Model.PageIndex + i)
+                </a>}
+        }
+        @for (int i = 0; i <= 3; i++)
+        {
+            @if (@Model.PageIndex + i < @Model.TotalPages)
+            {
+                <a asp-action="Carpage"
+                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                   asp-route-page="@(Model.PageIndex + i)"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   asp-route-currentColorFilter="@ViewData["ColorFilter"]"
+                   asp-route-fueltypeFilter="@ViewData["FuelTypeFilter"]"
+                   asp-route-motortypeFilter="@ViewData["MotorTypeFilter"]"
+                   asp-route-transmissionFilter="@ViewData["TransmissionFilter"]"
+                   class="btn btn-default">
+                    @(Model.PageIndex + i)
+                </a>}
+        }
+        <a asp-action="Carpage"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-page="@(Model.PageIndex + 1)"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           asp-route-currentColorFilter="@ViewData["ColorFilter"]"
+           asp-route-fueltypeFilter="@ViewData["FuelTypeFilter"]"
+           asp-route-motortypeFilter="@ViewData["MotorTypeFilter"]"
+           asp-route-transmissionFilter="@ViewData["TransmissionFilter"]"
+           class="btn btn-default @nextDisabled">
+            Next
+        </a>
+        <a asp-action="Carpage"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-page="@(Model.TotalPages)"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           asp-route-currentColorFilter="@ViewData["ColorFilter"]"
+           asp-route-fueltypeFilter="@ViewData["FuelTypeFilter"]"
+           asp-route-motortypeFilter="@ViewData["MotorTypeFilter"]"
+           asp-route-transmissionFilter="@ViewData["TransmissionFilter"]"
+           class="btn btn-default @nextDisabled">
+            Last
+        </a>
+
+
+        <script>
+            /* When the user clicks on the button,
+            toggle between hiding and showing the dropdown content */
+            function myFunction() {
+                document.getElementById("myDropdown").classList.toggle("show");
+            }
+
+            function filterFunction() {
+                var input, filter, ul, li, a, i;
+                input = document.getElementById("myInput");
+                filter = input.value.toUpperCase();
+                div = document.getElementById("myDropdown");
+                a = div.getElementsByTagName("a");
+                for (i = 0; i < a.length; i++) {
+                    if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        a[i].style.display = "";
+                    } else {
+                        a[i].style.display = "none";
+                    }
+                }
+            }
+        </script>
+    </div>
+</center>

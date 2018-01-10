@@ -1,0 +1,107 @@
+﻿@model WebshopHPWcore.Models.ShoppingCartViewModels.ShoppingCartViewModel
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@{
+    ViewBag.Title = "Winkelwagen";
+}
+@functions
+{
+    public string GetAntiXsrfRequestToken()
+    {
+        return Xsrf.GetAndStoreTokens(Context).RequestToken;
+    }
+}
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            // Document.ready -> link up remove event handler
+            $(".RemoveLink").click(function () {
+                // Get the id from the link
+                var recordToDelete = $(this).attr("data-id");
+                var PostToUrl = $(this).attr("data-url");
+                if (recordToDelete != '') {
+
+                    // Perform the ajax post
+                    $.ajax(PostToUrl, {
+                        type: "post",
+                        data: {
+                            "id": recordToDelete
+                        },
+                        dataType: "json",
+                        headers: {
+                            "RequestVerificationToken": '@GetAntiXsrfRequestToken()'
+                        }
+                    }).done(function (data) {
+                        // Successful requests get here
+                        // Update the page elements
+                        if (data.itemCount == 0) {
+                            $('#row-' + data.deleteId).fadeOut('slow');
+                        } else {
+                            $('#item-count-' + data.deleteId).text(data.itemCount);
+                        }
+
+                        $('#cart-total').text(data.cartTotal);
+                        $('#update-message').text(data.message);
+                        $('#cart-status').text(data.cartCount);
+                    });
+                }
+            });
+        });
+    </script>
+}
+
+<h3>Overzicht van uw winkelwagen:</h3>
+
+<div id="update-message">
+</div>
+<table id="cart-summary" class="table table-bordered table-responsive table-hover table-striped">
+    <tr></tr>
+    @foreach (var item in Model.CartItems)
+    {
+        <tr id="row-@item.CartItemId">
+            <td width="300">
+                    <img src="~/images/auto2.jpg" alt="Visual Studio" class="img-responsive" />
+            </td>
+            <td>
+                <p class="Text-size">
+                    @item.Car.brand @item.Car.model</p>
+                
+                €  @item.Car.price ,-
+            </td>
+            <td id="item-count-@item.CartItemId">
+                Aantal: @item.Count
+            </td>
+            <td>
+                <a asp-controller="WishList" asp-action="AddToCart" asp-route-id="@item.carid" class="btn btn-default" style="float:right">Voeg toe aan wenslijst</a>
+                <br />
+                <br />
+                <a asp-controller="ShoppingCart" asp-action="Details" asp-route-id="@item.carid" class="btn btn-default" style="float:right">Details</a>
+                <br />
+                <br />
+                <a href="#" class="btn btn-default RemoveLink" style="float:right;background-color:#F04C33" data-id="@item.CartItemId" 
+                   data-url='@Url.Content("~/ShoppingCart/RemoveFromCart")'>Verwijder</a>
+            </td>
+        </tr>
+    }
+    <tr>
+        <td>
+            <b>Totaal</b>
+        </td>
+        <td id="cart-total">
+            € @Model.CartTotal ,-
+        </td>
+        <td></td>
+        <td></td>
+
+    </tr>
+</table>
+
+<p class="koop-knopje-links">
+    <a asp-controller="Car" asp-action="Carpage"><< Verder winkelen</a>
+</p>
+
+<p class="koop-knopje">
+    <a asp-controller="ShoppingCart" asp-action="Review">Verder naar bestellen >></a>
+</p>
+<br />
+<br />
