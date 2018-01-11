@@ -50,8 +50,9 @@
     </script>
 }
 
-<h3>Overzicht van uw winkelwagen:</h3>
-
+<br />
+<h2>Overzicht van uw winkelwagen:</h2>
+<br />
 <div id="update-message">
 </div>
 <table id="cart-summary" class="table table-bordered table-responsive table-hover table-striped">
@@ -63,13 +64,12 @@
                     <img src="~/images/auto2.jpg" alt="Visual Studio" class="img-responsive" />
             </td>
             <td>
-                <p class="Text-size">
-                    @item.Car.brand @item.Car.model</p>
+                <h4>@item.Car.brand @item.Car.model</h4>
                 
-                €  @item.Car.price ,-
+                <h5>€  @item.Car.price ,-</h5>
             </td>
             <td id="item-count-@item.CartItemId">
-                Aantal: @item.Count
+                <h5>Aantal: @item.Count</h5>
             </td>
             <td>
                 <a asp-controller="WishList" asp-action="AddToCart" asp-route-id="@item.carid" class="btn btn-default" style="float:right">Voeg toe aan wenslijst</a>
@@ -92,9 +92,9 @@
         </td>
         <td></td>
         <td></td>
-
     </tr>
 </table>
+<br />
 
 <p >
     <a asp-controller="Car" asp-action="Carpage" class="koop-knopje-links"><< Verder winkelen</a>
