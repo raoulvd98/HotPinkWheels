@@ -11,60 +11,97 @@
     <a asp-action="Create">Nieuwe auto toevoegen</a>
 </p>
 
-<form asp-action="Index" method="get">
+<form  asp-action="Index" method="get">
     <div class="form-actions no-color">
-        <p>
-            Huidig Filter(s):
-            @ViewData["CurrentFilter"]
-            @ViewData["ColorFilter"]
-            @ViewData["FuelTypeFilter"]
-            @ViewData["MotorTypeFilter"]
-            @ViewData["TransmissionFilter"]
-            <br>
-            <br>
+        <input type="submit" value="Zoeken" class="btn btn-default" />
+        <a class="btn btn-default" asp-action="index"
+           asp-route-searchString=""
+           asp-route-searchStringModel=""
+           asp-route-carColor=""
+           asp-route-fueltype=""
+           asp-route-transmission=""
+           asp-route-maxPrice=""
+           asp-route-milage=""
+           asp-route-bouwjaar="">
 
-            Find by name: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
+            Verwijder Filter(s)
+        </a><br /><br />
+        <b>Huidig Filter(s): </b> <br />
+        Merk + model: @ViewData["CurrentFilter"] @ViewData["CurrentFilterModel"]
+        Bouwjaar @ViewData["ManufactureYear"]
+        Kleur: @ViewData["ColorFilter"]
+        Max prijs: @ViewData["MaxPriceFilter"]
+        Brandstof: @ViewData["FuelTypeFilter"]
+        Transmissie: @ViewData["TransmissionFilter"]
+        Kilometerstand @ViewData["MilageFilter"]
+        <br />
+        <br />
 
-            <select name="carColor" value="@ViewData["ColorFilter"]">
-                <option value="">Kleuren</option>
-                @foreach (var item in Model.Select(s => s.color).Distinct())
+        <b>Merken:</b>
+        <select id="searchString" name="searchString" value="@ViewData["currentFilter"]">
+            <option value="@ViewData["CurrentFilter"]">Alle</option>
+            @foreach (var item in Model.AllItems.OrderBy(s => s.brand).Select(s => s.brand).Distinct())
+            {
+                <option value=@item>@item</option>
+            }
+        </select>
+        &nbsp;&nbsp;
+        @if (ViewData["currentFilter"] != null)
+            {
+            <b>Model:</b>
+            <select id="searchStringModel" name="searchStringModel" value="@ViewData["CurrentFilterModel"] ">
+                <option value="@ViewData["CurrentFilterModel"] ">Alle</option>
+                @foreach (var item in Model.AllItems.OrderBy(s => s.model).Select(s => s.model).Distinct())
                 {
                     <option value=@item>@item</option>
                 }
             </select>
-            <select name="FuelType" value="@ViewData["FuelTypeFilter"]">
-                <option value="">Brandstof</option>
-                @foreach (var item in Model.Select(s => s.fueltype).Distinct())
-                {
-                    <option value=@item>@item</option>
-                }
-            </select>
-            <select name="motortype" value="@ViewData["MotorTypeFilter"]">
-                <option value="">Type motor</option>
-                @foreach (var item in Model.Select(s => s.enginetype).Distinct())
-                {
-                    <option value=@item>@item</option>
-                }
-            </select>
+        }
+        &nbsp;&nbsp;
+        <b>Bouwjaar:</b>
+        <input name="ManufactureYear" value="@ViewData["ManufactureYear"]" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+        &nbsp;&nbsp;
+        <b>Kleur:</b>
+        <select id="color" name="carColor" value="@ViewData["ColorFilter"]">
+            <option value="@ViewData["ColorFilter"]">Alle</option>
+            @foreach (var item in Model.AllItems.OrderBy(s => s.color).Select(s => s.color).Distinct())
+            {
+                <option value=@item>@item</option>
+            }
+        </select><br /><br />
 
-            <select name="transmission" value="@ViewData["TransmissionFilter"]">
-                <option value="">Transmissie</option>
-                @foreach (var item in Model.Select(s => s.transmission).Distinct())
-                {
-                    <option value=@item>@item</option>
-                }
-            </select>
-
-            @*<b>Kilometerstand: (vanaf)</b>
-                <input type="number" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="SearchString" value="@ViewData["PrijsFilter"]" >*@
-
-            <input type="submit" value="Zoeken" class="btn btn-default" /> |
-
-
-            <a asp-action="Index">Verwijder Filter(s)</a>
-        </p>
-    </div>
+        <b>Maximum prijs:</b>
+        <input name="maxPrice" value="@ViewData["MaxPriceFilter"]" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+        &nbsp;&nbsp;
+        <b>Type brandstof:</b>
+        <select id="fueltype" name="fuelType" value="@ViewData["FuelTypeFilter"]">
+            <option value="@ViewData["FuelTypeFilter"]">Alle</option>
+            @foreach (var item in Model.AllItems.OrderBy(s => s.fueltype).Select(s => s.fueltype).Distinct())
+            {
+                <option value=@item>@item</option>
+            }
+        </select>
+        &nbsp;&nbsp;
+        <b>Transmissie:</b>
+        <select name="transmission" value="@ViewData["TransmissionFilter"]">
+            <option value="@ViewData["TransmissionFilter"]">Alle</option>
+            @foreach (var item in Model.AllItems.OrderBy(s => s.transmission).Select(s => s.transmission).Distinct())
+            {
+                <option value=@item>@item</option>
+            }
+        </select>
+        &nbsp;&nbsp;
+        <b>Kilometerstand: (vanaf)</b>
+        <input name="milage" value="@ViewData["MilageFilter"]" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'><br /><br />
+</div>
 </form>
+
+
+
+
+
+
+
 <br />
 @await Html.PartialAsync("PaginationView")
 <br />
@@ -136,3 +173,59 @@
         }
     </tbody>
 </table>
+
+
+@*<form asp-action="Index" method="get">
+        <div class="form-actions no-color">
+            <p>
+                Huidig Filter(s):
+                @ViewData["CurrentFilter"]
+                @ViewData["ColorFilter"]
+                @ViewData["FuelTypeFilter"]
+                @ViewData["MotorTypeFilter"]
+                @ViewData["TransmissionFilter"]
+                <br>
+                <br>
+
+                Find by name: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
+
+                <select name="carColor" value="@ViewData["ColorFilter"]">
+                    <option value="">Kleuren</option>
+                    @foreach (var item in Model.Select(s => s.color).Distinct())
+                    {
+                        <option value=@item>@item</option>
+                    }
+                </select>
+                <select name="FuelType" value="@ViewData["FuelTypeFilter"]">
+                    <option value="">Brandstof</option>
+                    @foreach (var item in Model.Select(s => s.fueltype).Distinct())
+                    {
+                        <option value=@item>@item</option>
+                    }
+                </select>
+                <select name="motortype" value="@ViewData["MotorTypeFilter"]">
+                    <option value="">Type motor</option>
+                    @foreach (var item in Model.Select(s => s.enginetype).Distinct())
+                    {
+                        <option value=@item>@item</option>
+                    }
+                </select>
+
+                <select name="transmission" value="@ViewData["TransmissionFilter"]">
+                    <option value="">Transmissie</option>
+                    @foreach (var item in Model.Select(s => s.transmission).Distinct())
+                    {
+                        <option value=@item>@item</option>
+                    }
+                </select>
+
+                @*<b>Kilometerstand: (vanaf)</b>
+                    <input type="number" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="SearchString" value="@ViewData["PrijsFilter"]" >
+
+                <input type="submit" value="Zoeken" class="btn btn-default" /> |
+
+
+                <a asp-action="Index">Verwijder Filter(s)</a>
+            </p>
+        </div>
+    </form>*@
