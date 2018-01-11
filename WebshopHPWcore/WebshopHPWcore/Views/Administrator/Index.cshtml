@@ -20,6 +20,7 @@
            asp-route-carColor=""
            asp-route-fueltype=""
            asp-route-transmission=""
+           asp-route-minPrice=""
            asp-route-maxPrice=""
            asp-route-milage=""
            asp-route-bouwjaar="">
@@ -30,7 +31,7 @@
         Merk + model: @ViewData["CurrentFilter"] @ViewData["CurrentFilterModel"]
         Bouwjaar @ViewData["ManufactureYear"]
         Kleur: @ViewData["ColorFilter"]
-        Max prijs: @ViewData["MaxPriceFilter"]
+        Prijs: @ViewData["MinPriceFilter"] - @ViewData["MaxPriceFilter"]
         Brandstof: @ViewData["FuelTypeFilter"]
         Transmissie: @ViewData["TransmissionFilter"]
         Kilometerstand @ViewData["MilageFilter"]
@@ -70,6 +71,9 @@
             }
         </select><br /><br />
 
+        <b>Minimum prijs:</b>
+        <input name="minPrice" value="@ViewData["MinPriceFilter"]" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+        &nbsp;
         <b>Maximum prijs:</b>
         <input name="maxPrice" value="@ViewData["MaxPriceFilter"]" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
         &nbsp;&nbsp;

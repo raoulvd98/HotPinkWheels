@@ -65,6 +65,7 @@ namespace WebshopHPWcore.Controllers
                                          string searchStringModel, string currentFilterModel,
                                          string manufactureYear, string manufactureYearFilter,
                                          string carColor, string currentColorFilter,
+                                         int minPrice, int minPriceFilter,
                                          int maxPrice, int maxPriceFilter,
                                          string fueltype, string fueltypeFilter,
                                          string transmission, string transmissionFilter,
@@ -89,6 +90,7 @@ namespace WebshopHPWcore.Controllers
             ViewData["CurrentFilterModel"] = searchStringModel;
             ViewData["ManufactureYear"] = manufactureYear;
             ViewData["ColorFilter"] = carColor;
+            ViewData["MinPriceFilter"] = minPrice;
             ViewData["MaxPriceFilter"] = maxPrice;
             ViewData["FuelTypeFilter"] = fueltype;
             ViewData["TransmissionFilter"] = transmission;
@@ -139,6 +141,9 @@ namespace WebshopHPWcore.Controllers
 
             if (maxPrice > 0) { cars = cars.Where(x => x.price <= maxPrice); }
             else { ViewData["MaxPriceFilter"] = cars.Select(x => x.price).Max(); }
+
+            if (minPrice > 0) { cars = cars.Where(x => x.price >= minPrice); }
+            else { ViewData["MinPriceFilter"] = 0; }
 
             if (milage > 0) { cars = cars.Where(x => x.mileage <= milage); }
             else { @ViewData["MilageFilter"] = ""; }
