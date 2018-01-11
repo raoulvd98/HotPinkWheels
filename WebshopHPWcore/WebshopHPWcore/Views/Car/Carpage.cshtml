@@ -24,6 +24,7 @@
                asp-route-motortype=""
                asp-route-transmission=""
                asp-route-maxPrice=""
+               asp-route-minPrice=""
                asp-route-amountSeats=""
                asp-route-usage=""
                asp-route-pk=""
@@ -39,7 +40,7 @@
             Brandstof: @ViewData["FuelTypeFilter"] <br />
             Motor: @ViewData["MotorTypeFilter"] <br />
             Transmissie: @ViewData["TransmissionFilter"] <br />
-            Max prijs: @ViewData["MaxPriceFilter"] <br />
+            Prijs: @ViewData["MinPriceFilter"] - @ViewData["MaxPriceFilter"] <br />
             Aantal stoelen: @ViewData["AmountSeatsFilter"] <br />
             Verbruik: @ViewData["UsageFilter"] <br />
             Aantal PK: @ViewData["PkFilter"] <br />
@@ -85,7 +86,8 @@
                     <option value=@item>@item</option>
                 }
             </select><br /><br />
-
+            <b>Minimum prijs:</b><br />
+            <input name="minPrice" value="@ViewData["MinPriceFilter"]" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'><br /><br />
             <b>Maximum prijs:</b><br />
             <input name="maxPrice" value="@ViewData["MaxPriceFilter"]" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'><br /><br />
 
@@ -145,6 +147,7 @@
                asp-route-motortype=""
                asp-route-transmission=""
                asp-route-maxPrice=""
+               asp-route-minPrice=""
                asp-route-amountSeats=""
                asp-route-usage=""
                asp-route-pk=""
