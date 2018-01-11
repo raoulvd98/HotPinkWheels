@@ -4,9 +4,9 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<br />
 <h2>Auto Beheer</h2>
-
+<br />
 <p>
     <a asp-action="Create">Nieuwe auto toevoegen</a>
 </p>
@@ -67,7 +67,7 @@
 </form>
 <br />
 @await Html.PartialAsync("PaginationView")
-
+<br />
 <table class="table">
     <thead>
         <tr>
@@ -87,22 +87,7 @@
                 Prijs
             </th>
             <th>
-                PK
-            </th>
-            <th>
-                Gewicht
-            </th>
-            <th>
-                Topsnelheid
-            </th>
-            <th>
-                Motortype
-            </th>
-            <th>
                 Brandstoftype
-            </th>
-            <th>
-                Brandstofverbruik
             </th>
             <th>
                 Transmissie
@@ -110,24 +95,7 @@
             <th>
                 Kilometerstand
             </th>
-            <th>
-                APK
-            </th>
-            <th>
-                Garantie
-            </th>
-            <th>
-                Deuren
-            </th>
-            <th>
-                Stoelen
-            </th>
-            <th>
-                Vorige eigenaren
-            </th>
-            <th>
-                Plaatje
-            </th>
+
             <th></th>
         </tr>
     </thead>
@@ -148,49 +116,16 @@
                     @Html.DisplayFor(modelItem => item.color)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.horsepower)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.weight)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.topspeed)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.enginetype)
+                    €@Html.DisplayFor(modelItem => item.price)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.fueltype)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.fuelusage)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.transmission)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.mileage)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.apk)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.warranty)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.amountofdoors)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.amountofseats)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.amountofpreviousowners)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.image)
+                    @Html.DisplayFor(modelItem => item.mileage) km
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.carid">Aanpassen</a> |
