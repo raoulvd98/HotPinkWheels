@@ -109,6 +109,7 @@ namespace WebshopHPWcore.Controllers
             else { ViewData["MaxPriceFilter"] = cars.Select(x => x.price).Max(); }
 
             if (minPrice > 0) { cars = cars.Where(x => x.price >= minPrice); }
+            else { ViewData["MinPriceFilter"] = 0; }
 
             if (amountSeats > 0) { cars = cars.Where(x => x.amountofseats == amountSeats); }
             else { ViewData["AmountSeatsFilter"] = ""; }
