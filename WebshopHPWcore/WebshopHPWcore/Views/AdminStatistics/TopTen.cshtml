@@ -19,19 +19,19 @@
     <table>
         <tr>
             <td width="100px">
-                <input type="radio" name="Data" id="DataIsModel" class="btn btn-default">Weergeven per model<br />
-                <input type="radio" name="Data" id="DataIsBrand" class="btn btn-default" checked>Weergeven per merk<br />
+                <input type="radio" name="Data" id="DataIsModel" class="btn btn-default">Per model<br />
+                <input type="radio" name="Data" id="DataIsBrand" class="btn btn-default" checked>Per merk<br />
             </td>
             <td>
                 <input type="radio" name="Chart" id="ChangeToPieChart" class="btn btn-default">Cirkeldiagram<br />
                 <input type="radio" name="Chart" id="ChangeToColumnChart" class="btn btn-default" checked>Kolomdiagram<br />
-                <input type="radio" name="Chart" id="ChangeToBarChart" class="btn btn-default">Staafdiagram<br />
+                <input type="radio" name="Chart" id="ChangeToLineChart" class="btn btn-default">Lijndiagram<br />
             </td>
         </tr>
     </table>
 
-    <input id="SetAmountOfItemsInChart" type="number" value="10"  class="btn btn-default"/>
-        <button id="SetAmountOfItemsInChartSubmit" class="btn btn-default">Verander aantal weergegeven auto's</button><br />
+    <input id="SetAmountOfItemsInChart" type="number" min="0" value="10"  class="btn btn-default"/>
+        <button id="SetAmountOfItemsInChartSubmit" class="btn btn-default">Verander</button><br />
     <div id="chartContainer"></div>
 
     <script type="text/javascript">
@@ -44,21 +44,8 @@
             function compareDataPointYDescend(dataPoint1, dataPoint2) {
                 return dataPoint2.y - dataPoint1.y;
             }
-            CanvasJS.addColorSet("pink",
-                [//colorSet Array
-                    "#ff3399",
-                    "#f53d99",
-                    "#eb4799",
-                    "#e05299",
-                    "#d65c99",
-                    "#cc6699",
-                    "#c27099",
-                    "#b87a99",
-                    "#ad8599",
-                    "#a38f99",
-                ]);
             var chart = new CanvasJS.Chart("chartContainer", {
-                colorSet: "pink",
+                theme: "Theme2",
                 animationEnabled: true,
                 title: {
                     text: "Aantal verkochte auto's per merk"
@@ -68,7 +55,11 @@
                 ],
 
                 axisX: {
-                    maximum:9.5,
+                    maximum: 9.5,
+                    title: "Merk",
+                },
+                axisY: {
+                    title: "Aantal",
                 },
 
                 data: [
@@ -83,12 +74,14 @@
             chart.render();
             $("#DataIsModel").click(function () {
                 chart.options.title.text = "Aantal verkochte auto's per model"
+                chart.options.axisX.title = "Model"
                 chart.options.data[0].dataPoints = @Html.Raw(ViewBag.DataPoints2);
                 chart.options.data[0].dataPoints.sort(compareDataPointYDescend);
                 chart.render();
             });
             $("#DataIsBrand").click(function () {
                 chart.options.title.text = "Aantal verkochte auto's per merk"
+                chart.options.axisX.title = "Merk"
                 chart.options.data[0].dataPoints = @Html.Raw(ViewBag.DataPoints);
                 chart.options.data[0].dataPoints.sort(compareDataPointYDescend);
                 chart.render();
@@ -101,8 +94,8 @@
                 chart.options.data[0].type = "column"
                 chart.render();
             });
-            $("#ChangeToBarChart").click(function () {
-                chart.options.data[0].type = "bar"
+            $("#ChangeToLineChart").click(function () {
+                chart.options.data[0].type = "line"
                 chart.render();
             });
             $("#SetAmountOfItemsInChartSubmit").click(function () {

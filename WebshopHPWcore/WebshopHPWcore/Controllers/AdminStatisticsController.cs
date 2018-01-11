@@ -60,9 +60,7 @@ namespace WebshopHPWcore.Controllers
         public IActionResult TopTen()
         {
             List<DataPoint> dataPoints2 = HistoryModelStatistics();
-            
             List<DataPoint> dataPoints = HistoryBrandStatistics();
-
 
             ViewBag.dataPoints = JsonConvert.SerializeObject(dataPoints);
             ViewBag.dataPoints2 = JsonConvert.SerializeObject(dataPoints2);
@@ -203,7 +201,7 @@ namespace WebshopHPWcore.Controllers
                 DataPoint2 z = new DataPoint2(price, time.Year.ToString());
                 dataPoints5.Add(z);
             }
-
+            
             return dataPoints5;
         }
     }
