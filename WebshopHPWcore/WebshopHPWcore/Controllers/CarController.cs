@@ -31,6 +31,7 @@ namespace WebshopHPWcore.Controllers
                                                  string fueltype, string fueltypeFilter,
                                                  string motortype, string motortypeFilter,
                                                  string transmission, string transmissionFilter,
+                                                 int minPrice, int minPriceFilter,
                                                  int maxPrice, int maxPriceFilter,
                                                  int amountSeats, int amountSeatsFilter,
                                                  int usage, int usageFilter,
@@ -70,6 +71,7 @@ namespace WebshopHPWcore.Controllers
             ViewData["FuelTypeFilter"] = fueltype;
             ViewData["MotorTypeFilter"] = motortype;
             ViewData["TransmissionFilter"] = transmission;
+            ViewData["MinPriceFilter"] = minPrice;
             ViewData["MaxPriceFilter"] = maxPrice;
             ViewData["AmountSeatsFilter"] = amountSeats;
             ViewData["UsageFilter"] = usage;
@@ -105,6 +107,8 @@ namespace WebshopHPWcore.Controllers
 
             if (maxPrice > 0) { cars = cars.Where(x => x.price <= maxPrice); }
             else { ViewData["MaxPriceFilter"] = cars.Select(x => x.price).Max(); }
+
+            if (minPrice > 0) { cars = cars.Where(x => x.price >= minPrice); }
 
             if (amountSeats > 0) { cars = cars.Where(x => x.amountofseats == amountSeats); }
             else { ViewData["AmountSeatsFilter"] = ""; }

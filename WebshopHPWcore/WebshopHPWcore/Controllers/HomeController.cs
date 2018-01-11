@@ -10,9 +10,16 @@ namespace WebshopHPWcore.Controllers
 {
     public class HomeController : Controller
     {
+
+        private readonly ShopContext _context;
+
+        public HomeController(ShopContext context)
+        {
+            _context = context;
+        }
         public IActionResult Index()
         {
-            return View();
+           return View();
         }
 
         public IActionResult About()
