@@ -8,14 +8,46 @@
 @inject UserManager<ApplicationUser> UserManager
 
 <body>
-    <h2>Kies uw betaalmethode</h2>
+    <br />
+    <h2>Kies hier uw betaalmethode</h2>
     <br />
 
     <div id="paypal-button-container"></div>
     <br />
     <br />
+    <br />
 
-    <h4>Overzicht persoonsgegevens</h4>
+
+    <h4>Overzicht bestelling</h4><br />
+    <table id="table" class="table table-bordered table-responsive table-hover table-striped">
+        <tr></tr>
+        @foreach (var item in Model.shoppingcart.CartItems)
+        {
+            <tr id="row-@item.CartItemId">
+                <td>
+                    @item.Car.brand @item.Car.model
+                </td>
+                <td>
+                    €  @item.Car.price ,-
+                </td>
+                <td id="item-count-@item.CartItemId">
+                    Aantal: @item.Count
+                </td>
+            </tr>
+        }
+        <tr>
+            <td>
+                <b>Totaal</b>
+            </td>
+            <td id="cart-total">
+                <b>€ @Model.shoppingcart.CartTotal ,-</b>
+            </td>
+            <td></td>
+        </tr>
+    </table>
+    <br />
+
+    <h4>Overzicht persoonsgegevens</h4><br />
 
     <form asp-action="Finish" method="post" id="form" name="form">
         <table id="table" class="table table-bordered table-responsive table-hover table-striped">
