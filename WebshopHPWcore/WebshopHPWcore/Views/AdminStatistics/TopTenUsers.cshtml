@@ -40,7 +40,6 @@
         </tr>
     </thead>
     <tbody>
-        @*@foreach (var item in Model.HistoryItems.GroupBy(y => y.userid).OrderBy(x => x.Select(z => z.OrderId)).Reverse().Distinct())*@
         @foreach (var item in Model.HistoryItems.GroupBy(q => q.userid).OrderBy(x => x.Key).Select(x => x.Key).Reverse().Distinct())
         {
             int Count = 0;
@@ -63,11 +62,11 @@
                     <p>@Count</p>
                 </td>
                 <td>
+                    
                     @foreach (var totalprice in Model.HistoryItems.Where(x => x.userid == item).Select(x => x.Price))
                 {
                     TotalPrice += totalprice;
-                }
-                    <p>@TotalPrice</p>
+                }<p>@TotalPrice</p>
                 </td>
             </tr>
         }
