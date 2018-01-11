@@ -5,132 +5,134 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
+<h2>Verwijderen</h2>
+<h4>@Html.DisplayFor(m => m.brand) @Html.DisplayFor(m => m.model)</h4>
 <div>
-    <h4>Car</h4>
+
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.brand)
+            Merk
         </dt>
         <dd>
             @Html.DisplayFor(model => model.brand)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.model)
+            Model
         </dt>
         <dd>
             @Html.DisplayFor(model => model.model)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.manufactureyear)
+            Bouwjaar
         </dt>
         <dd>
             @Html.DisplayFor(model => model.manufactureyear)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.color)
+            Kleur
         </dt>
         <dd>
             @Html.DisplayFor(model => model.color)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.price)
+            Prijs
         </dt>
         <dd>
             @Html.DisplayFor(model => model.price)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.horsepower)
+            PK
         </dt>
         <dd>
             @Html.DisplayFor(model => model.horsepower)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.weight)
+            Gewicht
         </dt>
         <dd>
             @Html.DisplayFor(model => model.weight)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.topspeed)
+            Topsnelheid
         </dt>
         <dd>
             @Html.DisplayFor(model => model.topspeed)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.enginetype)
+            Type Motor
         </dt>
         <dd>
             @Html.DisplayFor(model => model.enginetype)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.fueltype)
+            Type Brandstof
         </dt>
         <dd>
             @Html.DisplayFor(model => model.fueltype)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.fuelusage)
+            Verbruik
         </dt>
         <dd>
             @Html.DisplayFor(model => model.fuelusage)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.transmission)
+            Transmissie
         </dt>
         <dd>
             @Html.DisplayFor(model => model.transmission)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.mileage)
+            Kilometerstand
         </dt>
         <dd>
             @Html.DisplayFor(model => model.mileage)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.apk)
+            APK
         </dt>
         <dd>
             @Html.DisplayFor(model => model.apk)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.warranty)
+            Garantie
         </dt>
         <dd>
             @Html.DisplayFor(model => model.warranty)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.amountofdoors)
+            Aantal deuren
         </dt>
         <dd>
             @Html.DisplayFor(model => model.amountofdoors)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.amountofseats)
+            Aantal stoelen
         </dt>
         <dd>
             @Html.DisplayFor(model => model.amountofseats)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.amountofpreviousowners)
+            Aantal vorige eigenaren
         </dt>
         <dd>
             @Html.DisplayFor(model => model.amountofpreviousowners)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.image)
+            Afbeelding
         </dt>
         <dd>
             @Html.DisplayFor(model => model.image)
         </dd>
     </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="carid" />
-        <input type="submit" value="Delete" class="btn btn-default" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+</div>
+   <div> 
+       <form asp-action="Delete">
+           <input type="hidden" asp-for="carid" />
+           <input type="submit" value="Verwijderen" class="btn btn-default" />
+       </form></div>
+<br />
+<div>
+        <a asp-action="Index">Terug naar overzicht</a>
 </div>
