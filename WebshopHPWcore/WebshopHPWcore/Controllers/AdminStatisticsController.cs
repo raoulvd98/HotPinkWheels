@@ -51,7 +51,7 @@ namespace WebshopHPWcore.Controllers
             List<DataPoint2> dataPoints4 = RevenueMonth();
             ViewBag.dataPoints4 = JsonConvert.SerializeObject(dataPoints4);
 
-            List<DataPoint2> dataPoints5 = RevenueMonth();
+            List<DataPoint2> dataPoints5 = RevenueYear();
             ViewBag.dataPoints5 = JsonConvert.SerializeObject(dataPoints5);
 
             return View();
