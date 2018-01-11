@@ -45,7 +45,7 @@ namespace WebshopHPWcore.Controllers
 
         public IActionResult Omzet()
         {
-            List<DataPoint2> dataPoints3 = Revenue();
+            List<DataPoint2> dataPoints3 = RevenueDay();
             ViewBag.dataPoints3 = JsonConvert.SerializeObject(dataPoints3);
             return View();
         }
@@ -149,11 +149,11 @@ namespace WebshopHPWcore.Controllers
             return dataPoints2;
         }
 
-        public List<DataPoint2> Revenue()
+        public List<DataPoint2> RevenueDay()
         {
             List<DataPoint2> dataPoints3 = new List<DataPoint2>();
 
-            for (int DayCounter = 0; DayCounter > -31; DayCounter--)
+            for (int DayCounter = 0; DayCounter > -1000; DayCounter--)
             {
                 var price = _context.History.Where(x => x.DateCreated.ToShortDateString() == DateTime.Now.AddDays(DayCounter).ToShortDateString()).Sum(y => y.Price);
                 
@@ -162,6 +162,21 @@ namespace WebshopHPWcore.Controllers
             }
          
             return dataPoints3;
+        }
+
+        public List<DataPoint2> RevenueMonth()
+        {
+            List<DataPoint2> dataPoints4 = new List<DataPoint2>();
+
+            for (int MonthCounter = 0; MonthCounter > -1000; MonthCounter--)
+            {
+                var price = _context.History.Where(x => x.DateCreated.ToShortDateString() == DateTime.Now.AddDays(MonthCounter).ToShortDateString()).Sum(y => y.Price);
+
+                DataPoint2 z = new DataPoint2(price, DateTime.Now.AddDays(MonthCounter).ToShortDateString());
+                dataPoints4.Add(z);
+            }
+
+            return dataPoints4;
         }
     }
 }
