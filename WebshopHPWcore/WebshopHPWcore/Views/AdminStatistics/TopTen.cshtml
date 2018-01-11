@@ -1,7 +1,7 @@
 ﻿@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
 @model WebshopHPWcore.Models.HistoryViewModels.HistoryViewModel
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Verkoop statistieken auto's";
 }
 <!DOCTYPE html>
 
@@ -9,7 +9,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-    <title>Index</title>
+    <title>Verkoop statistieken auto's</title>
 </head>
 <body>
 
@@ -19,13 +19,13 @@
     <table>
         <tr>
             <td width="100px">
-                <input type="radio" name="Data" id="DataIsModel" class="btn btn-default">Per Model<br />
-                <input type="radio" name="Data" id="DataIsBrand" class="btn btn-default" checked>Per Merk<br />
+                <input type="radio" name="Data" id="DataIsModel" class="btn btn-default">Weergeven per model<br />
+                <input type="radio" name="Data" id="DataIsBrand" class="btn btn-default" checked>Weergeven per merk<br />
             </td>
             <td>
-                <input type="radio" name="Chart" id="ChangeToPieChart" class="btn btn-default">CirkelDiagram<br />
-                <input type="radio" name="Chart" id="ChangeToColumnChart" class="btn btn-default" checked>KolomDiagram<br />
-                <input type="radio" name="Chart" id="ChangeToBarChart" class="btn btn-default">StaafDiagram<br />
+                <input type="radio" name="Chart" id="ChangeToPieChart" class="btn btn-default">Cirkeldiagram<br />
+                <input type="radio" name="Chart" id="ChangeToColumnChart" class="btn btn-default" checked>Kolomdiagram<br />
+                <input type="radio" name="Chart" id="ChangeToBarChart" class="btn btn-default">Staafdiagram<br />
             </td>
         </tr>
     </table>
@@ -68,8 +68,7 @@
                 ],
 
                 axisX: {
-                    maximum:9.5
-
+                    maximum:9.5,
                 },
 
                 data: [
@@ -107,7 +106,7 @@
                 chart.render();
             });
             $("#SetAmountOfItemsInChartSubmit").click(function () {
-                chart.options.axisX.maximum = document.getElementById("SetAmountOfItemsInChart"). - 0.5;
+                chart.options.axisX.maximum = document.getElementById("SetAmountOfItemsInChart").value - 0.5;
                 chart.render();
             });
         };

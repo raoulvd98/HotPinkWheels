@@ -1681,9 +1681,11 @@ pre code {
     min-height: 1px;
     padding-right: 15px;
     padding-left: 15px;
-    background-color: lightpink;
+    background-color: #ffe0e4;
     width: 25%;
-    float : left;
+    float: left;
+    border: solid;
+    border-color: hotpink;
 }
 
 .filterstuk-knopje {

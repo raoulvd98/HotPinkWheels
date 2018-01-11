@@ -65,7 +65,7 @@ namespace WebshopHPWcore.Controllers
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
+                    _logger.LogInformation("Gebruiker is ingelogd.");
                     return RedirectToLocal(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
@@ -74,12 +74,12 @@ namespace WebshopHPWcore.Controllers
                 }
                 if (result.IsLockedOut)
                 {
-                    _logger.LogWarning("User account locked out.");
+                    _logger.LogWarning("Account is op slot gezet.");
                     return RedirectToAction(nameof(Lockout));
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "De gebruikersnaam of wachtwoord zijn incorrect");
                     return View(model);
                 }
             }
@@ -227,14 +227,14 @@ namespace WebshopHPWcore.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User created a new account with password.");
+                    _logger.LogInformation("Gebruiker heeft nieuw account gemaakt met wachtwoord.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
                     await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    _logger.LogInformation("User created a new account with password.");
+                    _logger.LogInformation("Gebruiker heeft nieuw account gemaakt met wachtwoord.");
                     return RedirectToLocal(returnUrl);
                 }
                 AddErrors(result);
@@ -249,7 +249,7 @@ namespace WebshopHPWcore.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            _logger.LogInformation("User logged out.");
+            _logger.LogInformation("Gebruiker is uitgelogd.");
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 

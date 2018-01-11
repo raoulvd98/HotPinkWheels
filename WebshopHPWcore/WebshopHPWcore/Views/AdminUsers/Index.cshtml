@@ -3,9 +3,9 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>Index</h2>
+<h2>Beheer gebruikers</h2>
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Nieuwe gebruiker toevoegen</a>
 </p>
 
 @await Html.PartialAsync("PaginationView")
@@ -24,6 +24,9 @@
             </th>
             <th>
                 Telefoonnummer
+            </th>
+            <th>
+                Woonplaats
             </th>
             <th>
                 Adres
@@ -53,6 +56,9 @@
                     @Html.DisplayFor(modelItem => item.PhoneNumber)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Address) @Html.DisplayFor(modelItem => item.HouseNumber)
                 </td>
                 <td>
@@ -62,9 +68,9 @@
                     @*@Html.Raw(ViewData["userroles"])*@
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Edit" asp-route-id="@item.Id">Aanpassen</a> |
                     @*<a asp-action="Details" asp-route-id="@item.Id">Details</a> |*@
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Verwijderen</a>
                 </td>
             </tr>
         }
