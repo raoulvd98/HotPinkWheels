@@ -20,22 +20,20 @@
         <tr>
             <td width="100px">
                 <input type="radio" name="Data" id="PerDag" class="btn btn-default" checked>Per dag<br />
-                <input type="radio" name="Data" id="PerMaand" class="btn btn-default" >Per Maand<br />
-                <input type="radio" name="Data" id="PerJaar" class="btn btn-default">Per Jaar<br />
+                <input type="radio" name="Data" id="PerMaand" class="btn btn-default" >Per maand<br />
+                <input type="radio" name="Data" id="PerJaar" class="btn btn-default">Per jaar<br />
             </td>
             <td>
                 <input type="radio" name="Chart" id="ChangeToLineChart" class="btn btn-default" checked>Lijndiagram<br />
                 <input type="radio" name="Chart" id="ChangeToSplineChart" class="btn btn-default">Lijndiagram ronde afwerking<br />
-                <input type="radio" name="Chart" id="ChangeToStepLineChart" class="btn btn-default">Lijndiagram hoekige afwerking<br />
                 <input type="radio" name="Chart" id="ChangeToAreaChart" class="btn btn-default" >Lijndiagram gekleurd<br />
                 <input type="radio" name="Chart" id="ChangeToSplineAreaChart" class="btn btn-default" checked>Lijndiagram ronde afwerking gekleurd<br />
-                <input type="radio" name="Chart" id="ChangeToStepLineAreaChart" class="btn btn-default">Lijndiagram hoekige afwerking gekleurd<br />
             </td>
         </tr>
     </table>
 
-    <input id="SetAmountOfItemsInChart" type="number" value="10" class="btn btn-default" />
-    <button id="SetAmountOfItemsInChartSubmit" class="btn btn-default">Verander aantal weergegeven perioden</button><br />
+    <input id="SetAmountOfItemsInChart" type="number" min="0" value="10" class="btn btn-default" />
+    <button id="SetAmountOfItemsInChartSubmit" class="btn btn-default">Verander</button><br />
 
     
     <div id="chartContainer"></div>
@@ -57,7 +55,7 @@
                     "#a38f99",
                 ]);
             var chart = new CanvasJS.Chart("chartContainer", {
-                colorSet: "pink",
+                theme: "theme2",
                 animationEnabled: true,
                 title: {
                     text: "Omzet per dag"
@@ -66,8 +64,12 @@
                     { text: "" }
                 ],
                 axisX: {
-                    maximum: 30.5
-
+                    reversed: true,
+                    maximum: 9.5,
+                    title: "Datum",
+                },
+                axisY: {
+                    title: "Aantal in euro's (€)",
                 },
 
                 data: [
@@ -80,19 +82,16 @@
             chart.render();
             $("#PerDag").click(function () {
                 chart.options.title.text = "Omzet per dag"
-                chart.options.axisX.maximum = 30.5
                 chart.options.data[0].dataPoints = @Html.Raw(ViewBag.DataPoints3);
                 chart.render();
             });
             $("#PerMaand").click(function () {
                 chart.options.title.text = "Omzet per maand"
-                chart.options.axisX.maximum = 11.5
                 chart.options.data[0].dataPoints = @Html.Raw(ViewBag.DataPoints4);
                 chart.render();
             });
             $("#PerJaar").click(function () {
                 chart.options.title.text = "Omzet per Jaar"
-                chart.options.axisX.maximum = 4.5
                 chart.options.data[0].dataPoints = @Html.Raw(ViewBag.DataPoints5);
                 chart.render();
             });
@@ -103,14 +102,6 @@
             });
             $("#ChangeToLineChart").click(function () {
                 chart.options.data[0].type = "line"
-                chart.render();
-            });
-            $("#ChangeToStepLineChart").click(function () {
-                chart.options.data[0].type = "stepLine"
-                chart.render();
-            });
-            $("#ChangeToStepLineAreaChart").click(function () {
-                chart.options.data[0].type = "stepArea"
                 chart.render();
             });
             $("#ChangeToAreaChart").click(function () {
