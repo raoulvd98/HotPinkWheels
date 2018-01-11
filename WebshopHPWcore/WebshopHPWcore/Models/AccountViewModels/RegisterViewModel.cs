@@ -14,14 +14,14 @@ namespace WebshopHPWcore.Models.AccountViewModels
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "Het {0} moet op zijn minst {2} en maximaal {1} tekens lang zijn.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Wachtwoord")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Bevestig wachtwoord")]
+        [Compare("Password", ErrorMessage = "De wachtwoorden komen niet overeen.")]
         public string ConfirmPassword { get; set; }
 
         [Required]
@@ -32,36 +32,36 @@ namespace WebshopHPWcore.Models.AccountViewModels
 
         [Required]
         [DataType(DataType.PostalCode)]
-        [Display(Name ="PostCode")]
+        [Display(Name ="Postcode")]
         public string ZipCode { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "City")]
+        [Display(Name = "Woonplaats")]
         public string City { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name ="FirstName")]
+        [Display(Name ="Voornaam")]
         public string FirstName { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "LastName")]
+        [Display(Name = "Achternaam")]
         public string LastName { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "Address")]
+        [Display(Name = "Straatnaam")]
         public string Address { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "HouseNumber")]
+        [Display(Name = "Huisnummer")]
         public string HouseNumber { get; set; }
 
         [DataType(DataType.Text)]
-        [Display(Name = "MiddleName")]
+        [Display(Name = "Tussenvoegsel")]
         public string MiddleName { get; set; }
     }
 }
