@@ -101,7 +101,7 @@ namespace WebshopHPWcore.Controllers
                 }
             }
 
-            StatusMessage = "Your profile has been updated";
+            StatusMessage = "De aanpassingen aan uw profiel zijn opgeslagen.";
             return RedirectToAction(nameof(Index));
         }
 
@@ -125,7 +125,7 @@ namespace WebshopHPWcore.Controllers
             var email = user.Email;
             await _emailSender.SendEmailConfirmationAsync(email, callbackUrl);
 
-            StatusMessage = "Verification email sent. Please check your email.";
+            StatusMessage = "Verificatie email gestuurd. Controleer uw mailbox.";
             return RedirectToAction(nameof(Index));
         }
 
@@ -171,8 +171,8 @@ namespace WebshopHPWcore.Controllers
             }
 
             await _signInManager.SignInAsync(user, isPersistent: false);
-            _logger.LogInformation("User changed their password successfully.");
-            StatusMessage = "Your password has been changed.";
+            _logger.LogInformation("Gebruiker heeft succesvol zijn wachtwoord gewijzigd.");
+            StatusMessage = "Uw wachtwoord is gewijzigd.";
 
             return RedirectToAction(nameof(ChangePassword));
         }
@@ -410,7 +410,7 @@ namespace WebshopHPWcore.Controllers
 
             if (!is2faTokenValid)
             {
-                ModelState.AddModelError("model.Code", "Verification code is invalid.");
+                ModelState.AddModelError("model.Code", "Verificatie code is incorrect.");
                 return View(model);
             }
 

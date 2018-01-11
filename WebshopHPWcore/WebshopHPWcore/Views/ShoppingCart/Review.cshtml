@@ -10,10 +10,10 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-
+<br />
 <h2>Overzicht van uw bestelling</h2>
 <br />
-<h4>Overzicht winkelwagen</h4>
+<h4>Overzicht winkelwagen</h4><br />
 
 <table id="table" class="table table-bordered table-responsive table-hover table-striped">
     <tr></tr>
@@ -41,9 +41,10 @@
         <td></td>
     </tr>
 </table>
+<br />
 
-<h4>Overzicht persoonsgegevens</h4>
-<form asp-action="Howtopayherefor" method="post" id="form" name="form">
+<h4>Vul hier uw persoonsgegevens in</h4><br />
+<form asp-action="Checkout" method="post" id="form" name="form">
     <table id="table" class="table table-bordered table-responsive table-hover table-striped">
         <tr>
             <td>
@@ -92,5 +93,4 @@
     <input type="submit" class="koop-knopje" value="Verder naar bestellen >>" />
 </form>
 
-<br />
 <br />
