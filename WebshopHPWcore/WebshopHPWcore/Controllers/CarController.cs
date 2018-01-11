@@ -118,7 +118,7 @@ namespace WebshopHPWcore.Controllers
             if (milage > 0) { cars = cars.Where(x => x.mileage <= milage); }
             else { @ViewData["MilageFilter"] = "";  }
 
-            if (topSpeed > 0) { cars = cars.Where(x => x.topspeed <= topSpeed); }
+            if (topSpeed > 0) { cars = cars.Where(x => x.topspeed >= topSpeed); }
             else { ViewData["TopSpeedFilter"] = ""; }
 
             if (minWeight > 0) { cars = cars.Where(x => x.weight >= minWeight); }
