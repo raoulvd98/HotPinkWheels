@@ -26,6 +26,7 @@ namespace WebshopHPWcore.Controllers
         }
         
         public async Task<IActionResult> Carpage(string searchString, string currentFilter,
+                                                 string searchStringModel, string currentFilterModel,
                                                  string carColor, string currentColorFilter,
                                                  string fueltype, string fueltypeFilter,
                                                  string motortype, string motortypeFilter,
@@ -64,6 +65,7 @@ namespace WebshopHPWcore.Controllers
             //}
 
             ViewData["CurrentFilter"] = searchString;
+            ViewData["CurrentFilterModel"] = searchStringModel;
             ViewData["ColorFilter"] = carColor;
             ViewData["FuelTypeFilter"] = fueltype;
             ViewData["MotorTypeFilter"] = motortype;
@@ -82,7 +84,11 @@ namespace WebshopHPWcore.Controllers
                            select s;
 
             if (!String.IsNullOrEmpty(searchString)) { searchString = searchString.ToUpper();
-                            cars = cars.Where(m =>  (m.brand).ToUpper().Contains(searchString) || (m.model).ToUpper().Contains(searchString));
+                            cars = cars.Where(m =>  (m.brand).ToUpper().Contains(searchString));
+            }
+
+            if (!String.IsNullOrEmpty(searchStringModel)) { searchStringModel = searchStringModel.ToUpper();
+                cars = cars.Where(m => (m.model).ToUpper().Contains(searchStringModel));
             }
 
             if (!String.IsNullOrEmpty(carColor)) { carColor = carColor.ToUpper();
@@ -112,7 +118,7 @@ namespace WebshopHPWcore.Controllers
             if (milage > 0) { cars = cars.Where(x => x.mileage <= milage); }
             else { @ViewData["MilageFilter"] = "";  }
 
-            if (topSpeed > 0) { cars = cars.Where(x => x.topspeed <= topSpeed); }
+            if (topSpeed > 0) { cars = cars.Where(x => x.topspeed >= topSpeed); }
             else { ViewData["TopSpeedFilter"] = ""; }
 
             if (minWeight > 0) { cars = cars.Where(x => x.weight >= minWeight); }
