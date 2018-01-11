@@ -5,22 +5,19 @@
 @model LoginViewModel
 @inject SignInManager<ApplicationUser> SignInManager
 
-
-<div class="row">
-    <div class="col-md-5">
+<div class="row-left">
+    <div class="col-md-4">
         <section>
             <form asp-controller="Account" asp-action="Login" method="post">
-                
-
                 <div class="form-group">
                     <br />
-                    <h2>Inloggen voor bestaande klanten</h2>
+                    <h3>Inloggen voor bestaande klanten</h3>
                     <hr />
-                    <input asp-for="Email" class="form-control" placeholder="Email"/>
+                    <input asp-for="Email" class="form-control" placeholder="Email" />
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <input asp-for="Password" class="form-control" placeholder="Wachtwoord"/>
+                    <input asp-for="Password" class="form-control" placeholder="Wachtwoord" />
                     <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
                 <div class="form-group">
@@ -39,15 +36,40 @@
                     <p>
                         <a asp-controller="Account" asp-action="ForgotPassword">Wachtwoord vergeten?</a>
                     </p>
-                    <p>
-                        <a asp-area="" asp-controller="Account" asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">Klik hier om je te registeren!</a>
-                    </p>
                 </div>
             </form>
         </section>
     </div>
 </div>
 
-@section Scripts {
-    @await Html.PartialAsync("_ValidationScriptsPartial")
-}
+<style>
+    .vl {
+        border-left: 2px solid black;
+        height: 570px;
+        position: absolute;
+        left: 42%;
+        margin-left: -3px;
+        top: 0;
+        opacity: 0.1;
+    }
+    .padding-left-pagina
+    {
+        padding-left: 45%
+    }
+</style>
+
+    <div class="col-md-4, padding-left-pagina">
+        <br />
+        <h3>Nieuwe klanten</h3>
+        <hr align="left" width="330px"/>
+
+        <button align="center " type="submit" class="btn btn-default">
+            Registreren
+            <a asp-area="" asp-controller="Account" asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]"></a>
+        </button>
+    </div>
+
+<div class="vl"></div>
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+@section Scripts {@await Html.PartialAsync("_ValidationScriptsPartial")}
