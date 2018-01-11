@@ -278,7 +278,7 @@ namespace WebshopHPWcore.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Howtopayherefor(string Username, string Email, string Firstname,
+        public async Task<IActionResult> Checkout(string Username, string Email, string Firstname,
                                     string Middlename, string Lastname, string Addres,
                                     string Housenr, string Zipcode, string City, string Phonenr, string Toevoeging)
         {
