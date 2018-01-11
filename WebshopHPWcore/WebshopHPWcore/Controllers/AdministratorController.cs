@@ -62,33 +62,39 @@ namespace WebshopHPWcore.Controllers
         // GET: Administrator
         [HttpGet("/adminpage")]
         public async Task<IActionResult> Index(string searchString, string currentFilter,
+                                         string searchStringModel, string currentFilterModel,
+                                         string manufactureYear, string manufactureYearFilter,
                                          string carColor, string currentColorFilter,
+                                         int minPrice, int minPriceFilter,
+                                         int maxPrice, int maxPriceFilter,
                                          string fueltype, string fueltypeFilter,
-                                         string motortype, string motortypeFilter,
                                          string transmission, string transmissionFilter,
+                                         int milage, int milageFilter,
                                          int? page)
         {
 
-            if (searchString != null || carColor != null || fueltype != null || motortype != null || transmission != null)
-            {
-                page = 1;
-            }
-            else
-            {
-                searchString = currentFilter;
-                carColor = currentColorFilter;
-                fueltype = fueltypeFilter;
-                motortype = motortypeFilter;
-                transmission = transmissionFilter;
-                //milage = milageFilter;
-            }
+            //if (searchString != null || carColor != null || fueltype != null || transmission != null)
+            //{
+            //    page = 1;
+            //}
+            //else
+            //{
+            //    searchString = currentFilter;
+            //    carColor = currentColorFilter;
+            //    fueltype = fueltypeFilter;
+            //    transmission = transmissionFilter;
+            //    //milage = milageFilter;
+            //}
 
             ViewData["CurrentFilter"] = searchString;
+            ViewData["CurrentFilterModel"] = searchStringModel;
+            ViewData["ManufactureYear"] = manufactureYear;
             ViewData["ColorFilter"] = carColor;
+            ViewData["MinPriceFilter"] = minPrice;
+            ViewData["MaxPriceFilter"] = maxPrice;
             ViewData["FuelTypeFilter"] = fueltype;
-            ViewData["MotorTypeFilter"] = motortype;
             ViewData["TransmissionFilter"] = transmission;
-            //ViewData["MilageFilter"] = milage;
+            ViewData["MilageFilter"] = milage;
 
             IQueryable<string> genreQuery = from m in _context.cars
                                             orderby m.color
@@ -99,27 +105,50 @@ namespace WebshopHPWcore.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                cars = cars.Where(m => m.brand.Contains(searchString) || m.model.Contains(searchString));
+                searchString = searchString.ToUpper();
+                cars = cars.Where(m => (m.brand).ToUpper().Contains(searchString));
+            }
+
+            if (!String.IsNullOrEmpty(searchStringModel))
+            {
+                searchStringModel = searchStringModel.ToUpper();
+                cars = cars.Where(m => (m.model).ToUpper().Contains(searchStringModel));
+            }
+
+            if (!String.IsNullOrEmpty(manufactureYear))
+            {
+                manufactureYear = manufactureYear.ToUpper();
+                cars = cars.Where(x => (x.manufactureyear).ToUpper().Contains(manufactureYear));
             }
 
             if (!String.IsNullOrEmpty(carColor))
             {
-                cars = cars.Where(x => x.color.Contains(carColor));
+                carColor = carColor.ToUpper();
+                cars = cars.Where(x => (x.color).ToUpper().Contains(carColor));
             }
-
+            
             if (!String.IsNullOrEmpty(fueltype))
             {
-                cars = cars.Where(x => x.fueltype.Contains(fueltype));
+                fueltype = fueltype.ToUpper();
+                cars = cars.Where(x => (x.fueltype).ToUpper().Contains(fueltype));
             }
-
-            if (!String.IsNullOrEmpty(motortype))
-            {
-                cars = cars.Where(x => x.enginetype.Contains(motortype));
-            }
+            
             if (!String.IsNullOrEmpty(transmission))
             {
-                cars = cars.Where(x => x.transmission.Contains(transmission));
+                transmission = transmission.ToUpper();
+                cars = cars.Where(x => (x.transmission).ToUpper().Contains(transmission));
             }
+
+            if (maxPrice > 0) { cars = cars.Where(x => x.price <= maxPrice); }
+            else { ViewData["MaxPriceFilter"] = cars.Select(x => x.price).Max(); }
+
+            if (minPrice > 0) { cars = cars.Where(x => x.price >= minPrice); }
+            else { ViewData["MinPriceFilter"] = 0; }
+
+            if (milage > 0) { cars = cars.Where(x => x.mileage <= milage); }
+            else { @ViewData["MilageFilter"] = ""; }
+
+            
 
             //if (milage != null)
             //{
