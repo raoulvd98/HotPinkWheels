@@ -16,6 +16,28 @@
     <h2>Index</h2>
     <br />
     <div><a asp-area="" asp-controller="AdminStatistics" asp-action="Index"><< Terug naar overzichten</a></div>
+    <table>
+        <tr>
+            <td width="100px">
+                <input type="radio" name="Data" id="PerDag" class="btn btn-default" checked>Per dag<br />
+                <input type="radio" name="Data" id="PerMaand" class="btn btn-default" >Per Maand<br />
+                <input type="radio" name="Data" id="PerJaar" class="btn btn-default">Per Jaar<br />
+            </td>
+            <td>
+                <input type="radio" name="Chart" id="ChangeToLineChart" class="btn btn-default" checked>Lijndiagram<br />
+                <input type="radio" name="Chart" id="ChangeToSplineChart" class="btn btn-default">Lijndiagram ronde afwerking<br />
+                <input type="radio" name="Chart" id="ChangeToStepLineChart" class="btn btn-default">Lijndiagram hoekige afwerking<br />
+                <input type="radio" name="Chart" id="ChangeToAreaChart" class="btn btn-default" >Lijndiagram gekleurd<br />
+                <input type="radio" name="Chart" id="ChangeToSplineAreaChart" class="btn btn-default" checked>Lijndiagram ronde afwerking gekleurd<br />
+                <input type="radio" name="Chart" id="ChangeToStepLineAreaChart" class="btn btn-default">Lijndiagram hoekige afwerking gekleurd<br />
+            </td>
+        </tr>
+    </table>
+
+    <input id="SetAmountOfItemsInChart" type="number" value="10" class="btn btn-default" />
+    <button id="SetAmountOfItemsInChartSubmit" class="btn btn-default">Verander aantal weergegeven perioden</button><br />
+
+    
     <div id="chartContainer"></div>
 
     <script type="text/javascript">
@@ -38,21 +60,72 @@
                 colorSet: "pink",
                 animationEnabled: true,
                 title: {
-                    text: "Omzet"
+                    text: "Omzet per dag"
                 },
                 subtitles: [
                     { text: "" }
                 ],
+                axisX: {
+                    maximum: 30.5
+
+                },
 
                 data: [
                     {
-                        type: "spline", //change type to column, bar, line, area, pie, etc
+                        type: "splineArea", //change type to column, bar, line, area, pie, etc
                         dataPoints: @Html.Raw(ViewBag.dataPoints3),
                     }
             ]
             });
             chart.render();
+            $("#PerDag").click(function () {
+                chart.options.title.text = "Omzet per dag"
+                chart.options.axisX.maximum = 30.5
+                chart.options.data[0].dataPoints = @Html.Raw(ViewBag.DataPoints3);
+                chart.render();
+            });
+            $("#PerMaand").click(function () {
+                chart.options.title.text = "Omzet per maand"
+                chart.options.axisX.maximum = 11.5
+                chart.options.data[0].dataPoints = @Html.Raw(ViewBag.DataPoints4);
+                chart.render();
+            });
+            $("#PerJaar").click(function () {
+                chart.options.title.text = "Omzet per Jaar"
+                chart.options.axisX.maximum = 4.5
+                chart.options.data[0].dataPoints = @Html.Raw(ViewBag.DataPoints5);
+                chart.render();
+            });
 
+            $("#ChangeToSplineChart").click(function () {
+                chart.options.data[0].type = "spline"
+                chart.render();
+            });
+            $("#ChangeToLineChart").click(function () {
+                chart.options.data[0].type = "line"
+                chart.render();
+            });
+            $("#ChangeToStepLineChart").click(function () {
+                chart.options.data[0].type = "stepLine"
+                chart.render();
+            });
+            $("#ChangeToStepLineAreaChart").click(function () {
+                chart.options.data[0].type = "stepArea"
+                chart.render();
+            });
+            $("#ChangeToAreaChart").click(function () {
+                chart.options.data[0].type = "area"
+                chart.render();
+            });
+            $("#ChangeToSplineAreaChart").click(function () {
+                chart.options.data[0].type = "splineArea"
+                chart.render();
+            });
+
+            $("#SetAmountOfItemsInChartSubmit").click(function () {
+                chart.options.axisX.maximum = document.getElementById("SetAmountOfItemsInChart").value - 0.5;
+                chart.render();
+            });
         };
 
 

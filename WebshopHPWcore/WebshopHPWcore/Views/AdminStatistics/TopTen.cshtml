@@ -68,8 +68,7 @@
                 ],
 
                 axisX: {
-                    maximum:9.5
-
+                    maximum:9.5,
                 },
 
                 data: [
@@ -107,7 +106,7 @@
                 chart.render();
             });
             $("#SetAmountOfItemsInChartSubmit").click(function () {
-                chart.options.axisX.maximum = document.getElementById("SetAmountOfItemsInChart"). - 0.5;
+                chart.options.axisX.maximum = document.getElementById("SetAmountOfItemsInChart").value - 0.5;
                 chart.render();
             });
         };
