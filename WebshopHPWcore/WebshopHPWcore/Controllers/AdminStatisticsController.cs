@@ -47,6 +47,13 @@ namespace WebshopHPWcore.Controllers
         {
             List<DataPoint2> dataPoints3 = RevenueDay();
             ViewBag.dataPoints3 = JsonConvert.SerializeObject(dataPoints3);
+
+            List<DataPoint2> dataPoints4 = RevenueMonth();
+            ViewBag.dataPoints4 = JsonConvert.SerializeObject(dataPoints4);
+
+            List<DataPoint2> dataPoints5 = RevenueYear();
+            ViewBag.dataPoints5 = JsonConvert.SerializeObject(dataPoints5);
+
             return View();
         }
 
@@ -167,16 +174,37 @@ namespace WebshopHPWcore.Controllers
         public List<DataPoint2> RevenueMonth()
         {
             List<DataPoint2> dataPoints4 = new List<DataPoint2>();
-
             for (int MonthCounter = 0; MonthCounter > -1000; MonthCounter--)
             {
-                var price = _context.History.Where(x => x.DateCreated.ToShortDateString() == DateTime.Now.AddDays(MonthCounter).ToShortDateString()).Sum(y => y.Price);
-
-                DataPoint2 z = new DataPoint2(price, DateTime.Now.AddDays(MonthCounter).ToShortDateString());
+                decimal price = 0;
+                DateTime time = DateTime.Now.AddMonths(MonthCounter);
+                foreach (var item in _context.History.Where(x => x.DateCreated.Month == time.Month && x.DateCreated.Year == time.Year).Select(x => x.Price))
+                {
+                    price += item;
+                }
+                DataPoint2 z = new DataPoint2(price, time.Month.ToString() + "-" + time.Year.ToString());
                 dataPoints4.Add(z);
             }
 
             return dataPoints4;
+        }
+
+        public List<DataPoint2> RevenueYear()
+        {
+            List<DataPoint2> dataPoints5 = new List<DataPoint2>();
+            for (int YearCounter = 0; YearCounter > -100; YearCounter--)
+            {
+                decimal price = 0;
+                DateTime time = DateTime.Now.AddYears(YearCounter);
+                foreach (var item in _context.History.Where(x => x.DateCreated.Year == time.Year).Select(x => x.Price))
+                {
+                    price += item;
+                }
+                DataPoint2 z = new DataPoint2(price, time.Year.ToString());
+                dataPoints5.Add(z);
+            }
+
+            return dataPoints5;
         }
     }
 }
