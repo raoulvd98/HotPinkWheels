@@ -30,8 +30,8 @@
         </tr>
     </table>
 
-    @*<input id="SetAmountOfItemsInChart" type="number" value="10"  class="btn btn-default"/>
-        <button id="SetAmountOfItemsInChartSubmit" class="btn btn-default">Verander aantal weergegeven auto's</button><br />*@
+    <input id="SetAmountOfItemsInChart" type="number" value="10"  class="btn btn-default"/>
+        <button id="SetAmountOfItemsInChartSubmit" class="btn btn-default">Verander aantal weergegeven auto's</button><br />
     <div id="chartContainer"></div>
 
     <script type="text/javascript">
@@ -107,7 +107,7 @@
                 chart.render();
             });
             $("#SetAmountOfItemsInChartSubmit").click(function () {
-                chart.options.axisX.maximum = document.getElementById("SetAmountOfItemsInChart").value - 0.5;
+                chart.options.axisX.maximum = document.getElementById("SetAmountOfItemsInChart"). - 0.5;
                 chart.render();
             });
         };
