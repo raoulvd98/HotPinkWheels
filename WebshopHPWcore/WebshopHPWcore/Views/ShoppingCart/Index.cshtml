@@ -51,7 +51,7 @@
 }
 
 <br />
-<h2>Overzicht van uw winkelwagen:</h2>
+<h2>Overzicht van uw winkelwagen</h2>
 <br />
 <div id="update-message">
 </div>
@@ -61,7 +61,24 @@
     {
         <tr id="row-@item.CartItemId">
             <td width="300">
-                    <img src="~/images/auto2.jpg" alt="Visual Studio" class="img-responsive" />
+                @if (item.Car.color == "Wit")
+                { <img src="~/images/auto1.jpg" alt="Visual Studio" class="img-responsive" /> }
+                @if (item.Car.color == "Zilver")
+                { <img src="~/images/auto2.jpg" alt="Visual Studio" class="img-responsive" />   }
+                @if (item.Car.color == "Grijs")
+                {  <img src="~/images/auto3.jpg" alt="Visual Studio" class="img-responsive" />     }
+                @if (item.Car.color == "Rood")
+                { <img src="~/images/auto4.jpg" alt="Visual Studio" class="img-responsive" /> }
+                @if (item.Car.color == "Blauw")
+                { <img src="~/images/auto5.jpg" alt="Visual Studio" class="img-responsive" />   }
+                @if (item.Car.color == "Zwart")
+                {  <img src="~/images/auto6.jpg" alt="Visual Studio" class="img-responsive" />     }
+                @if (item.Car.color == "Geel")
+                { <img src="~/images/auto7.jpg" alt="Visual Studio" class="img-responsive" /> }
+                @if (item.Car.color == "Oranje")
+                { <img src="~/images/auto8.jpg" alt="Visual Studio" class="img-responsive" />   }
+                @if (item.Car.color == "Groen")
+                {  <img src="~/images/auto9.jpg" alt="Visual Studio" class="img-responsive" />     }
             </td>
             <td>
                 <h4>@item.Car.brand @item.Car.model</h4>
@@ -72,14 +89,15 @@
                 <h5>Aantal: @item.Count</h5>
             </td>
             <td>
-                <a asp-controller="WishList" asp-action="AddToCart" asp-route-id="@item.carid" class="btn btn-default" style="float:right">Voeg toe aan wenslijst</a>
-                <br />
-                <br />
                 <a asp-controller="ShoppingCart" asp-action="Details" asp-route-id="@item.carid" class="btn btn-default" style="float:right">Details</a>
+                
+                <br />
+                <br />
+                <a asp-controller="WishList" asp-action="AddToCart" asp-route-id="@item.carid" class="btn btn-default" style="float:right;"><i class="fa fa-heart" style="font-size:20px;color:red;"></i></a>
                 <br />
                 <br />
                 <a href="#" class="btn btn-default RemoveLink" style="float:right;background-color:#F04C33" data-id="@item.CartItemId" 
-                   data-url='@Url.Content("~/ShoppingCart/RemoveFromCart")'>Verwijder</a>
+                   data-url='@Url.Content("~/ShoppingCart/RemoveFromCart")'><i class="fa fa-trash" aria-hidden="true" style="font-size:24px;"></i></a>
             </td>
         </tr>
     }
