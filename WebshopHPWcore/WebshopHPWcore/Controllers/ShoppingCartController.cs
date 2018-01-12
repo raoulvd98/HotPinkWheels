@@ -244,7 +244,7 @@ namespace WebshopHPWcore.Controllers
             {
                 CartItems = await cart.GetCartItems()
             };
-
+            ViewBag.BovensteAuto = viewModel.CartItems[0].Car.color;
             Orderdetail detail = new Orderdetail
             {
                 Orderid = id,
