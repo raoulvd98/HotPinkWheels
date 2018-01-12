@@ -49,7 +49,7 @@
             Gewicht: @ViewData["MinWeightFilter"] - @ViewData["MaxWeightFilter"] <br /><br />
             
             <b>Merken:</b><br />
-            <select id="searchString" name="searchString" value="@ViewData["currentFilter"]">
+            <select id="searchString" name="searchString" value="@ViewData["CurrentFilter"]">
                 <option value="@ViewData["CurrentFilter"]">Alle</option>
                 @foreach (var item in Model.AllItems.OrderBy(s => s.brand).Select(s => s.brand).Distinct())
                 {
@@ -60,8 +60,8 @@
             @if (ViewData["currentFilter"] != null)
             {
                 <b>Model:</b><br />
-                <select id="searchStringModel" name="searchStringModel" value="@ViewData["CurrentFilterModel"] ">
-                    <option value="@ViewData["CurrentFilterModel"] ">Alle</option>
+                <select id="searchStringModel" name="searchStringModel" value="@ViewData["CurrentFilterModel"]">
+                    <option value="@ViewData["CurrentFilterModel"]">Alle</option>
                     @foreach (var item in Model.AllItems.OrderBy(s => s.model).Select(s => s.model).Distinct())
                     {
                         <option value=@item>@item</option>
@@ -168,7 +168,15 @@
     <div class="row-auto">
         <div class="row-auto-plaatje">
             <div class="item">
-                <img src="~/images/auto2.jpg" alt="Visual Studio" class="img-responsive" />
+                @if (item.color == "Wit") { <img src="~/images/auto1.jpg" alt="Visual Studio" class="img-responsive" /> }
+                @if (item.color == "Zilver"){ <img src="~/images/auto2.jpg" alt="Visual Studio" class="img-responsive" />   }
+                @if (item.color == "Grijs")  {  <img src="~/images/auto3.jpg" alt="Visual Studio" class="img-responsive" />     }
+                @if (item.color == "Rood") { <img src="~/images/auto4.jpg" alt="Visual Studio" class="img-responsive" /> }
+                @if (item.color == "Blauw") { <img src="~/images/auto5.jpg" alt="Visual Studio" class="img-responsive" />   }
+                @if (item.color == "Zwart") {  <img src="~/images/auto6.jpg" alt="Visual Studio" class="img-responsive" />     }
+                @if (item.color == "Geel") { <img src="~/images/auto7.jpg" alt="Visual Studio" class="img-responsive" /> }
+                @if (item.color == "Oranje") { <img src="~/images/auto8.jpg" alt="Visual Studio" class="img-responsive" />   }
+                @if (item.color == "Groen") {  <img src="~/images/auto9.jpg" alt="Visual Studio" class="img-responsive" />     }
             </div>
         </div>
         <div class="row-auto-titel">
