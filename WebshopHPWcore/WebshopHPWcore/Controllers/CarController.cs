@@ -42,29 +42,6 @@ namespace WebshopHPWcore.Controllers
                                                  int maxWeight, int maxWeightFilter,
                                                  int? page)
         {
-            //if (searchString != null || carColor != null || fueltype != null || motortype != null || transmission != null ||
-            //                            maxPrice < 0 || amountSeats < 0 || usage < 0 || pk < 0 || milage < 0 ||
-            //                            topSpeed < 0 || minWeight < 0 || maxWeight < 0)
-            //{
-            //    page = 1;
-            //}
-            //else
-            //{
-                //searchString = currentFilter;
-                //carColor = currentColorFilter;
-                //fueltype = fueltypeFilter;
-                //motortype = motortypeFilter;  
-                //transmission = transmissionFilter;
-                //maxPrice = maxPriceFilter;
-                //amountSeats = amountSeatsFilter;
-                //usage = usageFilter;
-                //pk = pkFilter;
-                //milage = milageFilter;
-                //topSpeed = topSpeedFilter;
-                //minWeight = minWeightFilter;
-                //maxWeight = maxWeightFilter;
-            //}
-
             ViewData["CurrentFilter"] = searchString;
             ViewData["CurrentFilterModel"] = searchStringModel;
             ViewData["ColorFilter"] = carColor;
@@ -131,8 +108,6 @@ namespace WebshopHPWcore.Controllers
 
             if (maxWeight > 0) { cars = cars.Where(x => x.weight <= maxWeight); }
             else { ViewData["MaxWeightFilter"] = ""; }
-            
-           
 
             int pageSize = 15;
             
