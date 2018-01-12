@@ -57,8 +57,8 @@
                 }
             </select><br /><br />
 
-            @*@if (ViewData["currentFilter"] != null)
-            {*@
+            @if (ViewData["currentFilter"] != null)
+            {
                 <b>Model:</b><br />
                 <select id="searchStringModel" name="searchStringModel" value="@ViewData["CurrentFilterModel"]">
                     <option value="@ViewData["CurrentFilterModel"]">Alle</option>
@@ -67,7 +67,7 @@
                         <option value=@item>@item</option>
                     }
                 </select><br /><br />
-            @*}*@
+            }
 
             <b>Type brandstof:</b><br />
             <select id="fueltype" name="fuelType" value="@ViewData["FuelTypeFilter"]">
