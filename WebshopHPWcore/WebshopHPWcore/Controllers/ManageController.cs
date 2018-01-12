@@ -220,7 +220,7 @@ namespace WebshopHPWcore.Controllers
             }
 
             await _signInManager.SignInAsync(user, isPersistent: false);
-            StatusMessage = "Your password has been set.";
+            StatusMessage = "Uw wachtwoord is gewijzigd..";
 
             return RedirectToAction(nameof(SetPassword));
         }
