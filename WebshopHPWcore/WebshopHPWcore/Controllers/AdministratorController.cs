@@ -210,8 +210,11 @@ namespace WebshopHPWcore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("carid,brand,model,manufactureyear,color,price,horsepower,weight,topspeed,enginetype,fueltype,fuelusage,transmission,mileage,apk,warranty,amountofdoors,amountofseats,amountofpreviousowners,image")] Car car)
+        public async Task<IActionResult> Create([Bind("brand,model,manufactureyear,color,price,horsepower,weight,topspeed,enginetype,fueltype,fuelusage,transmission,mileage,apk,warranty,amountofdoors,amountofseats,amountofpreviousowners,image")] Car car)
         {
+            var x = _context.cars.Select(y => y.carid).Max();
+            car.carid = x + 1;
+            car.Count = 1;
             if (ModelState.IsValid)
             {
                 _context.Add(car);
