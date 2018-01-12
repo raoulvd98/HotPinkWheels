@@ -63,12 +63,10 @@ namespace WebshopHPWcore.Controllers
                            select s;
 
             if (!String.IsNullOrEmpty(searchString)) { searchString = searchString.ToUpper();
-                            cars = cars.Where(m =>  (m.brand).ToUpper().Contains(searchString));
-            }
+                            cars = cars.Where(m =>  (m.brand).ToUpper().Contains(searchString)); }
 
             if (!String.IsNullOrEmpty(searchStringModel)) { searchStringModel = searchStringModel.ToUpper();
-                            cars = cars.Where(m => (m.model).ToUpper().Contains(searchStringModel));
-            }
+                            cars = cars.Where(m => (m.model).ToUpper().Contains(searchStringModel));  }
 
             if (!String.IsNullOrEmpty(carColor)) { carColor = carColor.ToUpper();
                             cars = cars.Where(x => (x.color).ToUpper().Contains(carColor)); }
