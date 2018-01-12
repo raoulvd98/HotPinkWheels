@@ -90,7 +90,7 @@ namespace WebshopHPWcore.Controllers
             }
 
             if (!String.IsNullOrEmpty(searchStringModel)) { searchStringModel = searchStringModel.ToUpper();
-                cars = cars.Where(m => (m.model).ToUpper().Contains(searchStringModel));
+                            cars = cars.Where(m => (m.model).ToUpper().Contains(searchStringModel));
             }
 
             if (!String.IsNullOrEmpty(carColor)) { carColor = carColor.ToUpper();
@@ -109,7 +109,7 @@ namespace WebshopHPWcore.Controllers
             else { ViewData["MaxPriceFilter"] = cars.Select(x => x.price).Max(); }
 
             if (minPrice > 0) { cars = cars.Where(x => x.price >= minPrice); }
-            else { ViewData["MinPriceFilter"] = 0; }
+            else { ViewData["MinPriceFilter"] = cars.Select(x => x.price).Min(); }
 
             if (amountSeats > 0) { cars = cars.Where(x => x.amountofseats == amountSeats); }
             else { ViewData["AmountSeatsFilter"] = ""; }
@@ -121,7 +121,7 @@ namespace WebshopHPWcore.Controllers
             else { ViewData["PkFilter"] = ""; }
 
             if (milage > 0) { cars = cars.Where(x => x.mileage <= milage); }
-            else { @ViewData["MilageFilter"] = "";  }
+            else { ViewData["MilageFilter"] = "";  }
 
             if (topSpeed > 0) { cars = cars.Where(x => x.topspeed >= topSpeed); }
             else { ViewData["TopSpeedFilter"] = ""; }
