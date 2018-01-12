@@ -233,7 +233,7 @@ namespace WebshopHPWcore.Controllers
                     var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
                     await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
 
-                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    //await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation("Gebruiker heeft nieuw account gemaakt met wachtwoord.");
                     return RedirectToLocal(returnUrl);
                 }
