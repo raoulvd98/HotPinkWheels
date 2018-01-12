@@ -17,7 +17,7 @@ namespace WebshopHPWcore.Models
 {
     public class ShopContext : IdentityDbContext<ApplicationUser>
     {
-        public DbSet<Car> cars {get; set;}
+        public DbSet<Car> cars { get; set; }
         public DbSet<WebshopHPWcore.Models.ApplicationUser> ApplicationUser { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
         public DbSet<WishListItem> WishListItems { get; set; }
