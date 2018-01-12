@@ -60,7 +60,7 @@ namespace WebshopHPWcore.Controllers
 
             var cars = from s in _context.cars
                        where s.Count > 0
-                           select s;
+                       select s;
 
             if (!String.IsNullOrEmpty(searchString)) { searchString = searchString.ToUpper();
                             cars = cars.Where(m =>  (m.brand).ToUpper().Contains(searchString)); }
