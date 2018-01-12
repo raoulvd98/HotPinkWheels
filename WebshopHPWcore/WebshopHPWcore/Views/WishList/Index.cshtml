@@ -80,14 +80,14 @@
                 Aantal: @item.Count
             </td>
             <td>
-                <a asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@item.carid" class="btn btn-default" style="float:right">Voeg toe aan winkelwagen</a>
-                <br />
-                <br />
                 <a asp-controller="ShoppingCart" asp-action="Details" asp-route-id="@item.carid" class="btn btn-default" style="float:right">Details</a>
                 <br />
                 <br />
+                <a asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@item.carid" class="btn btn-default" style="float:right;background-color:#26B226;border-color:#187018"><i class="fa fa-cart-plus" style="font-size:20px;color:white;"></i></a>
+                <br />
+                <br />
                 <a href="#" class="btn btn-default RemoveLink" style="float:right;background-color:#F04C33" data-id="@item.WishListItemId"
-                   data-url='@Url.Content("~/WishList/RemoveFromCart")'><i class="fa fa-trash" aria-hidden="true"></i></a>
+                   data-url='@Url.Content("~/WishList/RemoveFromCart")'><i class="fa fa-trash" aria-hidden="true" style="font-size:24px;"></i></a>
             </td>
         </tr>
     }
