@@ -9,11 +9,11 @@
         popup.classList.toggle("show");
     }
 </script>
+
 <div class="filterstuk">
     <h3>Filter op:</h3>
     <p>
         <div class="collapse navbar-collapse"></div>
-
         <form asp-action="Carpage" method="get">
             <input type="submit" value="Zoeken" class="btn btn-default" />
             <a class="btn btn-default" asp-action="Carpage"
@@ -32,8 +32,9 @@
                asp-route-topSpeed=""
                asp-route-minWeight=""
                asp-route-maxWeight="">
-            
-            Verwijder Filter(s)</a><br /><br />
+
+                Verwijder Filter(s)
+            </a><br /><br />
             Huidig Filter(s): <br />
             Merk + model: @ViewData["CurrentFilter"] @ViewData["CurrentFilterModel"] <br />
             Kleur: @ViewData["ColorFilter"] <br />
@@ -47,7 +48,7 @@
             Kilometerstand @ViewData["MilageFilter"] <br />
             Topsnelheid: @ViewData["TopSpeedFilter"] <br />
             Gewicht: @ViewData["MinWeightFilter"] - @ViewData["MaxWeightFilter"] <br /><br />
-            
+
             <b>Merken:</b><br />
             <select id="searchString" name="searchString" value="@ViewData["CurrentFilter"]">
                 <option value="@ViewData["CurrentFilter"]">Alle</option>
@@ -56,7 +57,6 @@
                     <option value=@item>@item</option>
                 }
             </select><br /><br />
-
             @if (ViewData["currentFilter"] != null)
             {
                 <b>Model:</b><br />
@@ -68,7 +68,6 @@
                     }
                 </select><br /><br />
             }
-
             <b>Type brandstof:</b><br />
             <select id="fueltype" name="fuelType" value="@ViewData["FuelTypeFilter"]">
                 <option value="@ViewData["FuelTypeFilter"]">Alle</option>
@@ -77,7 +76,6 @@
                     <option value=@item>@item</option>
                 }
             </select><br /><br />
-
             <b>Kleur:</b><br />
             <select id="color" name="carColor" value="@ViewData["ColorFilter"]">
                 <option value="@ViewData["ColorFilter"]">Alle</option>
@@ -90,7 +88,6 @@
             <input name="minPrice" value="@ViewData["MinPriceFilter"]" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'><br /><br />
             <b>Maximum prijs:</b><br />
             <input name="maxPrice" value="@ViewData["MaxPriceFilter"]" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'><br /><br />
-
             <b>Type motor:</b><br />
             <select id="motortype" name="motortype" value="@ViewData["MotorTypeFilter"]">
                 <option value="@ViewData["MotorTypeFilter"]">Alle</option>
@@ -99,7 +96,6 @@
                     <option value=@item>@item</option>
                 }
             </select><br /><br />
-
             <b>Aantal stoelen:</b><br />
             <select name="amountSeats" value="@ViewData["AmountSeatsFilter"]" class="sc-input">
                 <option value="@ViewData["AmountSeatsFilter"]">Alle</option>
@@ -108,7 +104,6 @@
                     <option value=@item>@item</option>
                 }
             </select><br /><br />
-
             <b>Transmissie:</b><br />
             <select name="transmission" value="@ViewData["TransmissionFilter"]">
                 <option value="@ViewData["TransmissionFilter"]">Alle</option>
@@ -117,7 +112,6 @@
                     <option value=@item>@item</option>
                 }
             </select><br /><br />
-
             <b>Verbruik</b><br />
             <select name="usage" value="@ViewData["UsageFilter"]" class="sc-input">
                 <option value="0"></option>
@@ -126,7 +120,6 @@
                 <option value="15"> < 15 </option>
                 <option value="20"> < 20 </option>
             </select><br /><br />
-
             <b>Kilometerstand: (vanaf)</b><br />
             <input name="milage" value="@ViewData["MilageFilter"]" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'><br /><br />
             <b>PK: (vanaf)</b><br />
@@ -138,7 +131,6 @@
             <b>Gewicht: (Tot)</b><br />
             <input name="maxWeight" value="@ViewData["MaxWeightFilter"]" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'><br /><br />
             <input type="submit" value="Zoeken" class="btn btn-default" />
-
             <a class="btn btn-default" asp-action="Carpage"
                asp-route-searchString=""
                asp-route-searchStringModel=""
@@ -158,7 +150,6 @@
         </form>
     </p>
 </div>
-
 <center>
         @await Html.PartialAsync("PaginationView")
 </center><br /><br />
@@ -166,28 +157,51 @@
 
 @foreach (var item in Model)
 {
-    <div class="row-auto">
+    <div class="row-auto" id="@item.carid">
         <div class="row-auto-plaatje">
             <div class="item">
-                @if (item.color == "Wit") { <img src="~/images/auto1.jpg" alt="Visual Studio" class="img-responsive" /> }
-                @if (item.color == "Zilver"){ <img src="~/images/auto2.jpg" alt="Visual Studio" class="img-responsive" />   }
-                @if (item.color == "Grijs")  {  <img src="~/images/auto3.jpg" alt="Visual Studio" class="img-responsive" />     }
-                @if (item.color == "Rood") { <img src="~/images/auto4.jpg" alt="Visual Studio" class="img-responsive" /> }
-                @if (item.color == "Blauw") { <img src="~/images/auto5.jpg" alt="Visual Studio" class="img-responsive" />   }
-                @if (item.color == "Zwart") {  <img src="~/images/auto6.jpg" alt="Visual Studio" class="img-responsive" />     }
-                @if (item.color == "Geel") { <img src="~/images/auto7.jpg" alt="Visual Studio" class="img-responsive" /> }
-                @if (item.color == "Oranje") { <img src="~/images/auto8.jpg" alt="Visual Studio" class="img-responsive" />   }
-                @if (item.color == "Groen") {  <img src="~/images/auto9.jpg" alt="Visual Studio" class="img-responsive" />     }
+                @if (item.color == "Wit")
+                {<a class="lightbox" href="#AutoWit"><img src="~/images/auto1.jpg" alt="Visual Studio" class="img-responsive" /></a>
+                <div class="lightbox-target" id="AutoWit"><img src="~/images/auto1.jpg" /><a class="lightbox-close" href="javascript:history.back()"></a></div>}
+
+                @if (item.color == "Zilver")
+                {<a class="lightbox" href="#AutoZilver"><img src="~/images/auto2.jpg" alt="Visual Studio" class="img-responsive" /></a>
+                <div class="lightbox-target" id="AutoZilver"><img src="~/images/auto2.jpg" /><a class="lightbox-close" href="javascript:history.back()"></a></div>}
+                
+                @if (item.color == "Grijs")
+                {<a class="lightbox" href="#AutoGrijs"><img src="~/images/auto3.jpg" alt="Visual Studio" class="img-responsive" /></a>
+                <div class="lightbox-target" id="AutoGrijs"><img src="~/images/auto3.jpg" /><a class="lightbox-close" href="javascript:history.back()"></a></div>}
+                
+                @if (item.color == "Rood")
+                {<a class="lightbox" href="#AutoRood"><img src="~/images/auto4.jpg" alt="Visual Studio" class="img-responsive" /></a>
+                <div class="lightbox-target" id="AutoRood"><img src="~/images/auto4.jpg" /><a class="lightbox-close" href="javascript:history.back()"></a></div>}
+               
+                @if (item.color == "Blauw")
+                {<a class="lightbox" href="#AutoBlauw"><img src="~/images/auto5.jpg" alt="Visual Studio" class="img-responsive" /></a>
+                <div class="lightbox-target" id="AutoZwartBlauw"><img src="~/images/auto5.jpg" /><a class="lightbox-close" href="javascript:history.back()"></a></div>}
+                @if (item.color == "Zwart")
+                {<a class="lightbox" href="#AutoZwart"><img src="~/images/auto6.jpg" alt="Visual Studio" class="img-responsive" /></a>
+                <div class="lightbox-target" id="AutoZwart"><img src="~/images/auto6.jpg" /><a class="lightbox-close" href="javascript:history.back()"></a></div>}
+                
+                @if (item.color == "Geel")
+                {<a class="lightbox" href="#AutoGeel"><img src="~/images/auto7.jpg" alt="Visual Studio" class="img-responsive" /></a>
+                <div class="lightbox-target" id="AutoGeel"><img src="~/images/auto7.jpg" /><a class="lightbox-close" href="javascript:history.back()"></a></div>}
+                
+                @if (item.color == "Oranje")
+                {<a class="lightbox" href="#AutoOranje"><img src="~/images/auto8.jpg" alt="Visual Studio" class="img-responsive" /></a>
+                <div class="lightbox-target" id="AutoOranje"><img src="~/images/auto8.jpg" /><a class="lightbox-close" href="javascript:history.back()"></a></div>}
+                
+                @if (item.color == "Groen")
+                {<a class="lightbox" href="#AutoGroen"><img src="~/images/auto9.jpg" alt="Visual Studio" class="img-responsive" /></a>
+                <div class="lightbox-target" id="AutoGroen"><img src="~/images/auto9.jpg" /><a class="lightbox-close" href="javascript:history.back()"></a></div>}
             </div>
         </div>
         <div class="row-auto-titel">
             <h2>
                 <a asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@item.carid" class="koop-knopje">In winkelwagen <i class="fa fa-cart-plus" style="font-size:20px;color:white;"></i></a>
-
                 <button type="button" class="row-auto-knopje">
                     <a asp-controller="WishList" asp-action="AddToCart" asp-route-id="@item.carid"><i class="fa fa-heart" style="font-size:20px;color:red;"></i></a>
                 </button>
-
                 @Html.DisplayFor(modelItem => item.brand) @Html.DisplayFor(modelItem => item.model)
             </h2>
         </div>
@@ -234,7 +248,6 @@
     </div>
     <br />
 }<br />
-
 <center>
     @await Html.PartialAsync("PaginationView")
 </center>
