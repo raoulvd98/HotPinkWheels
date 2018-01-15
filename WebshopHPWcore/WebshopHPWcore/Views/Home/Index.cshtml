@@ -1,6 +1,6 @@
 ﻿@model WebshopHPWcore.Models.TopCarsViewModel
 
-@foreach (var item in Model.cars.OrderByDescending(c => c.CarCount).Take(5).Select(c => c).Distinct())
+@foreach (var item in Model.cars.OrderByDescending(c => c.CarCount).Take(5).Select(x => x).Distinct())
 {
     <p>@item.Car.brand  @item.CarCount</p>
 }
