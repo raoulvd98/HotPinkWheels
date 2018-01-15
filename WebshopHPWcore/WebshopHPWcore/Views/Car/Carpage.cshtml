@@ -32,57 +32,71 @@
                asp-route-topSpeed=""
                asp-route-minWeight=""
                asp-route-maxWeight="">
-
                 Verwijder Filter(s)
             </a><br /><br />
-            Huidig Filter(s): <br />
-            Merk + model: @ViewData["CurrentFilter"] @ViewData["CurrentFilterModel"] <br />
-            Kleur: @ViewData["ColorFilter"] <br />
-            Brandstof: @ViewData["FuelTypeFilter"] <br />
-            Motor: @ViewData["MotorTypeFilter"] <br />
-            Transmissie: @ViewData["TransmissionFilter"] <br />
-            Prijs: @ViewData["MinPriceFilter"] - @ViewData["MaxPriceFilter"] <br />
-            Aantal stoelen: @ViewData["AmountSeatsFilter"] <br />
-            Verbruik: @ViewData["UsageFilter"] <br />
-            Aantal PK: @ViewData["PkFilter"] <br />
-            Kilometerstand @ViewData["MilageFilter"] <br />
-            Topsnelheid: @ViewData["TopSpeedFilter"] <br />
-            Gewicht: @ViewData["MinWeightFilter"] - @ViewData["MaxWeightFilter"] <br /><br />
+                      <div class="dropdown">
+                          <a class="dropbtn">Huidige Filter(s):</a><br />
+                          <ul class="dropdown-content">
+                              Merk + model: @ViewData["CurrentFilter"] @ViewData["CurrentFilterModel"]
+                              <br />
+                              Kleur: @ViewData["ColorFilter"]
+                              <br />
+                              Brandstof: @ViewData["FuelTypeFilter"]
+                              <br />
+                              Motor: @ViewData["MotorTypeFilter"]
+                              <br />
+                              Transmissie: @ViewData["TransmissionFilter"]
+                              <br />
+                              Prijs: @ViewData["MinPriceFilter"] - @ViewData["MaxPriceFilter"]
+                              <br />
+                              Aantal stoelen: @ViewData["AmountSeatsFilter"]
+                              <br />
+                              Verbruik: @ViewData["UsageFilter"]
+                              <br />
+                              Aantal PK: @ViewData["PkFilter"]
+                              <br />
+                              Kilometerstand @ViewData["MilageFilter"]
+                              <br />
+                              Topsnelheid: @ViewData["TopSpeedFilter"]
+                              <br />
+                              Gewicht: @ViewData["MinWeightFilter"] - @ViewData["MaxWeightFilter"]
+                          </ul>
+                      </div><br /><br />
 
             <b>Merken:</b><br />
             <select id="searchString" name="searchString" value="@ViewData["CurrentFilter"]">
                 <option value="@ViewData["CurrentFilter"]">Alle</option>
                 @foreach (var item in Model.AllItems.OrderBy(s => s.brand).Select(s => s.brand).Distinct())
-                {
-                    <option value=@item>@item</option>
-                }
+        {
+            <option value=@item>@item</option>
+}
             </select><br /><br />
             @if (ViewData["currentFilter"] != null)
-            {
-                <b>Model:</b><br />
-                <select id="searchStringModel" name="searchStringModel" value="@ViewData["CurrentFilterModel"]">
-                    <option value="@ViewData["CurrentFilterModel"]">Alle</option>
-                    @foreach (var item in Model.AllItems.OrderBy(s => s.model).Select(s => s.model).Distinct())
-                    {
-                        <option value=@item>@item</option>
-                    }
-                </select><br /><br />
-            }
+    {
+        <b>Model:</b><br />
+        <select id="searchStringModel" name="searchStringModel" value="@ViewData["CurrentFilterModel"]">
+            <option value="@ViewData["CurrentFilterModel"]">Alle</option>
+            @foreach (var item in Model.AllItems.OrderBy(s => s.model).Select(s => s.model).Distinct())
+    {
+        <option value=@item>@item</option>
+}
+        </select><br /><br />
+}
             <b>Type brandstof:</b><br />
             <select id="fueltype" name="fuelType" value="@ViewData["FuelTypeFilter"]">
                 <option value="@ViewData["FuelTypeFilter"]">Alle</option>
                 @foreach (var item in Model.AllItems.OrderBy(s => s.fueltype).Select(s => s.fueltype).Distinct())
-                {
-                    <option value=@item>@item</option>
-                }
+        {
+            <option value=@item>@item</option>
+}
             </select><br /><br />
             <b>Kleur:</b><br />
             <select id="color" name="carColor" value="@ViewData["ColorFilter"]">
                 <option value="@ViewData["ColorFilter"]">Alle</option>
                 @foreach (var item in Model.AllItems.OrderBy(s => s.color).Select(s => s.color).Distinct())
-                {
-                    <option value=@item>@item</option>
-                }
+        {
+            <option value=@item>@item</option>
+}
             </select><br /><br />
             <b>Minimum prijs:</b><br />
             <input name="minPrice" value="@ViewData["MinPriceFilter"]" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'><br /><br />
@@ -92,25 +106,25 @@
             <select id="motortype" name="motortype" value="@ViewData["MotorTypeFilter"]">
                 <option value="@ViewData["MotorTypeFilter"]">Alle</option>
                 @foreach (var item in Model.AllItems.OrderBy(s => s.enginetype).Select(s => s.enginetype).Distinct())
-                {
-                    <option value=@item>@item</option>
-                }
+        {
+            <option value=@item>@item</option>
+}
             </select><br /><br />
             <b>Aantal stoelen:</b><br />
             <select name="amountSeats" value="@ViewData["AmountSeatsFilter"]" class="sc-input">
                 <option value="@ViewData["AmountSeatsFilter"]">Alle</option>
                 @foreach (var item in Model.AllItems.OrderBy(s => s.amountofseats).Select(s => s.amountofseats).Distinct())
-                {
-                    <option value=@item>@item</option>
-                }
+        {
+            <option value=@item>@item</option>
+}
             </select><br /><br />
             <b>Transmissie:</b><br />
             <select name="transmission" value="@ViewData["TransmissionFilter"]">
                 <option value="@ViewData["TransmissionFilter"]">Alle</option>
                 @foreach (var item in Model.AllItems.OrderBy(s => s.transmission).Select(s => s.transmission).Distinct())
-                {
-                    <option value=@item>@item</option>
-                }
+        {
+            <option value=@item>@item</option>
+}
             </select><br /><br />
             <b>Verbruik</b><br />
             <select name="usage" value="@ViewData["UsageFilter"]" class="sc-input">
@@ -157,7 +171,7 @@
 
 @foreach (var item in Model)
 {
-    <div class="row-auto" id="@item.carid">
+    <div class="row-auto">
         <div class="row-auto-plaatje">
             <div class="item">
                 @if (item.color == "Wit")
@@ -178,7 +192,7 @@
                
                 @if (item.color == "Blauw")
                 {<a class="lightbox" href="#AutoBlauw"><img src="~/images/auto5.jpg" alt="Visual Studio" class="img-responsive" /></a>
-                <div class="lightbox-target" id="AutoZwartBlauw"><img src="~/images/auto5.jpg" /><a class="lightbox-close" href="javascript:history.back()"></a></div>}
+                <div class="lightbox-target" id="AutoBlauw"><img src="~/images/auto5.jpg" /><a class="lightbox-close" href="javascript:history.back()"></a></div>}
                 @if (item.color == "Zwart")
                 {<a class="lightbox" href="#AutoZwart"><img src="~/images/auto6.jpg" alt="Visual Studio" class="img-responsive" /></a>
                 <div class="lightbox-target" id="AutoZwart"><img src="~/images/auto6.jpg" /><a class="lightbox-close" href="javascript:history.back()"></a></div>}
