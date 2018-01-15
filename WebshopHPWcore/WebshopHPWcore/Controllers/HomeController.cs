@@ -39,7 +39,7 @@ namespace WebshopHPWcore.Controllers
                 Car car = item;
                 int Count = 0;
 
-                foreach (var test in _context.cars.Where(x => x.brand == item.brand).Where(x => x.Count == 0).Select(x => x))
+                foreach (var test in _context.cars.Where(x => x.model == item.model).Where(x => x.Count == 0).Select(x => x))
                 {
                     Count += 1;
                 }
