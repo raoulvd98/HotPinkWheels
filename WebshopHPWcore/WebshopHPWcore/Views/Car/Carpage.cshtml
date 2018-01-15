@@ -33,72 +33,139 @@
                asp-route-maxWeight="">
                 Verwijder Filter(s)
             </a><br /><br />
-            <div class="dropdown">
-                <a class="dropbtn">Huidige Filter(s):</a><br />
-                <ul class="dropdown-content">
-                    @if (ViewData["CurrentFilter"] != null)
-                    {
-                    <span>Merk: <b>@ViewData["CurrentFilter"]</b></span>                  
-                    }
-                    <br />
-                    @if (ViewData["CurrentFilterModel"] != null)
-                    {
-                    <span>Model: <b>@ViewData["CurrentFilterModel"]</b></span>
-                    }
-                    <br />
-                    @if (ViewData["ColorFilter"] != null)
-                    {
-                    <span>Kleur: <b>@ViewData["ColorFilter"]</b></span>
-                    }
-                    <br />
-                    @if (ViewData["FuelTypeFilter"] != null)
-                    {
-                    <span>Brandstof: <b>@ViewData["FuelTypeFilter"]</b></span>
-                    }
-                    <br />
-                    @if (ViewData["MotorTypeFilter"] != null)
-                    {
-                    <span>Motor: <b>@ViewData["MotorTypeFilter"]</b></span>
-                    }
-                    <br />
-                    @if (ViewData["TransmissionFilter"] != null)
-                    {
-                    <span>Transmissie: <b>@ViewData["TransmissionFilter"]</b></span>
-                    }
-                    <br />
-                    <span>Prijs: <b>@ViewData["MinPriceFilter"]</b> - <b>@ViewData["MaxPriceFilter"]</b></span>
-                    <br />
-                    @if (ViewData["AmountSeatsFilter"] != "")
-                    {
-                    <span>Aantal stoelen: <b>@ViewData["AmountSeatsFilter"]</b></span>
-                    }
-                    <br />
-                    @if (ViewData["UsageFilter"] != "")
-                    {
-                    <span>Verbruik: <b>@ViewData["UsageFilter"]</b></span>
-                    }
-                    <br />
-                    @if (ViewData["PkFilter"] != "")
-                    {
-                    <span>Aantal PK: <b>@ViewData["PkFilter"]</b></span>
-                    }
-                    <br />
-                    @if (ViewData["MilageFilter"] != "")
-                    {
-                    <span>Kilometerstand <b>@ViewData["MilageFilter"]</b></span>
-                    }
-                    <br />
-                    @if (ViewData["TopSpeedFilter"] != "")
-                    {
-                    <span>Topsnelheid: <b>@ViewData["TopSpeedFilter"]</b></span>
-                    }
-                    <br />
-                    @if (ViewData["MinWeightFilter"] != "" || (ViewData["MaxWeightFilter"] != ""))
-                    {
-                    <span>Gewicht: <b>@ViewData["MinWeightFilter"]</b> - <b>@ViewData["MaxWeightFilter"]</b></span>
-                    }
-                    </ul>
-                </div><br /><br />
+                      <div class="dropdown">
+                          <a class="dropbtn">Huidige Filter(s):</a><br />
+                          <ul class="dropdown-content">
+                              Merk + model: @ViewData["CurrentFilter"] @ViewData["CurrentFilterModel"]
+                              <br />
+                              Kleur: @ViewData["ColorFilter"]
+                              <br />
+                              Brandstof: @ViewData["FuelTypeFilter"]
+                              <br />
+                              Motor: @ViewData["MotorTypeFilter"]
+                              <br />
+                              Transmissie: @ViewData["TransmissionFilter"]
+                              <br />
+                              Prijs: @ViewData["MinPriceFilter"] - @ViewData["MaxPriceFilter"]
+                              <br />
+                              Aantal stoelen: @ViewData["AmountSeatsFilter"]
+                              <br />
+                              Verbruik: @ViewData["UsageFilter"]
+                              <br />
+                              Aantal PK: @ViewData["PkFilter"]
+                              <br />
+                              Kilometerstand @ViewData["MilageFilter"]
+                              <br />
+                              Topsnelheid: @ViewData["TopSpeedFilter"]
+                              <br />
+                              Gewicht: @ViewData["MinWeightFilter"] - @ViewData["MaxWeightFilter"]
+                          </ul>
+                      </div><br /><br />
+
+            <b>Merken:</b><br />
+            <select id="searchString" name="searchString" value="@ViewData["CurrentFilter"]">
+                <option value="@ViewData["CurrentFilter"]">Alle</option>
+                @foreach (var item in Model.AllItems.OrderBy(s => s.brand).Select(s => s.brand).Distinct())
+        {
+            <option value=@item>@item</option>
+}
+            </select><br /><br />
+            @if (ViewData["currentFilter"] != null)
+    {
+        <b>Model:</b><br />
+        <select id="searchStringModel" name="searchStringModel" value="@ViewData["CurrentFilterModel"]">
+            <option value="@ViewData["CurrentFilterModel"]">Alle</option>
+            @foreach (var item in Model.AllItems.OrderBy(s => s.model).Select(s => s.model).Distinct())
+    {
+        <option value=@item>@item</option>
+}
+        </select><br /><br />
+}
+            <b>Type brandstof:</b><br />
+            <select id="fueltype" name="fuelType" value="@ViewData["FuelTypeFilter"]">
+                <option value="@ViewData["FuelTypeFilter"]">Alle</option>
+                @foreach (var item in Model.AllItems.OrderBy(s => s.fueltype).Select(s => s.fueltype).Distinct())
+        {
+            <option value=@item>@item</option>
+}
+            </select><br /><br />
+            <b>Kleur:</b><br />
+            <select id="color" name="carColor" value="@ViewData["ColorFilter"]">
+                <option value="@ViewData["ColorFilter"]">Alle</option>
+                @foreach (var item in Model.AllItems.OrderBy(s => s.color).Select(s => s.color).Distinct())
+        {
+            <option value=@item>@item</option>
+}
+            </select><br /><br />
+            <b>Minimum prijs:</b><br />
+            <input name="minPrice" value="@ViewData["MinPriceFilter"]" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'><br /><br />
+            <b>Maximum prijs:</b><br />
+            <input name="maxPrice" value="@ViewData["MaxPriceFilter"]" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'><br /><br />
+            <b>Type motor:</b><br />
+            <select id="motortype" name="motortype" value="@ViewData["MotorTypeFilter"]">
+                <option value="@ViewData["MotorTypeFilter"]">Alle</option>
+                @foreach (var item in Model.AllItems.OrderBy(s => s.enginetype).Select(s => s.enginetype).Distinct())
+        {
+            <option value=@item>@item</option>
+}
+            </select><br /><br />
+            <b>Aantal stoelen:</b><br />
+            <select name="amountSeats" value="@ViewData["AmountSeatsFilter"]" class="sc-input">
+                <option value="@ViewData["AmountSeatsFilter"]">Alle</option>
+                @foreach (var item in Model.AllItems.OrderBy(s => s.amountofseats).Select(s => s.amountofseats).Distinct())
+        {
+            <option value=@item>@item</option>
+}
+            </select><br /><br />
+            <b>Transmissie:</b><br />
+            <select name="transmission" value="@ViewData["TransmissionFilter"]">
+                <option value="@ViewData["TransmissionFilter"]">Alle</option>
+                @foreach (var item in Model.AllItems.OrderBy(s => s.transmission).Select(s => s.transmission).Distinct())
+        {
+            <option value=@item>@item</option>
+}
+            </select><br /><br />
+            <b>Verbruik</b><br />
+            <select name="usage" value="@ViewData["UsageFilter"]" class="sc-input">
+                <option value="0"></option>
+                <option value="5"> < 5 </option>
+                <option value="10"> < 10 </option>
+                <option value="15"> < 15 </option>
+                <option value="20"> < 20 </option>
+            </select><br /><br />
+            <b>Kilometerstand: (vanaf)</b><br />
+            <input name="milage" value="@ViewData["MilageFilter"]" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'><br /><br />
+            <b>PK: (vanaf)</b><br />
+            <input name="pk" value="@ViewData["PkFilter"]" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'><br /><br />
+            <b>Topsnelheid: (vanaf)</b><br />
+            <input name="topSpeed" value="@ViewData["TopSpeedFilter"]" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'><br /><br />
+            <b>Gewicht (vanaf)</b><br />
+            <input name="minWeight" value="@ViewData["MinWeightFilter"]" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'><br />
+            <b>Gewicht: (Tot)</b><br />
+            <input name="maxWeight" value="@ViewData["MaxWeightFilter"]" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'><br /><br />
+            <input type="submit" value="Zoeken" class="btn btn-default" />
+            <a class="btn btn-default" asp-action="Carpage"
+               asp-route-searchString=""
+               asp-route-searchStringModel=""
+               asp-route-carColor=""
+               asp-route-fueltype=""
+               asp-route-motortype=""
+               asp-route-transmission=""
+               asp-route-maxPrice=""
+               asp-route-minPrice=""
+               asp-route-amountSeats=""
+               asp-route-usage=""
+               asp-route-pk=""
+               asp-route-milage=""
+               asp-route-topSpeed=""
+               asp-route-minWeight=""
+               asp-route-maxWeight="">Verwijder Filter(s)</a>
+        </form>
+    </p>
+</div>
+<center>
+        @await Html.PartialAsync("PaginationView")
+</center><br /><br />
 
                 <b>Merken:</b><br />
                 <select id="searchString" name="searchString" value="@ViewData["CurrentFilter"]">
@@ -322,3 +389,89 @@
                         }
                     }
                 </script>
+        <form asp-action="Carpage" method="get">
+            <input type="submit" value="Zoeken" class="btn btn-default" />
+            <a class="btn btn-default" asp-action="Carpage"
+               asp-route-searchString=""
+               asp-route-searchStringModel=""
+               asp-route-carColor=""
+               asp-route-fueltype=""
+               asp-route-motortype=""
+               asp-route-transmission=""
+               asp-route-maxPrice=""
+               asp-route-minPrice=""
+               asp-route-amountSeats=""
+               asp-route-usage=""
+               asp-route-pk=""
+               asp-route-milage=""
+               asp-route-topSpeed=""
+               asp-route-minWeight=""
+               asp-route-maxWeight="">
+                Verwijder Filter(s)
+            </a><br /><br />
+            <div class="dropdown">
+                <a class="dropbtn">Huidige Filter(s):</a><br />
+                <ul class="dropdown-content">
+                    @if (ViewData["CurrentFilter"] != null)
+                    {
+                    <span>Merk: <b>@ViewData["CurrentFilter"]</b></span>                  
+                    }
+                    <br />
+                    @if (ViewData["CurrentFilterModel"] != null)
+                    {
+                    <span>Model: <b>@ViewData["CurrentFilterModel"]</b></span>
+                    }
+                    <br />
+                    @if (ViewData["ColorFilter"] != null)
+                    {
+                    <span>Kleur: <b>@ViewData["ColorFilter"]</b></span>
+                    }
+                    <br />
+                    @if (ViewData["FuelTypeFilter"] != null)
+                    {
+                    <span>Brandstof: <b>@ViewData["FuelTypeFilter"]</b></span>
+                    }
+                    <br />
+                    @if (ViewData["MotorTypeFilter"] != null)
+                    {
+                    <span>Motor: <b>@ViewData["MotorTypeFilter"]</b></span>
+                    }
+                    <br />
+                    @if (ViewData["TransmissionFilter"] != null)
+                    {
+                    <span>Transmissie: <b>@ViewData["TransmissionFilter"]</b></span>
+                    }
+                    <br />
+                    <span>Prijs: <b>@ViewData["MinPriceFilter"]</b> - <b>@ViewData["MaxPriceFilter"]</b></span>
+                    <br />
+                    @if (ViewData["AmountSeatsFilter"] != "")
+                    {
+                    <span>Aantal stoelen: <b>@ViewData["AmountSeatsFilter"]</b></span>
+                    }
+                    <br />
+                    @if (ViewData["UsageFilter"] != "")
+                    {
+                    <span>Verbruik: <b>@ViewData["UsageFilter"]</b></span>
+                    }
+                    <br />
+                    @if (ViewData["PkFilter"] != "")
+                    {
+                    <span>Aantal PK: <b>@ViewData["PkFilter"]</b></span>
+                    }
+                    <br />
+                    @if (ViewData["MilageFilter"] != "")
+                    {
+                    <span>Kilometerstand <b>@ViewData["MilageFilter"]</b></span>
+                    }
+                    <br />
+                    @if (ViewData["TopSpeedFilter"] != "")
+                    {
+                    <span>Topsnelheid: <b>@ViewData["TopSpeedFilter"]</b></span>
+                    }
+                    <br />
+                    @if (ViewData["MinWeightFilter"] != "" || (ViewData["MaxWeightFilter"] != ""))
+                    {
+                    <span>Gewicht: <b>@ViewData["MinWeightFilter"]</b> - <b>@ViewData["MaxWeightFilter"]</b></span>
+                    }
+                    </ul>
+                </div><br /><br />
