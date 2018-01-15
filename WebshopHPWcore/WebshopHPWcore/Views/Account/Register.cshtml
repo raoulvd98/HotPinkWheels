@@ -7,7 +7,7 @@
 
 <div class="row">
     <div class="col-md-8">
-        <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
+        <form asp-controller="Account" asp-action="Register" asp-route-returnUrl="Account/ConfirmAccount" method="post">
             <h4>Maak je eigen account!</h4>
             <hr />
 

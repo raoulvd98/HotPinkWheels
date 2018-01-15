@@ -23,8 +23,8 @@ namespace WebshopHPWcore.Data.Migrations
                 {
                     b.Property<string>("Id");
 
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken();
+                    b.Property<string>("ConcurrencyStamp");
+                        //.IsConcurrencyToken();
 
                     b.Property<string>("Name")
                         .HasAnnotation("MaxLength", 256);
