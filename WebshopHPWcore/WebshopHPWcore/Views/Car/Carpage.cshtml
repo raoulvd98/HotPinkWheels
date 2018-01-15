@@ -166,7 +166,7 @@
 
 @foreach (var item in Model)
 {
-    <div class="row-auto">
+    <div id="@item.carid" class="row-auto">
         <div class="row-auto-plaatje">
             <div class="item">
                 @if (item.color == "Wit") { <img src="~/images/auto1.jpg" alt="Visual Studio" class="img-responsive" /> }
