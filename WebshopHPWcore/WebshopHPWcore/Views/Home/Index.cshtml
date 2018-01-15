@@ -1,18 +1,43 @@
-﻿@model WebshopHPWcore.Models.HomeViewModels.HomeViewModel
+﻿@model WebshopHPWcore.Models.TopCarsViewModel
 
-<div>
-    <table id="table" class="table table-bordered table-responsive table-hover table-striped">
+@foreach (var item in Model.cars.OrderByDescending(c => c.CarCount).Take(5).Select(c => c).Distinct())
+{
+    <p>@item.Car.brand  @item.CarCount</p>
+}
+
+<div class="row">
+    <div class="col-md-3">
+        <h2>Welkom bij Webshop HotPinkWheels</h2>
+        <p>
+            Bij HotPinkWheels vindt u uw droomauto in het grootste aanbod van Nederland met ruim 10.000 auto's.
+            Hierbij kunt u zoeken in het aanbod van uw lokale autobedrijf en van circa 50.000 autobedrijven in heel Nederland.
+            Of u nu een nieuwe auto of tweedehands auto zoekt, een milieuvriendelijke stadsauto of een sportieve auto – bij HotPinkWheels kunt u snel, eenvoudig en stressvrij uw droomauto vinden.
+        </p>
+        <br>
+        <p>
+            In het grootste aanbod van Nederland vindt u met slechts een paar klikken een nieuwe of tweedehands auto die aan al uw wensen voldoet.
+            Hierbij kunt u direct contact opnemen met de particuliere verkoper of het autobedrijf. U kunt eenvoudig en snel uw zoekresultaten bepalen aan de hand van uw specifieke wensen.
+            Selecteer bijvoorbeeld het gewenste merk, model, type brandstof, kilometerprijs en de prijs.
+            Bij HotPinkWheels vindt u altijd de auto die overeenkomt met uw wensen!
+        </p>
+    </div>
+
+    <div class="col-md-3">
+        <br>
+        <br>
         <br />
-        <tr>
-            @foreach (var item in Model.cars.Where(x => x.Key.Count == 0).Select(x => x.Key.model).Max())
-            {
-                <td>@item</td>
-            }
-        </tr>
-
-    </table>
+        <p>
+            HotPinkWheels test zowel nieuwe als tweedehands auto’s op een onafhankelijke manier waardoor u als eerste informatie over auto’s ontvangt.
+            Bij ons kunt u diverse auto’s vinden: nieuwe auto’s en oldtimers, tweedehands auto’s, kleine en luxe auto’s, sport auto’s, motoren, bedrijfswagens en nog veel meer.
+            Meer informatie vindt u in ons magazine en op de advies- en dienstenpagina.
+        </p>
+        <br>
+        <p>
+            Bent u niet alleen op zoek naar uw droomauto, maar ook naar de optimale financiering en/of verzekering?
+            HotPinkWheels heeft een uitgebreid aanbod aan diensten voor al uw specifieke wensen.
+        </p>
+    </div>
 </div>
-
 
 
 @*<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
@@ -80,37 +105,3 @@
     <br />
     <br>
     <br>*@
-
-<div class="row">
-    <div class="col-md-3">
-        <h2>Welkom bij Webshop HotPinkWheels</h2>
-        <p>
-            Bij HotPinkWheels vindt u uw droomauto in het grootste aanbod van Nederland met ruim 10.000 auto's.
-            Hierbij kunt u zoeken in het aanbod van uw lokale autobedrijf en van circa 50.000 autobedrijven in heel Nederland.
-            Of u nu een nieuwe auto of tweedehands auto zoekt, een milieuvriendelijke stadsauto of een sportieve auto – bij HotPinkWheels kunt u snel, eenvoudig en stressvrij uw droomauto vinden.
-        </p>
-        <br>
-        <p>
-            In het grootste aanbod van Nederland vindt u met slechts een paar klikken een nieuwe of tweedehands auto die aan al uw wensen voldoet.
-            Hierbij kunt u direct contact opnemen met de particuliere verkoper of het autobedrijf. U kunt eenvoudig en snel uw zoekresultaten bepalen aan de hand van uw specifieke wensen.
-            Selecteer bijvoorbeeld het gewenste merk, model, type brandstof, kilometerprijs en de prijs.
-            Bij HotPinkWheels vindt u altijd de auto die overeenkomt met uw wensen!
-        </p>
-    </div>
-
-    <div class="col-md-3">
-        <br>
-        <br>
-        <br />
-        <p>
-            HotPinkWheels test zowel nieuwe als tweedehands auto’s op een onafhankelijke manier waardoor u als eerste informatie over auto’s ontvangt.
-            Bij ons kunt u diverse auto’s vinden: nieuwe auto’s en oldtimers, tweedehands auto’s, kleine en luxe auto’s, sport auto’s, motoren, bedrijfswagens en nog veel meer.
-            Meer informatie vindt u in ons magazine en op de advies- en dienstenpagina.
-        </p>
-        <br>
-        <p>
-            Bent u niet alleen op zoek naar uw droomauto, maar ook naar de optimale financiering en/of verzekering?
-            HotPinkWheels heeft een uitgebreid aanbod aan diensten voor al uw specifieke wensen.
-        </p>
-    </div>
-</div>
