@@ -55,7 +55,7 @@
 }
 
 .showcase {
-    margin-top : 20px;
+    margin-top : 5px;
     width: 100%;
     max-height: 40vh;
     
@@ -64,6 +64,7 @@
 .showcaseitem{
     width : 18%;
     border : solid;
+    border-color : hotpink;
     margin : 10px;
     height : 95%;
     float : left;

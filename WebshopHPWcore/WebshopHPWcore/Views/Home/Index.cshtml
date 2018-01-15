@@ -1,6 +1,6 @@
 ﻿@model WebshopHPWcore.Models.TopCarsViewModel
 
-
+<h2>Top 5 beste modellen</h2>
 <div class="showcase">
     @foreach (var item in Model.cars.OrderByDescending(c => c.CarCount).GroupBy(x => x.Car.brand).Take(5).Select(c => c))
     {
