@@ -53,3 +53,32 @@
 .show {
     display: block;
 }
+
+.showcase {
+    margin-top : 20px;
+    width: 100%;
+    max-height: 40vh;
+    
+}
+
+.showcaseitem{
+    width : 18%;
+    border : solid;
+    margin : 10px;
+    height : 95%;
+    float : left;
+}
+
+.showcaseitem img{
+    max-width : 100%;
+}
+
+.showcaseitem-plaatje{
+    margin : 5%;
+    width : 90%;
+}
+
+.showcaseitem-content {
+    margin: 5%;
+    width: 90%;
+}

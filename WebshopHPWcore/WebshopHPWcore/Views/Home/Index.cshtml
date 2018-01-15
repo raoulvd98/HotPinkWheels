@@ -1,11 +1,74 @@
 ﻿@model WebshopHPWcore.Models.TopCarsViewModel
 
-@foreach (var item in Model.cars.OrderByDescending(c => c.CarCount).Take(5).Select(c => c).Distinct())
-{
-    <p>@item.Car.brand  @item.CarCount</p>
-}
 
-<div class="row">
+<div class="showcase">
+    @foreach (var item in Model.cars.OrderByDescending(c => c.CarCount).GroupBy(x => x.Car.brand).Take(5).Select(c => c))
+    {
+        <div class="showcaseitem">
+
+            @foreach (var bla in item)
+            {
+                <div class="showcaseitem-plaatje">
+
+                    @if (bla.Car.color == "Wit")
+                    { <img src="~/images/auto1.jpg" alt="Visual Studio" class="img-responsive" /> }
+                    @if (bla.Car.color == "Zilver")
+                    { <img src="~/images/auto2.jpg" alt="Visual Studio" class="img-responsive" />   }
+                    @if (bla.Car.color == "Grijs")
+                    {  <img src="~/images/auto3.jpg" alt="Visual Studio" class="img-responsive" />     }
+                    @if (bla.Car.color == "Rood")
+                    { <img src="~/images/auto4.jpg" alt="Visual Studio" class="img-responsive" /> }
+                    @if (bla.Car.color == "Blauw")
+                    { <img src="~/images/auto5.jpg" alt="Visual Studio" class="img-responsive" />   }
+                    @if (bla.Car.color == "Zwart")
+                    {  <img src="~/images/auto6.jpg" alt="Visual Studio" class="img-responsive" />     }
+                    @if (bla.Car.color == "Geel")
+                    { <img src="~/images/auto7.jpg" alt="Visual Studio" class="img-responsive" /> }
+                    @if (bla.Car.color == "Oranje")
+                    { <img src="~/images/auto8.jpg" alt="Visual Studio" class="img-responsive" />   }
+                    @if (bla.Car.color == "Groen")
+                    {  <img src="~/images/auto9.jpg" alt="Visual Studio" class="img-responsive" />     }
+                </div>
+                <div class="showcaseitem-content">
+                    <b>@bla.Car.brand @bla.Car.model</b> <br />
+                    <br />
+                    Dit model is al <b>@bla.CarCount keer gekocht!</b>
+                    <br /><br />
+                    <center><a class="btn btn-default" asp-controller="Car" asp-action="Carpage"
+                       asp-route-searchString="@bla.Car.brand"
+                       asp-route-searchStringModel="@bla.Car.model"
+                       asp-route-carColor=""
+                       asp-route-fueltype=""
+                       asp-route-motortype=""
+                       asp-route-transmission=""
+                       asp-route-maxPrice=""
+                       asp-route-minPrice=""
+                       asp-route-amountSeats=""
+                       asp-route-usage=""
+                       asp-route-pk=""
+                       asp-route-milage=""
+                       asp-route-topSpeed=""
+                       asp-route-minWeight=""
+                       asp-route-maxWeight="">
+
+                        Bekijk de collectie
+                    </a></center>
+                </div>
+
+
+                break;
+            }
+        </div>
+
+    }
+</div>
+
+<br />
+<br />
+<br />
+<br />
+
+<div class="row" style="margin-top : 20px">
     <div class="col-md-3">
         <h2>Welkom bij Webshop HotPinkWheels</h2>
         <p>
