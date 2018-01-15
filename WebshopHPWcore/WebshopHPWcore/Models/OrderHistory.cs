@@ -50,7 +50,5 @@ namespace WebshopHPWcore.Models
                    .Where(car => car.Userid == _userId)
                    .ToListAsync();
         }
-
- 
     }
 }
