@@ -1,80 +1,63 @@
 ﻿@model RegisterViewModel
-
 @{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Account registratie";
 }
 
-<h2>Create</h2>
+<h2>@ViewData["Title"]</h2>
 
-<h4>ApplicationUser</h4>
-<hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="FirstName">Voornaam</label>
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MiddleName" class="control-label">Tussenvoegsel</label>
-                <input asp-for="MiddleName" class="form-control" />
-                <span asp-validation-for="MiddleName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastName" class="control-label">Achternaam</label>
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label">Emailadres</label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PhoneNumber" class="control-label">Telefoonnummer</label>
-                <input asp-for="PhoneNumber" class="form-control" />
-                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Address" class="control-label">Straat</label>
-                <input asp-for="Address" class="form-control" />
-                <span asp-validation-for="Address" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="HouseNumber" class="control-label">Huisnummer</label>
-                <input asp-for="HouseNumber" class="form-control" />
-                <span asp-validation-for="HouseNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ZipCode" class="control-label">Postcode</label>
-                <input asp-for="ZipCode" class="form-control" />
-                <span asp-validation-for="ZipCode" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Password">Wachtwoord</label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ConfirmPassword">Wachtwoord bevestigen</label>
-                <input asp-for="ConfirmPassword" class="form-control" />
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+    <div class="col-md-8">
+        <form asp-controller="Account" asp-action="Register" method="post">
+            <h4>Maak je eigen account!</h4>
+            <hr />
+
+            <table id="table" class="table table-bordered table-responsive table-hover table-striped">
+                <tr>
+                    <td>Naam</td>
+                    <td>
+                        <input asp-for="FirstName" class="form-control" placeholder="Voornaam" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                        <input asp-for="MiddleName" class="form-control" placeholder="Tussenvoegsel" />
+                        <span asp-validation-for="MiddleName" class="text-danger"></span>
+                        <input asp-for="LastName" class="form-control" placeholder="Achternaam" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Adresgegevens</td>
+                    <td>
+                        <input asp-for="Address" class="form-control" placeholder="Straatnaam" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                        <input asp-for="HouseNumber" class="form-control" placeholder="Huisnummer" />
+                        <span asp-validation-for="HouseNumber" class="text-danger"></span>
+                        <input asp-for="ZipCode" class="form-control" placeholder="Postcode" />
+                        <span asp-validation-for="ZipCode" class="text-danger"></span>
+                        <input asp-for="City" class="form-control" placeholder="Woonplaats" />
+                        <span asp-validation-for="City" class="text-danger"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Contactgegevens</td>
+                    <td>
+                        <input asp-for="Email" class="form-control" placeholder="Email" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                        <input asp-for="Password" class="form-control" placeholder="Wachtwoord" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                        <input asp-for="ConfirmPassword" class="form-control" placeholder="Wachtwoord bevestigen" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        <input asp-for="PhoneNumber" class="form-control" placeholder="Telefoonnummer" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </td>
+                </tr>
+            </table>
+
+            <button type="submit" class="btn btn-default">Registreer</button>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
 }
-
