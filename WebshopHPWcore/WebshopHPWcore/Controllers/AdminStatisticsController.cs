@@ -138,7 +138,6 @@ namespace WebshopHPWcore.Controllers
             var cars = _context.cars.Where(x => x.Count == 0).Select(x => new { x.model, x.brand }).Distinct().ToList();
             foreach (var item in cars)
             {
-
                 string model = item.brand + " " + item.model;
                 int Count = 0;
 
@@ -149,7 +148,6 @@ namespace WebshopHPWcore.Controllers
 
                 DataPoint z = new DataPoint(model, Count);
                 dataPoints2.Add(z);
-
             }
             return dataPoints2;
         }
