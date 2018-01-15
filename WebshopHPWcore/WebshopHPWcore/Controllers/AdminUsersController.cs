@@ -142,19 +142,41 @@ namespace WebshopHPWcore.Controllers
             {
                 try
                 {
-                    _context.Update(applicationUser);
+                    _context.ApplicationUser.Update(applicationUser);
                     await _context.SaveChangesAsync();
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (DbUpdateConcurrencyException ex)
                 {
-                    if (!ApplicationUserExists(applicationUser.Id))
+                    foreach (var entry in ex.Entries)
                     {
-                        return NotFound();
+                        if (entry.Entity is ApplicationUser)
+                        {
+                            // Using a NoTracking query means we get the entity but it is not tracked by the context
+                            // and will not be merged with existing entities in the context.
+                            var databaseEntity = _context.ApplicationUser.AsNoTracking().Single(p => p.Id == ((ApplicationUser)entry.Entity).Id);
+                            var databaseEntry = _context.Entry(databaseEntity);
+
+                            foreach (var property in entry.Metadata.GetProperties())
+                            {
+                                var proposedValue = entry.Property(property.Name).CurrentValue;
+                                var originalValue = entry.Property(property.Name).OriginalValue;
+                                var databaseValue = databaseEntry.Property(property.Name).CurrentValue;
+
+                                // TODO: Logic to decide which value should be written to database
+                                // entry.Property(property.Name).CurrentValue = <value to be saved>;
+
+                                // Update original values to
+                                entry.Property(property.Name).OriginalValue = databaseEntry.Property(property.Name).CurrentValue;
+                            }
+                        }
+                        else
+                        {
+                            throw new NotSupportedException("Don't know how to handle concurrency conflicts for " + entry.Metadata.Name);
+                        }
                     }
-                    else
-                    {
-                        throw;
-                    }
+
+                    // Retry the save operation
+                    _context.SaveChanges();
                 }
                 return RedirectToAction(nameof(Index));
             }
