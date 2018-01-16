@@ -74,7 +74,6 @@ namespace WebshopHPWcore.Controllers
             {
                 return View(model);
             }
-
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
@@ -85,9 +84,10 @@ namespace WebshopHPWcore.Controllers
             if (model.Email != email)
             {
                 var setEmailResult = await _userManager.SetEmailAsync(user, model.Email);
+                var setUserNameResult = await _userManager.SetUserNameAsync(user, model.Email);
                 if (!setEmailResult.Succeeded)
                 {
-                    throw new ApplicationException($"Unexpected error occurred setting email for user with ID '{user.Id}'.");
+                    StatusMessage = "Uw email is niet opgeslagen, probeer het opnieuw";
                 }
             }
 
@@ -97,11 +97,12 @@ namespace WebshopHPWcore.Controllers
                 var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, model.PhoneNumber);
                 if (!setPhoneResult.Succeeded)
                 {
-                    throw new ApplicationException($"Unexpected error occurred setting phone number for user with ID '{user.Id}'.");
+                    StatusMessage = "Uw telefoonnummer is niet opgeslagen, probeer het opnieuw";
                 }
             }
 
-            StatusMessage = "De aanpassingen aan uw profiel zijn opgeslagen.";
+            if (StatusMessage == null) { StatusMessage = "De aanpassingen aan uw profiel zijn opgeslagen."; }
+            
             return RedirectToAction(nameof(Index));
         }
 
@@ -463,6 +464,9 @@ namespace WebshopHPWcore.Controllers
 
             return View(model);
         }
+
+
+
         #region Helpers
 
         private void AddErrors(IdentityResult result)
