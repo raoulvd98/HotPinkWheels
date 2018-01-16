@@ -84,6 +84,7 @@ namespace WebshopHPWcore.Controllers
             if (model.Email != email)
             {
                 var setEmailResult = await _userManager.SetEmailAsync(user, model.Email);
+                var setUserNameResult = await _userManager.SetUserNameAsync(user, model.Email);
                 if (!setEmailResult.Succeeded)
                 {
                     StatusMessage = "Uw email is niet opgeslagen, probeer het opnieuw";
@@ -463,6 +464,9 @@ namespace WebshopHPWcore.Controllers
 
             return View(model);
         }
+
+
+
         #region Helpers
 
         private void AddErrors(IdentityResult result)

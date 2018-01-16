@@ -2,10 +2,12 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+    var Id = SignInManager.UserManager.GetUserId(User);
 }
 
 <ul class="nav nav-pills nav-stacked">
     <li class="@ManageNavPages.IndexNavClass(ViewContext)"><a asp-action="Index">Profiel</a></li>
     <li class="@ManageNavPages.ChangePasswordNavClass(ViewContext)"><a asp-action="ChangePassword">Wachtwoord</a></li>
+    <li class="@ManageNavPages.ChangeDetailsNavClass(ViewContext)"><a asp-controller="EditUser" asp-action="ChangeDetails" asp-route-id="@Id">Overige gegevens</a></li>
 </ul>
 <br />
