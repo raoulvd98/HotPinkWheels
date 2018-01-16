@@ -41,7 +41,7 @@ namespace WebshopHPWcore.Models.AccountViewModels
         public string City { get; set; }
 
         [Required]
-        [DataType(DataType.Text)]
+        [DataType(DataType.PhoneNumber)]
         [Display(Name ="Voornaam")]
         public string FirstName { get; set; }
 
