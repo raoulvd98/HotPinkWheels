@@ -101,6 +101,16 @@ namespace WebshopHPWcore.Controllers
                 }
             }
 
+            var userName = user.UserName;
+            if (model.Username != userName)
+            {
+                var setUserNameResult = await _userManager.SetUserNameAsync(user, model.Username);
+                if (!setUserNameResult.Succeeded)
+                {
+                    throw new ApplicationException($"Unexpected error occurred setting phone number for user with ID '{user.Id}'.");
+                }
+            }
+
             StatusMessage = "De aanpassingen aan uw profiel zijn opgeslagen.";
             return RedirectToAction(nameof(Index));
         }
