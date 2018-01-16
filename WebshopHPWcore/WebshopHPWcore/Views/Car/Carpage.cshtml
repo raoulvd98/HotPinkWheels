@@ -9,7 +9,6 @@
         popup.classList.toggle("show");
     }
 </script>
-
 <div class="filterstuk">
     <h3>Filter op:</h3>
     <p>
@@ -161,130 +160,128 @@
                asp-route-topSpeed=""
                asp-route-minWeight=""
                asp-route-maxWeight="">Verwijder Filter(s)</a>
-        </form>
+            </form>
     </p>
 </div>
 <center>
         @await Html.PartialAsync("PaginationView")
 </center><br /><br />
 
+                @foreach (var item in Model)
+                {
+                    <div class="row-auto">
+                        <div class="row-auto-plaatje">
+                            <div class="item">
+                                @if (item.color == "Wit")
+                                {<a class="lightbox" href="#AutoWit"><img src="~/images/auto1.jpg" alt="Visual Studio" class="img-responsive" /></a>
+                                    <div class="lightbox-target" id="AutoWit"><img src="~/images/auto1.jpg" /><a class="lightbox-close" href="javascript:history.back()"></a></div>}
+                                @if (item.color == "Zilver")
+                                {<a class="lightbox" href="#AutoZilver"><img src="~/images/auto2.jpg" alt="Visual Studio" class="img-responsive" /></a>
+                                    <div class="lightbox-target" id="AutoZilver"><img src="~/images/auto2.jpg" /><a class="lightbox-close" href="javascript:history.back()"></a></div>}
 
-@foreach (var item in Model)
-{
-    <div class="row-auto">
-        <div class="row-auto-plaatje">
-            <div class="item">
-                @if (item.color == "Wit")
-                {<a class="lightbox" href="#AutoWit"><img src="~/images/auto1.jpg" alt="Visual Studio" class="img-responsive" /></a>
-                <div class="lightbox-target" id="AutoWit"><img src="~/images/auto1.jpg" /><a class="lightbox-close" href="javascript:history.back()"></a></div>}
+                                @if (item.color == "Grijs")
+                                {<a class="lightbox" href="#AutoGrijs"><img src="~/images/auto3.jpg" alt="Visual Studio" class="img-responsive" /></a>
+                                    <div class="lightbox-target" id="AutoGrijs"><img src="~/images/auto3.jpg" /><a class="lightbox-close" href="javascript:history.back()"></a></div>}
 
-                @if (item.color == "Zilver")
-                {<a class="lightbox" href="#AutoZilver"><img src="~/images/auto2.jpg" alt="Visual Studio" class="img-responsive" /></a>
-                <div class="lightbox-target" id="AutoZilver"><img src="~/images/auto2.jpg" /><a class="lightbox-close" href="javascript:history.back()"></a></div>}
-                
-                @if (item.color == "Grijs")
-                {<a class="lightbox" href="#AutoGrijs"><img src="~/images/auto3.jpg" alt="Visual Studio" class="img-responsive" /></a>
-                <div class="lightbox-target" id="AutoGrijs"><img src="~/images/auto3.jpg" /><a class="lightbox-close" href="javascript:history.back()"></a></div>}
-                
-                @if (item.color == "Rood")
-                {<a class="lightbox" href="#AutoRood"><img src="~/images/auto4.jpg" alt="Visual Studio" class="img-responsive" /></a>
-                <div class="lightbox-target" id="AutoRood"><img src="~/images/auto4.jpg" /><a class="lightbox-close" href="javascript:history.back()"></a></div>}
-               
-                @if (item.color == "Blauw")
-                {<a class="lightbox" href="#AutoBlauw"><img src="~/images/auto5.jpg" alt="Visual Studio" class="img-responsive" /></a>
-                <div class="lightbox-target" id="AutoBlauw"><img src="~/images/auto5.jpg" /><a class="lightbox-close" href="javascript:history.back()"></a></div>}
-                @if (item.color == "Zwart")
-                {<a class="lightbox" href="#AutoZwart"><img src="~/images/auto6.jpg" alt="Visual Studio" class="img-responsive" /></a>
-                <div class="lightbox-target" id="AutoZwart"><img src="~/images/auto6.jpg" /><a class="lightbox-close" href="javascript:history.back()"></a></div>}
-                
-                @if (item.color == "Geel")
-                {<a class="lightbox" href="#AutoGeel"><img src="~/images/auto7.jpg" alt="Visual Studio" class="img-responsive" /></a>
-                <div class="lightbox-target" id="AutoGeel"><img src="~/images/auto7.jpg" /><a class="lightbox-close" href="javascript:history.back()"></a></div>}
-                
-                @if (item.color == "Oranje")
-                {<a class="lightbox" href="#AutoOranje"><img src="~/images/auto8.jpg" alt="Visual Studio" class="img-responsive" /></a>
-                <div class="lightbox-target" id="AutoOranje"><img src="~/images/auto8.jpg" /><a class="lightbox-close" href="javascript:history.back()"></a></div>}
-                
-                @if (item.color == "Groen")
-                {<a class="lightbox" href="#AutoGroen"><img src="~/images/auto9.jpg" alt="Visual Studio" class="img-responsive" /></a>
-                <div class="lightbox-target" id="AutoGroen"><img src="~/images/auto9.jpg" /><a class="lightbox-close" href="javascript:history.back()"></a></div>}
-            </div>
-        </div>
-        <div class="row-auto-titel">
-            <h2>
-                <a asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@item.carid" class="koop-knopje">In winkelwagen <i class="fa fa-cart-plus" style="font-size:20px;color:white;"></i></a>
-                <button type="button" class="row-auto-knopje">
-                    <a asp-controller="WishList" asp-action="AddToCart" asp-route-id="@item.carid"><i class="fa fa-heart" style="font-size:20px;color:red;"></i></a>
-                </button>
-                @Html.DisplayFor(modelItem => item.brand) @Html.DisplayFor(modelItem => item.model)
-            </h2>
-        </div>
-        <div class="row-auto-subtitle">
-            <h2 style="margin-top: 5px">
-                €@Html.DisplayFor(modelItem => item.price)
-                <button type="button" class="row-auto-knopje" data-toggle="collapse" data-target="#@item.carid">Details</button>
-            </h2>
-        </div>
-        <div class="row-auto-content">
-            <div class="row-auto-content-col">
-                <ul style="padding-left: 10px">
-                    <li><b>Bouwjaar: </b>@Html.DisplayFor(modelItem => item.manufactureyear)</li>
-                    <li><b>Kilometerstand: </b>@Html.DisplayFor(modelItem => item.mileage) km</li>
-                </ul>
-                <div id="@item.carid" class="collapse">
-                    <div class="ul-links">
-                        <hr class="hr-autopage" width="257%">
-                        <ul style="padding-left: 10px">
-                            <li><b>Kleur: </b>@Html.DisplayFor(modelItem => item.color)</li>
-                            <li><b>Gewicht: </b>@Html.DisplayFor(modelItem => item.weight) kg</li>
-                            <li><b>Motor: </b>@Html.DisplayFor(modelItem => item.enginetype)</li>
-                            <li><b>Vermogen: </b>@Html.DisplayFor(modelItem => item.horsepower) pk</li>
-                            <li><b>Top snelheid: </b>@Html.DisplayFor(modelItem => item.topspeed) km/h</li>
-                            <li><b>Transmissie: </b>@Html.DisplayFor(modelItem => item.transmission)</li>
-                        </ul>
+                                @if (item.color == "Rood")
+                                {<a class="lightbox" href="#AutoRood"><img src="~/images/auto4.jpg" alt="Visual Studio" class="img-responsive" /></a>
+                                    <div class="lightbox-target" id="AutoRood"><img src="~/images/auto4.jpg" /><a class="lightbox-close" href="javascript:history.back()"></a></div>}
+
+                                @if (item.color == "Blauw")
+                                {<a class="lightbox" href="#AutoBlauw"><img src="~/images/auto5.jpg" alt="Visual Studio" class="img-responsive" /></a>
+                                    <div class="lightbox-target" id="AutoBlauw"><img src="~/images/auto5.jpg" /><a class="lightbox-close" href="javascript:history.back()"></a></div>}
+                                @if (item.color == "Zwart")
+                                {<a class="lightbox" href="#AutoZwart"><img src="~/images/auto6.jpg" alt="Visual Studio" class="img-responsive" /></a>
+                                    <div class="lightbox-target" id="AutoZwart"><img src="~/images/auto6.jpg" /><a class="lightbox-close" href="javascript:history.back()"></a></div>}
+
+                                @if (item.color == "Geel")
+                                {<a class="lightbox" href="#AutoGeel"><img src="~/images/auto7.jpg" alt="Visual Studio" class="img-responsive" /></a>
+                                    <div class="lightbox-target" id="AutoGeel"><img src="~/images/auto7.jpg" /><a class="lightbox-close" href="javascript:history.back()"></a></div>}
+
+                                @if (item.color == "Oranje")
+                                {<a class="lightbox" href="#AutoOranje"><img src="~/images/auto8.jpg" alt="Visual Studio" class="img-responsive" /></a>
+                                    <div class="lightbox-target" id="AutoOranje"><img src="~/images/auto8.jpg" /><a class="lightbox-close" href="javascript:history.back()"></a></div>}
+
+                                @if (item.color == "Groen")
+                                {<a class="lightbox" href="#AutoGroen"><img src="~/images/auto9.jpg" alt="Visual Studio" class="img-responsive" /></a>
+                                    <div class="lightbox-target" id="AutoGroen"><img src="~/images/auto9.jpg" /><a class="lightbox-close" href="javascript:history.back()"></a></div>}
+                            </div>
+                        </div>
+                        <div class="row-auto-titel">
+                            <h2>
+                                <a asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@item.carid" class="koop-knopje">In winkelwagen <i class="fa fa-cart-plus" style="font-size:20px;color:white;"></i></a>
+                                <button type="button" class="row-auto-knopje">
+                                    <a asp-controller="WishList" asp-action="AddToCart" asp-route-id="@item.carid"><i class="fa fa-heart" style="font-size:20px;color:red;"></i></a>
+                                </button>
+                                @Html.DisplayFor(modelItem => item.brand) @Html.DisplayFor(modelItem => item.model)
+                            </h2>
+                        </div>
+                        <div class="row-auto-subtitle">
+                            <h2 style="margin-top: 5px">
+                                €@Html.DisplayFor(modelItem => item.price)
+                                <button type="button" class="row-auto-knopje" data-toggle="collapse" data-target="#@item.carid">Details</button>
+                            </h2>
+                        </div>
+                        <div class="row-auto-content">
+                            <div class="row-auto-content-col">
+                                <ul style="padding-left: 10px">
+                                    <li><b>Bouwjaar: </b>@Html.DisplayFor(modelItem => item.manufactureyear)</li>
+                                    <li><b>Kilometerstand: </b>@Html.DisplayFor(modelItem => item.mileage) km</li>
+                                </ul>
+                                <div id="@item.carid" class="collapse">
+                                    <div class="ul-links">
+                                        <hr class="hr-autopage" width="257%">
+                                        <ul style="padding-left: 10px">
+                                            <li><b>Kleur: </b>@Html.DisplayFor(modelItem => item.color)</li>
+                                            <li><b>Gewicht: </b>@Html.DisplayFor(modelItem => item.weight) kg</li>
+                                            <li><b>Motor: </b>@Html.DisplayFor(modelItem => item.enginetype)</li>
+                                            <li><b>Vermogen: </b>@Html.DisplayFor(modelItem => item.horsepower) pk</li>
+                                            <li><b>Top snelheid: </b>@Html.DisplayFor(modelItem => item.topspeed) km/h</li>
+                                            <li><b>Transmissie: </b>@Html.DisplayFor(modelItem => item.transmission)</li>
+                                        </ul>
+                                    </div>
+                                    <div class="ul-rechts">
+                                        <hr class="hr-autopage1">
+                                        <ul>
+                                            <li><b>Brandstof: </b>@Html.DisplayFor(modelItem => item.fueltype)</li>
+                                            <li><b>Verbruik: </b>1/@Html.DisplayFor(modelItem => item.fuelusage)</li>
+                                            <li><b>Aantal deuren: </b>@Html.DisplayFor(modelItem => item.amountofdoors)</li>
+                                            <li><b>Aantal stoelen: </b>@Html.DisplayFor(modelItem => item.amountofseats)</li>
+                                            <li><b>Vorige eigenaren: </b>@Html.DisplayFor(modelItem => item.amountofpreviousowners)</li>
+                                            <li><b>APK: </b>@Html.DisplayFor(modelItem => item.apk)</li>
+                                            <li><b>Garantie: </b>@Html.DisplayFor(modelItem => item.warranty)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="dividing_line" width="755px">
                     </div>
-                    <div class="ul-rechts">
-                        <hr class="hr-autopage1">
-                        <ul>
-                            <li><b>Brandstof: </b>@Html.DisplayFor(modelItem => item.fueltype)</li>
-                            <li><b>Verbruik: </b>1/@Html.DisplayFor(modelItem => item.fuelusage)</li>
-                            <li><b>Aantal deuren: </b>@Html.DisplayFor(modelItem => item.amountofdoors)</li>
-                            <li><b>Aantal stoelen: </b>@Html.DisplayFor(modelItem => item.amountofseats)</li>
-                            <li><b>Vorige eigenaren: </b>@Html.DisplayFor(modelItem => item.amountofpreviousowners)</li>
-                            <li><b>APK: </b>@Html.DisplayFor(modelItem => item.apk)</li>
-                            <li><b>Garantie: </b>@Html.DisplayFor(modelItem => item.warranty)</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr class="dividing_line" width="755px">
-    </div>
-    <br />
-}<br />
-<center>
-    @await Html.PartialAsync("PaginationView")
-</center>
+                    <br />
+                }<br />
+                <center>
+                    @await Html.PartialAsync("PaginationView")
+                </center>
+                <script>
+                    /* When the user clicks on the button,
+                    toggle between hiding and showing the dropdown content */
+                    function myFunction() {
+                        document.getElementById("myDropdown").classList.toggle("show");
+                    }
 
-<script>
-    /* When the user clicks on the button,
-    toggle between hiding and showing the dropdown content */
-    function myFunction() {
-        document.getElementById("myDropdown").classList.toggle("show");
-    }
-
-    function filterFunction() {
-        var input, filter, ul, li, a, i;
-        input = document.getElementById("myInput");
-        filter = input.value.toUpperCase();
-        div = document.getElementById("myDropdown");
-        a = div.getElementsByTagName("a");
-        for (i = 0; i < a.length; i++) {
-            if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
-                a[i].style.display = "";
-            } else {
-                a[i].style.display = "none";
-            }
-        }
-    }
-</script>
+                    function filterFunction() {
+                        var input, filter, ul, li, a, i;
+                        input = document.getElementById("myInput");
+                        filter = input.value.toUpperCase();
+                        div = document.getElementById("myDropdown");
+                        a = div.getElementsByTagName("a");
+                        for (i = 0; i < a.length; i++) {
+                            if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+                                a[i].style.display = "";
+                            } else {
+                                a[i].style.display = "none";
+                            }
+                        }
+                    }
+                </script>
+ 
