@@ -34,31 +34,70 @@
                 Verwijder Filter(s)
             </a><br /><br />
                       <div class="dropdown">
-                          <a class="dropbtn">Huidige Filter(s):</a><br />
+                          <a class="dropbtn" data-constrainwidth="false">Huidige Filter(s):</a><br />
                           <ul class="dropdown-content">
-                              Merk + model: @ViewData["CurrentFilter"] @ViewData["CurrentFilterModel"]
+                              @if (ViewData["CurrentFilter"] != null)
+                              {
+                              <span>Merk: <b>@ViewData["CurrentFilter"]</b></span>
                               <br />
-                              Kleur: @ViewData["ColorFilter"]
+                              }
+                              @if (ViewData["CurentFilterModel"] != null)
+                              {
+                              <span>Model: <b>@ViewData["CurrentFilterModel"]</b></span>
+                              <br /> 
+                              }
+                              @if (ViewData["ColorFilter"] != null)
+                              {
+                              <span>Kleur: <b>@ViewData["ColorFilter"]</b></span>
                               <br />
-                              Brandstof: @ViewData["FuelTypeFilter"]
+                              }
+                              @if (ViewData["FuelTypeFilter"] != null)
+                              {
+                              <span>Brandstof: <b>@ViewData["FuelTypeFilter"]</b></span>
                               <br />
-                              Motor: @ViewData["MotorTypeFilter"]
+                              }
+                              @if (ViewData["MotortypeFilter"] != null)
+                              {
+                              <span>Motor: <b>@ViewData["MotorTypeFilter"]</b></span>
                               <br />
-                              Transmissie: @ViewData["TransmissionFilter"]
+                              }
+                              @if (ViewData["TransmissionFilter"] != null)
+                              {
+                              <span>Transmissie: <b>@ViewData["TransmissionFilter"]</b></span>
                               <br />
-                              Prijs: @ViewData["MinPriceFilter"] - @ViewData["MaxPriceFilter"]
+                              }
+                              Prijs: <b>@ViewData["MinPriceFilter"]</b> - <b>@ViewData["MaxPriceFilter"]</b>
                               <br />
-                              Aantal stoelen: @ViewData["AmountSeatsFilter"]
+                              @if (ViewData["AmountSeatsFilter"] != "")
+                              {
+                              <span>Aantal stoelen: <b>@ViewData["AmountSeatsFilter"]</b></span>
                               <br />
-                              Verbruik: @ViewData["UsageFilter"]
+                              }
+                              @if (ViewData["UsageFilter"] != "")
+                              {
+                              <span>Verbruik: <b>@ViewData["UsageFilter"]</b></span>
                               <br />
-                              Aantal PK: @ViewData["PkFilter"]
+                              }
+                              @if (ViewData["PkFilter"] != "")
+                              {
+                              <span>Aantal PK: <b>@ViewData["PkFilter"]</b></span>
                               <br />
-                              Kilometerstand @ViewData["MilageFilter"]
+                              }
+                              @if (ViewData["MilageFilter"] != "")
+                              {
+                              <span>Kilometerstand <b>@ViewData["MilageFilter"]</b></span>
                               <br />
-                              Topsnelheid: @ViewData["TopSpeedFilter"]
+                              }
+                              @if (ViewData["TopSpeedFilter"] != "")
+                              {
+                              <span>Topsnelheid: <b>@ViewData["TopSpeedFilter"]</b></span>
                               <br />
-                              Gewicht: @ViewData["MinWeightFilter"] - @ViewData["MaxWeightFilter"]
+                              }
+                              @if (ViewData["MinWeightFilter"] != "" || (ViewData["MaxWeightFilter"] != ""))
+                              {
+                              <span>Gewicht: <b>@ViewData["MinWeightFilter"]</b> - <b>@ViewData["MaxWeightFilter"]</b></span>
+
+                              }    
                           </ul>
                       </div><br /><br />
 
