@@ -25,12 +25,11 @@ using Npgsql;
 
 namespace WebshopHPWcore.Controllers
 {
-    [Authorize(Roles = "Admin")]
-    public class AdminUsersController : Controller
+    public class EditUserController : Controller
     {
         private readonly ShopContext _context;
 
-        public AdminUsersController(ShopContext context)
+        public EditUserController(ShopContext context)
         {
             _context = context;
         }
@@ -48,11 +47,11 @@ namespace WebshopHPWcore.Controllers
                             {
                                 s.Name
                             }).ToList();
-                           
+
             //var role = _context.Roles.Join(_context.UserRoles, d1 => d1.)
 
             //var CartItemCheck = DbContext.CartItems.Where(x => x.carid == id && x.userid == userid).ToList();
-            
+
             //join mi in _context.UserRoles on s.Id equals mi.UserId
             //join li in _context.Roles on mi.RoleId equals li.Id
             //select new
@@ -109,7 +108,7 @@ namespace WebshopHPWcore.Controllers
         }
 
         // GET: AdminUsers/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> ChangeDetails(string id)
         {
             if (id == null)
             {
@@ -129,7 +128,7 @@ namespace WebshopHPWcore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,UserName,NormalizedUserName,Email,NormalizedEmail,EmailConfirmed," +
+        public async Task<IActionResult> ChangeDetails(string id, [Bind("Id,UserName,NormalizedUserName,Email,NormalizedEmail,EmailConfirmed," +
             "PasswordHash,SecurityStamp,ConcurrencyStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEnd,LockoutEnabled," +
             "AccessFailedCount, FirstName, MiddleName, lastName, Address, HouseNumber, ZipCode, City")] ApplicationUser applicationUser)
         {
@@ -178,7 +177,7 @@ namespace WebshopHPWcore.Controllers
                     // Retry the save operation
                     _context.SaveChanges();
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(ChangeDetails));
             }
             return View(applicationUser);
         }
