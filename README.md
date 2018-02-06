@@ -20,7 +20,7 @@ A webshop which sells second-hand cars. The website was designed based on the MV
 </td><td>
 <img alt="CarpageFilterHover" src="Screenshots/Register.PNG">
 </td></tr>
-<tr><td>The login and register page</td></tr>
+<tr>The login and register page</tr>
 </table>
 
 <table><tr>
