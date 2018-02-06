@@ -16,9 +16,9 @@ A webshop which sells second-hand cars. The website was designed based on the MV
 </table>
 
 <table><tr><td>
-<img alt="CarpageFilter" src="Screenshots/Login.PNG">
+<img alt="Login" src="Screenshots/Login.PNG">
 </td><td>
-<img alt="CarpageFilterHover" src="Screenshots/Register.PNG">
+<img alt="Register" src="Screenshots/Register.PNG">
 </td></tr>
 <tr><td>The login and register page</td></tr>
 </table>
@@ -37,21 +37,21 @@ A webshop which sells second-hand cars. The website was designed based on the MV
 <table><tr><td>
 <img alt="CarpageFilter" src="Screenshots/Whish.PNG">
 </td><td>
-<img alt="CarpageFilterHover" src="Screenshots/ShoppingCart.PNG">
+<img alt="CarpageFilterHover" src="Screenshots/ShoppinCart.PNG">
 </td></tr>
 <tr><td>You can save your favorite cars in your wishlist and put them in the shopping cart.</td></tr>
 </table>
 
 <table><tr><td>
-<img alt="CarpageFilter" src="Screenshots/CheckOut.PNG">
+<img alt="CheckOut" src="Screenshots/CheckOut.PNG">
 </td><td>
-<img alt="CarpageFilterHover" src="Screenshots/Finish.PNG">
+<img alt="Finish" src="Screenshots/Finish.PNG">
 </td></tr>
 <tr><td>A page for the user to finalise the payment. The site uses a PayPal sandbox to simulate real payments.</td><td>A page after the user has successfully paid.</td></tr>
 </table>
 
 <table><tr><td>
-<img alt="Home" src="Screenshots/History.PNG"> 
+<img alt="History" src="Screenshots/History.PNG"> 
 </td></tr>
 <tr><td>The history page.</td></tr>
 </table>
