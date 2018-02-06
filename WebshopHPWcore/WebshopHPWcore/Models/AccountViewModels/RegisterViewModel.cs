@@ -14,6 +14,7 @@ namespace WebshopHPWcore.Models.AccountViewModels
         public string Email { get; set; }
 
         [Required]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{6,99}$", ErrorMessage = "Het {0} moet minstens 6 tekens lang zijn en 1 hoofdletter, 1 leesteken en 1 cijfer bevatten.")]
         [StringLength(100, ErrorMessage = "Het {0} moet op zijn minst {2} en maximaal {1} tekens lang zijn.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Wachtwoord")]
@@ -41,7 +42,7 @@ namespace WebshopHPWcore.Models.AccountViewModels
         public string City { get; set; }
 
         [Required]
-        [DataType(DataType.PhoneNumber)]
+        [DataType(DataType.Text)]
         [Display(Name ="Voornaam")]
         public string FirstName { get; set; }
 
