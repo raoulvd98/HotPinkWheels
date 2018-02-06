@@ -1,0 +1,121 @@
+﻿@model WebshopHPWcore.Models.Car
+@{
+    ViewData["Title"] = "Details";
+}
+<h2>Details van @Html.DisplayFor(model => model.brand) @Html.DisplayFor(model => model.model)</h2>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Merk
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.brand)
+        </dd>
+        <dt>
+            Model
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.model)
+        </dd>
+        <dt>
+            Bouwjaar
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.manufactureyear)
+        </dd>
+        <dt>
+            Kleur
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.color)
+        </dd>
+        <dt>
+            Prijs
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.price) Euro
+        </dd>
+        <dt>
+            PK
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.horsepower) pk
+        </dd>
+        <dt>
+            Gewicht
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.weight) kg
+        </dd>
+        <dt>
+            Maximum snelheid
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.topspeed) km/h
+        </dd>
+        <dt>
+            Type motor
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.enginetype)
+        </dd>
+        <dt>
+            Brandstof
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.fueltype)
+        </dd>
+        <dt>
+            Brandstof verbruik
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.fuelusage)
+        </dd>
+        <dt>
+            Transmissie
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.transmission)
+        </dd>
+        <dt>
+            Kilomterstand
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.mileage) km
+        </dd>
+        <dt>
+            APK
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.apk)
+        </dd>
+        <dt>
+            Garantie
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.warranty)
+        </dd>
+        <dt>
+            Aantal deuren
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.amountofdoors)
+        </dd>
+        <dt>
+            Aantal stoelen
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.amountofseats)
+        </dd>
+        <dt>
+            Aantal vorige eigenaren
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.amountofpreviousowners)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index" class="btn btn-default">Terug naar wenslijst</a>
+</div>

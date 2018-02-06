@@ -1,0 +1,120 @@
+﻿@model WebshopHPWcore.Models.ApplicationUser
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Aanpassen</h2>
+
+<h4> @Html.DisplayFor(m => m.FirstName) @Html.DisplayFor(m => m.MiddleName) @Html.DisplayFor(m => m.lastName)</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label">Gebruikersnaam</label>
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label">Voornaam</label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MiddleName" class="control-label">Tussenvoegsel</label>
+                <input asp-for="MiddleName" class="form-control" />
+                <span asp-validation-for="MiddleName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="lastName" class="control-label">Achternaam</label>
+                <input asp-for="lastName" class="form-control" />
+                <span asp-validation-for="lastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label">Emailadres</label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label">Telefoonnummer</label>
+                <input asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="City" class="control-label">Woonplaats</label>
+                <input asp-for="City" class="form-control" />
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label">Straat</label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HouseNumber" class="control-label">Huisnummer</label>
+                <input asp-for="HouseNumber" class="form-control" />
+                <span asp-validation-for="HouseNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ZipCode" class="control-label">Postcode</label>
+                <input asp-for="ZipCode" class="form-control" />
+                <span asp-validation-for="ZipCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Id" class="control-label">Id</label>
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NormalizedUserName" class="control-label">NormalizedUsername</label>
+                <input asp-for="NormalizedUserName" class="form-control" />
+                <span asp-validation-for="NormalizedUserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NormalizedEmail" class="control-label">NormalizedEmail</label>
+                <input asp-for="NormalizedEmail" class="form-control" />
+                <span asp-validation-for="NormalizedEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmailConfirmed" class="control-label">EmailConfirmed</label>
+                <input asp-for="EmailConfirmed" class="form-control" />
+                <span asp-validation-for="EmailConfirmed" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PasswordHash" class="control-label">PasswordHash</label>
+                <input asp-for="PasswordHash" class="form-control" readonly/>
+                <span asp-validation-for="PasswordHash" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SecurityStamp" class="control-label">SecurityStamp</label>
+                <input asp-for="SecurityStamp" class="form-control" readonly/>
+                <span asp-validation-for="SecurityStamp" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConcurrencyStamp" class="control-label">ConcurrencyStamp</label>
+                <input asp-for="ConcurrencyStamp" class="form-control" readonly/>
+                <span asp-validation-for="ConcurrencyStamp" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumberConfirmed" class="control-label">PhoneNumberConfirmed</label>
+                <input asp-for="PhoneNumberConfirmed" class="form-control" readonly/>
+                <span asp-validation-for="PhoneNumberConfirmed" class="text-danger"></span>
+            </div>
+
+
+
+            <div class="form-group">
+                <input type="submit" value="Opslaan" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Terug naar overzicht</a>
+</div>
+
