@@ -3,8 +3,26 @@ A webshop which sells second-hand cars. The website was designed based on the MV
 
 ## Screenshots
 
-<img alt="Home" src="Screenshots/Home.PNG"> The initial landing page when accessing the website.
+<table><tr><td>
+<img alt="Home" src="Screenshots/Home.PNG"> 
+</td></tr>
+<tr><td>The initial landing page when accessing the website.</td></tr>
+</table>
+
+<table><tr><td>
 <img alt="Carpage" src="Screenshots/Carpage.PNG">
-<img alt="CarpageFilter" src="Screenshots/CarpageFilter.PNG"><img alt="CarpageFilterHover" src="Screenshots/CarpageFilterHover.png">
+</td></tr>
+<tr><td>The initial landing page when accessing the website.</td></tr>
+</table>
+
+<table><tr><td>
+<img alt="CarpageFilter" src="Screenshots/CarpageFilter.PNG">
+</td>
+<td>
+<img alt="CarpageFilterHover" src="Screenshots/CarpageFilterHover.png">
+</td>
+</tr>
+<tr><td>The initial landing page when accessing the website.</td></tr>
+</table>
 
 
