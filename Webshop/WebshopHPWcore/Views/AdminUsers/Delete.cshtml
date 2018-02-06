@@ -1,0 +1,63 @@
+﻿@model WebshopHPWcore.Models.ApplicationUser
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Verwijderen</h2>
+
+<h4> @Html.DisplayFor(m => m.FirstName) @Html.DisplayFor(m => m.MiddleName) @Html.DisplayFor(m => m.lastName)</h4>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Naam
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.MiddleName) @Html.DisplayFor(model => model.lastName)
+        </dd>
+        <dt>
+            Gebruikersnaam
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+        <dt>
+            Emailadres
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            Telefoonnummer
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+        <dt>
+            Woonplaats
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+        <dt>
+            Adres
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Address) @Html.DisplayFor(model => model.HouseNumber)
+        </dd>
+        <dt>
+            Postcode
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ZipCode)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Verwijderen" class="btn btn-default" /> 
+
+    </form>  <br /> <div><a asp-action="Index">Terug naar overzicht</a></div> 
+</div>

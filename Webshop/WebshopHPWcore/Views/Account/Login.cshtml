@@ -1,0 +1,71 @@
+﻿@using System.Collections.Generic
+@using System.Linq
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Authentication
+@model LoginViewModel
+@inject SignInManager<ApplicationUser> SignInManager
+
+<div class="row-left">
+    <div class="col-md-4">
+        <section>
+            <form asp-controller="Account" asp-action="Login" method="post">
+                <div class="form-group">
+                    <br />
+                    <h3>Inloggen voor bestaande klanten</h3>
+                    <hr />
+                    <input asp-for="Email" class="form-control" placeholder="Email" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="Password" class="form-control" placeholder="Wachtwoord" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label asp-for="RememberMe">
+                            <input asp-for="RememberMe" />
+                            @Html.DisplayNameFor(m => m.RememberMe)
+                        </label>
+                    </div>
+                </div>
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-default">Inloggen</button>
+                </div>
+                <div class="form-group">
+                    <p>
+                        <a asp-controller="Account" asp-action="ForgotPassword">Wachtwoord vergeten?</a>
+                    </p>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>
+
+<style>
+    .vl {
+        border-left: 2px solid black;
+        height: 570px;
+        position: absolute;
+        left: 42%;
+        margin-left: -3px;
+        top: 0;
+        opacity: 0.1;
+    }
+    .padding-left-pagina
+    {
+        padding-left: 45%
+    }
+</style>
+
+<div class="col-md-4, padding-left-pagina">
+    <br />
+    <h3>Nieuwe klanten</h3>
+    <hr align="left" width="330px" />
+    <a asp-controller="Account" asp-action="Register" class="btn btn-default" align="center">Registreren</a>
+</div>
+
+<div class="vl"></div>
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+@section Scripts {@await Html.PartialAsync("_ValidationScriptsPartial")}

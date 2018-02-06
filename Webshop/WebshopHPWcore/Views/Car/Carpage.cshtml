@@ -1,0 +1,326 @@
+@model PaginatedList<WebshopHPWcore.Models.Car>
+<br />
+<br />
+<br />
+<script>
+    // When the user clicks on div, open the popup
+    function Check() {
+        var popup = document.getElementById("myPopup");
+        popup.classList.toggle("show");
+    }
+</script>
+<div class="filterstuk">
+    <h3>Filter op:</h3>
+    <p>
+        <div class="collapse navbar-collapse"></div>
+        <form asp-action="Carpage" method="get">
+            <input type="submit" value="Zoeken" class="btn btn-default" />
+            <a class="btn btn-default" asp-action="Carpage"
+               asp-route-searchString=""
+               asp-route-searchStringModel=""
+               asp-route-carColor=""
+               asp-route-fueltype=""
+               asp-route-motortype=""
+               asp-route-transmission=""
+               asp-route-maxPrice=""
+               asp-route-minPrice=""
+               asp-route-amountSeats=""
+               asp-route-usage=""
+               asp-route-pk=""
+               asp-route-milage=""
+               asp-route-topSpeed=""
+               asp-route-minWeight=""
+               asp-route-maxWeight="">
+                Verwijder Filter(s)
+            </a><br /><br />
+                      <div class="dropdown">
+                          <a class="dropbtn" data-constrainwidth="false">Huidige Filter(s):</a><br />
+                          <ul class="dropdown-content">
+                              @if (ViewData["CurrentFilter"] != null)
+                              {
+                              <span>Merk: <b>@ViewData["CurrentFilter"]</b></span>
+                              <br />
+                              }
+                              @if (ViewData["CurrentFilterModel"] != null)
+                              {
+                              <span>Model: <b>@ViewData["CurrentFilterModel"]</b></span>
+                              <br /> 
+                              }
+                              @if (ViewData["ColorFilter"] != null)
+                              {
+                              <span>Kleur: <b>@ViewData["ColorFilter"]</b></span>
+                              <br />
+                              }
+                              @if (ViewData["FuelTypeFilter"] != null)
+                              {
+                              <span>Brandstof: <b>@ViewData["FuelTypeFilter"]</b></span>
+                              <br />
+                              }
+                              @if (ViewData["MotortypeFilter"] != null)
+                              {
+                              <span>Motor: <b>@ViewData["MotorTypeFilter"]</b></span>
+                              <br />
+                              }
+                              @if (ViewData["TransmissionFilter"] != null)
+                              {
+                              <span>Transmissie: <b>@ViewData["TransmissionFilter"]</b></span>
+                              <br />
+                              }
+                              Prijs: <b>@ViewData["MinPriceFilter"]</b> - <b>@ViewData["MaxPriceFilter"]</b>
+                              <br />
+                              @if (ViewData["AmountSeatsFilter"] != "")
+                              {
+                              <span>Aantal stoelen: <b>@ViewData["AmountSeatsFilter"]</b></span>
+                              <br />
+                              }
+                              @if (ViewData["UsageFilter"] != "")
+                              {
+                              <span>Verbruik: <b>@ViewData["UsageFilter"]</b></span>
+                              <br />
+                              }
+                              @if (ViewData["PkFilter"] != "")
+                              {
+                              <span>Aantal PK: <b>@ViewData["PkFilter"]</b></span>
+                              <br />
+                              }
+                              @if (ViewData["MilageFilter"] != "")
+                              {
+                              <span>Kilometerstand <b>@ViewData["MilageFilter"]</b></span>
+                              <br />
+                              }
+                              @if (ViewData["TopSpeedFilter"] != "")
+                              {
+                              <span>Topsnelheid: <b>@ViewData["TopSpeedFilter"]</b></span>
+                              <br />
+                              }
+                              @if (ViewData["MinWeightFilter"] != "" || (ViewData["MaxWeightFilter"] != ""))
+                              {
+                              <span>Gewicht: <b>@ViewData["MinWeightFilter"]</b> - <b>@ViewData["MaxWeightFilter"]</b></span>
+
+                              }    
+                          </ul>
+                      </div><br /><br />
+
+            <b>Merken:</b><br />
+            <select id="searchString" name="searchString" value="@ViewData["CurrentFilter"]">
+                <option value="@ViewData["CurrentFilter"]">Alle</option>
+                @foreach (var item in Model.AllItems.OrderBy(s => s.brand).Select(s => s.brand).Distinct())
+        {
+            <option value=@item>@item</option>
+}
+            </select><br /><br />
+            @if (ViewData["currentFilter"] != null)
+    {
+        <b>Model:</b><br />
+        <select id="searchStringModel" name="searchStringModel" value="@ViewData["CurrentFilterModel"]">
+            <option value="@ViewData["CurrentFilterModel"]">Alle</option>
+            @foreach (var item in Model.AllItems.OrderBy(s => s.model).Select(s => s.model).Distinct())
+    {
+        <option value=@item>@item</option>
+}
+        </select><br /><br />
+}
+            <b>Type brandstof:</b><br />
+            <select id="fueltype" name="fuelType" value="@ViewData["FuelTypeFilter"]">
+                <option value="@ViewData["FuelTypeFilter"]">Alle</option>
+                @foreach (var item in Model.AllItems.OrderBy(s => s.fueltype).Select(s => s.fueltype).Distinct())
+        {
+            <option value=@item>@item</option>
+}
+            </select><br /><br />
+            <b>Kleur:</b><br />
+            <select id="color" name="carColor" value="@ViewData["ColorFilter"]">
+                <option value="@ViewData["ColorFilter"]">Alle</option>
+                @foreach (var item in Model.AllItems.OrderBy(s => s.color).Select(s => s.color).Distinct())
+        {
+            <option value=@item>@item</option>
+}
+            </select><br /><br />
+            <b>Minimum prijs:</b><br />
+            <input name="minPrice" value="@ViewData["MinPriceFilter"]" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'><br /><br />
+            <b>Maximum prijs:</b><br />
+            <input name="maxPrice" value="@ViewData["MaxPriceFilter"]" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'><br /><br />
+            <b>Type motor:</b><br />
+            <select id="motortype" name="motortype" value="@ViewData["MotorTypeFilter"]">
+                <option value="@ViewData["MotorTypeFilter"]">Alle</option>
+                @foreach (var item in Model.AllItems.OrderBy(s => s.enginetype).Select(s => s.enginetype).Distinct())
+        {
+            <option value=@item>@item</option>
+}
+            </select><br /><br />
+            <b>Aantal stoelen:</b><br />
+            <select name="amountSeats" value="@ViewData["AmountSeatsFilter"]" class="sc-input">
+                <option value="@ViewData["AmountSeatsFilter"]">Alle</option>
+                @foreach (var item in Model.AllItems.OrderBy(s => s.amountofseats).Select(s => s.amountofseats).Distinct())
+        {
+            <option value=@item>@item</option>
+}
+            </select><br /><br />
+            <b>Transmissie:</b><br />
+            <select name="transmission" value="@ViewData["TransmissionFilter"]">
+                <option value="@ViewData["TransmissionFilter"]">Alle</option>
+                @foreach (var item in Model.AllItems.OrderBy(s => s.transmission).Select(s => s.transmission).Distinct())
+        {
+            <option value=@item>@item</option>
+}
+            </select><br /><br />
+            <b>Verbruik</b><br />
+            <select name="usage" value="@ViewData["UsageFilter"]" class="sc-input">
+                <option value="0"></option>
+                <option value="5"> < 5 </option>
+                <option value="10"> < 10 </option>
+                <option value="15"> < 15 </option>
+                <option value="20"> < 20 </option>
+            </select><br /><br />
+            <b>Kilometerstand: (vanaf)</b><br />
+            <input name="milage" value="@ViewData["MilageFilter"]" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'><br /><br />
+            <b>PK: (vanaf)</b><br />
+            <input name="pk" value="@ViewData["PkFilter"]" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'><br /><br />
+            <b>Topsnelheid: (vanaf)</b><br />
+            <input name="topSpeed" value="@ViewData["TopSpeedFilter"]" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'><br /><br />
+            <b>Gewicht (vanaf)</b><br />
+            <input name="minWeight" value="@ViewData["MinWeightFilter"]" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'><br />
+            <b>Gewicht: (Tot)</b><br />
+            <input name="maxWeight" value="@ViewData["MaxWeightFilter"]" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'><br /><br />
+            <input type="submit" value="Zoeken" class="btn btn-default" />
+            <a class="btn btn-default" asp-action="Carpage"
+               asp-route-searchString=""
+               asp-route-searchStringModel=""
+               asp-route-carColor=""
+               asp-route-fueltype=""
+               asp-route-motortype=""
+               asp-route-transmission=""
+               asp-route-maxPrice=""
+               asp-route-minPrice=""
+               asp-route-amountSeats=""
+               asp-route-usage=""
+               asp-route-pk=""
+               asp-route-milage=""
+               asp-route-topSpeed=""
+               asp-route-minWeight=""
+               asp-route-maxWeight="">Verwijder Filter(s)</a>
+            </form>
+    </p>
+</div>
+<center>
+        @await Html.PartialAsync("PaginationView")
+</center><br /><br />
+
+                @foreach (var item in Model)
+                {
+                    <div class="row-auto">
+                        <div class="row-auto-plaatje">
+                            <div class="item">
+                                @if (item.color == "Wit")
+                                {<a class="lightbox" href="#AutoWit"><img src="~/images/auto1.jpg" alt="Visual Studio" class="img-responsive" /></a>
+                                    <div class="lightbox-target" id="AutoWit"><img src="~/images/auto1.jpg" /><a class="lightbox-close" href="javascript:history.back()"></a></div>}
+                                @if (item.color == "Zilver")
+                                {<a class="lightbox" href="#AutoZilver"><img src="~/images/auto2.jpg" alt="Visual Studio" class="img-responsive" /></a>
+                                    <div class="lightbox-target" id="AutoZilver"><img src="~/images/auto2.jpg" /><a class="lightbox-close" href="javascript:history.back()"></a></div>}
+
+                                @if (item.color == "Grijs")
+                                {<a class="lightbox" href="#AutoGrijs"><img src="~/images/auto3.jpg" alt="Visual Studio" class="img-responsive" /></a>
+                                    <div class="lightbox-target" id="AutoGrijs"><img src="~/images/auto3.jpg" /><a class="lightbox-close" href="javascript:history.back()"></a></div>}
+
+                                @if (item.color == "Rood")
+                                {<a class="lightbox" href="#AutoRood"><img src="~/images/auto4.jpg" alt="Visual Studio" class="img-responsive" /></a>
+                                    <div class="lightbox-target" id="AutoRood"><img src="~/images/auto4.jpg" /><a class="lightbox-close" href="javascript:history.back()"></a></div>}
+
+                                @if (item.color == "Blauw")
+                                {<a class="lightbox" href="#AutoBlauw"><img src="~/images/auto5.jpg" alt="Visual Studio" class="img-responsive" /></a>
+                                    <div class="lightbox-target" id="AutoBlauw"><img src="~/images/auto5.jpg" /><a class="lightbox-close" href="javascript:history.back()"></a></div>}
+                                @if (item.color == "Zwart")
+                                {<a class="lightbox" href="#AutoZwart"><img src="~/images/auto6.jpg" alt="Visual Studio" class="img-responsive" /></a>
+                                    <div class="lightbox-target" id="AutoZwart"><img src="~/images/auto6.jpg" /><a class="lightbox-close" href="javascript:history.back()"></a></div>}
+
+                                @if (item.color == "Geel")
+                                {<a class="lightbox" href="#AutoGeel"><img src="~/images/auto7.jpg" alt="Visual Studio" class="img-responsive" /></a>
+                                    <div class="lightbox-target" id="AutoGeel"><img src="~/images/auto7.jpg" /><a class="lightbox-close" href="javascript:history.back()"></a></div>}
+
+                                @if (item.color == "Oranje")
+                                {<a class="lightbox" href="#AutoOranje"><img src="~/images/auto8.jpg" alt="Visual Studio" class="img-responsive" /></a>
+                                    <div class="lightbox-target" id="AutoOranje"><img src="~/images/auto8.jpg" /><a class="lightbox-close" href="javascript:history.back()"></a></div>}
+
+                                @if (item.color == "Groen")
+                                {<a class="lightbox" href="#AutoGroen"><img src="~/images/auto9.jpg" alt="Visual Studio" class="img-responsive" /></a>
+                                    <div class="lightbox-target" id="AutoGroen"><img src="~/images/auto9.jpg" /><a class="lightbox-close" href="javascript:history.back()"></a></div>}
+                            </div>
+                        </div>
+                        <div class="row-auto-titel">
+                            <h2>
+                                <a asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@item.carid" class="koop-knopje">In winkelwagen <i class="fa fa-cart-plus" style="font-size:20px;color:white;"></i></a>
+                                <button type="button" class="row-auto-knopje">
+                                    <a asp-controller="WishList" asp-action="AddToCart" asp-route-id="@item.carid"><i class="fa fa-heart" style="font-size:20px;color:red;"></i></a>
+                                </button>
+                                @Html.DisplayFor(modelItem => item.brand) @Html.DisplayFor(modelItem => item.model)
+                            </h2>
+                        </div>
+                        <div class="row-auto-subtitle">
+                            <h2 style="margin-top: 5px">
+                                €@Html.DisplayFor(modelItem => item.price)
+                                <button type="button" class="row-auto-knopje" data-toggle="collapse" data-target="#@item.carid">Details</button>
+                            </h2>
+                        </div>
+                        <div class="row-auto-content">
+                            <div class="row-auto-content-col">
+                                <ul style="padding-left: 10px">
+                                    <li><b>Bouwjaar: </b>@Html.DisplayFor(modelItem => item.manufactureyear)</li>
+                                    <li><b>Kilometerstand: </b>@Html.DisplayFor(modelItem => item.mileage) km</li>
+                                </ul>
+                                <div id="@item.carid" class="collapse">
+                                    <div class="ul-links">
+                                        <hr class="hr-autopage" width="257%">
+                                        <ul style="padding-left: 10px">
+                                            <li><b>Kleur: </b>@Html.DisplayFor(modelItem => item.color)</li>
+                                            <li><b>Gewicht: </b>@Html.DisplayFor(modelItem => item.weight) kg</li>
+                                            <li><b>Motor: </b>@Html.DisplayFor(modelItem => item.enginetype)</li>
+                                            <li><b>Vermogen: </b>@Html.DisplayFor(modelItem => item.horsepower) pk</li>
+                                            <li><b>Top snelheid: </b>@Html.DisplayFor(modelItem => item.topspeed) km/h</li>
+                                            <li><b>Transmissie: </b>@Html.DisplayFor(modelItem => item.transmission)</li>
+                                        </ul>
+                                    </div>
+                                    <div class="ul-rechts">
+                                        <hr class="hr-autopage1">
+                                        <ul>
+                                            <li><b>Brandstof: </b>@Html.DisplayFor(modelItem => item.fueltype)</li>
+                                            <li><b>Verbruik: </b>1/@Html.DisplayFor(modelItem => item.fuelusage)</li>
+                                            <li><b>Aantal deuren: </b>@Html.DisplayFor(modelItem => item.amountofdoors)</li>
+                                            <li><b>Aantal stoelen: </b>@Html.DisplayFor(modelItem => item.amountofseats)</li>
+                                            <li><b>Vorige eigenaren: </b>@Html.DisplayFor(modelItem => item.amountofpreviousowners)</li>
+                                            <li><b>APK: </b>@Html.DisplayFor(modelItem => item.apk)</li>
+                                            <li><b>Garantie: </b>@Html.DisplayFor(modelItem => item.warranty)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="dividing_line" width="755px">
+                    </div>
+                    <br />
+                }<br />
+                <center>
+                    @await Html.PartialAsync("PaginationView")
+                </center>
+                <script>
+                    /* When the user clicks on the button,
+                    toggle between hiding and showing the dropdown content */
+                    function myFunction() {
+                        document.getElementById("myDropdown").classList.toggle("show");
+                    }
+
+                    function filterFunction() {
+                        var input, filter, ul, li, a, i;
+                        input = document.getElementById("myInput");
+                        filter = input.value.toUpperCase();
+                        div = document.getElementById("myDropdown");
+                        a = div.getElementsByTagName("a");
+                        for (i = 0; i < a.length; i++) {
+                            if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+                                a[i].style.display = "";
+                            } else {
+                                a[i].style.display = "none";
+                            }
+                        }
+                    }
+                </script>
+ 
