@@ -1,0 +1,60 @@
+﻿@model RegisterViewModel
+@{
+    ViewData["Title"] = "Account registratie";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row">
+    <div class="col-md-8">
+        <form asp-controller="Account" asp-action="Register" asp-route-returnUrl="/AdminUsers/Index" method="post">
+            <h4>Maak een gebruikers account!</h4>
+            <hr />
+            <table id="table" class="table table-bordered table-responsive table-hover table-striped">
+                <tr>
+                    <td>Naam</td>
+                    <td>
+                        <input asp-for="FirstName" class="form-control" placeholder="Voornaam" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                        <input asp-for="MiddleName" class="form-control" placeholder="Tussenvoegsel" />
+                        <span asp-validation-for="MiddleName" class="text-danger"></span>
+                        <input asp-for="LastName" class="form-control" placeholder="Achternaam" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Adresgegevens</td>
+                    <td>
+                        <input asp-for="Address" class="form-control" placeholder="Straatnaam" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                        <input asp-for="HouseNumber" class="form-control" placeholder="Huisnummer" />
+                        <span asp-validation-for="HouseNumber" class="text-danger"></span>
+                        <input asp-for="ZipCode" class="form-control" placeholder="Postcode" />
+                        <span asp-validation-for="ZipCode" class="text-danger"></span>
+                        <input asp-for="City" class="form-control" placeholder="Woonplaats" />
+                        <span asp-validation-for="City" class="text-danger"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Contactgegevens</td>
+                    <td>
+                        <input asp-for="Email" class="form-control" placeholder="Email" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                        <input asp-for="Password" class="form-control" placeholder="Wachtwoord" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                        <input asp-for="ConfirmPassword" class="form-control" placeholder="Wachtwoord bevestigen" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        <input asp-for="PhoneNumber" class="form-control" placeholder="Telefoonnummer" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </td>
+                </tr>
+            </table>
+            <button type="submit" class="btn btn-default">Registreer</button>
+        </form>
+        <br /> <div><a asp-action="Index">Terug naar overzicht</a></div>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
