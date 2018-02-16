@@ -2,13 +2,13 @@
 A webshop which sells second-hand cars. The website was designed based on the MVC design pattern, using C#, a Razor template and Javascript. The webshop is supported by a Postgres database. Sensitive user information such as passwords is hashed. The webshop uses SendGrid to send emails. A PayPal sandbox is in place to simulate real payments.
 
 ## Video
-<table>
-<tr><td>
-<video width="400" controls>
-  <source src="Video/IntroVideo.mp4" type="video/mp4">
+<video width="320" height="240" controls>
+  <source src="Film/Intro.mp4" type="video/mp4">
+  <source src="Film/Intro.ogg" type="video/ogg">
+  Your browser does not support the video tag.
 </video>
-</td></tr>
-</table>
+
+
 ## Screenshots
 
 <table><tr><td>
