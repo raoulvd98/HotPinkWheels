@@ -4,7 +4,9 @@ A webshop which sells second-hand cars. The website was designed based on the MV
 ## Video
 <table>
 <tr><td>
+<video width="400" controls>
   <source src="Video/IntroVideo.mp4" type="video/mp4">
+</video>
 </td></tr>
 </table>
 ## Screenshots
